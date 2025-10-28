@@ -1,4 +1,3 @@
-version: '2'
 services:
   mapas:
     build:
@@ -15,6 +14,7 @@ services:
       - ./docker-data/public-files:/var/www/html/files
       - ./docker-data/private-files:/var/www/var/private-files
       - ./docker-data/logs:/var/www/var/logs
+      - ./docker-data/sessions:/var/www/var/sessions
 
       - ../docker/common/config.d:/var/www/config/common.d
       - ./config.d:/var/www/config/local.d
@@ -25,6 +25,8 @@ services:
       - ../plugins/SpamDetector:/var/www/src/plugins/SpamDetector
 
     environment:
+      - AUTH_GOOGLE_CLIENT_ID=1084120397801-uvnpcsakmf63bmk9vpcp5p8jskgj1r5n.apps.googleusercontent.com
+      - AUTH_GOOGLE_CLIENT_SECRET=AGOCSPX-fjpvpUtmtdwh3XmSxIo6wyssLGd-
       - PENDING_PCACHE_RECREATION_INTERVAL=10
       - JOBS_INTERVAL=10
       - REDIS_CACHE=redis

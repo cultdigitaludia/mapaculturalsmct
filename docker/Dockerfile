@@ -6,6 +6,7 @@ COPY plugins /var/www/src/plugins
 WORKDIR /var/www/src
 RUN pnpm install --recursive && pnpm run build 
 WORKDIR /var/www
+RUN php /usr/local/bin/composer.phar install
 
 COPY docker/common/config.d /var/www/config/common.d
 COPY docker/production/config.d /var/www/config/config.d
