@@ -15,14 +15,17 @@ services:
       - ./docker-data/public-files:/var/www/html/files
       - ./docker-data/private-files:/var/www/var/private-files
       - ./docker-data/logs:/var/www/var/logs
+      - ./docker-data/sessions:/var/www/var/sessions
 
       - ../docker/common/config.d:/var/www/config/common.d
       - ./config.d:/var/www/config/local.d
-
+      - ../themes/UberlandiaCultural/components:/var/www/src/themes/UberlandiaCultural/components
+      
       # themes and plugins
       - ../plugins/SamplePlugin:/var/www/src/plugins/SamplePlugin
       - ../plugins/MultipleLocalAuth:/var/www/src/plugins/MultipleLocalAuth
       - ../plugins/SpamDetector:/var/www/src/plugins/SpamDetector
+      - ../themes/UberlandiaCultural:/var/www/src/themes/UberlandiaCultural
 
     environment:
       - PENDING_PCACHE_RECREATION_INTERVAL=10
@@ -32,6 +35,7 @@ services:
       - BUILD_ASSETS=1
       - MAILER_TRANSPORT=smtp://mailhog:1025
       - MAILER_FROM=sysadmin@localhost
+      - AUTH_SALT=9373b71968071a8dc3c96f208dff081c462ba3c1a2ae98d81e662278bbd75ff8
 
     depends_on:
       - db

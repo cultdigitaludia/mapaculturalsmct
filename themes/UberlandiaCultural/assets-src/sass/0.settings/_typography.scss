@@ -1,0 +1,52 @@
+@font-face {
+    font-display: swap;
+    font-family: 'AvenirNextLTPro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/AvenirNextLTPro-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'AvenirNextLTPro';
+    font-style: italic;
+    font-weight: 400;
+    src: url('/assets/fonts/AvenirNextLTPro-It.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'AvenirNextLTPro';
+    font-style: normal;
+    font-weight: 600;
+    src: url('/assets/fonts/AvenirNextLTPro-Demi.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'AvenirNextLTPro';
+    font-style: italic;
+    font-weight: 600;
+    src: url('/assets/fonts/AvenirNextLTPro-DemiIt.woff') format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'AvenirNextLTPro';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/assets/fonts/AvenirNextLTPro-Bold.woff') format('woff');
+}
+
+// Substitui Open Sans pela Avenir em todo o site
+* {
+    font-family: 'AvenirNextLTPro', sans-serif;
+}
+body,
+body *,
+input,
+button,
+select,
+textarea {
+    font-family: 'AvenirNextLTPro', sans-serif !important;
+}
