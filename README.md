@@ -442,3 +442,4 @@ E adicione as linhas (ajuste os caminhos conforme seu ambiente):
   - Nome do banco: `mapas`
 - Diretórios indicados nos parâmetros devem existir e ter permissões adequadas
 
+# mapaculturalsmct
