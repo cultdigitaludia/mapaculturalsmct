@@ -49,6 +49,11 @@ $config = $app->config['social-media'];
                 <li>
                     <a><?php i::_e("Acesse"); ?></a>
                 </li>
+                <li>
+                    <a href="<?= $app->createUrl('search', 'turismo') ?>">
+                        <mc-icon name="space"></mc-icon> <?php i::_e('turismo'); ?>
+                    </a>
+                </li>
                 <li v-if="global.enabledEntities.opportunities">
                     <a href="<?= $app->createUrl('search', 'opportunities') ?>">
                         <mc-icon name="opportunity"></mc-icon> <?= $this->text('main-footer', i::__('editais e oportunidade')); ?>

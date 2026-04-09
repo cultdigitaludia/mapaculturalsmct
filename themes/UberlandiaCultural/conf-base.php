@@ -10,4 +10,7 @@ return [
 
     //Logo rodapé
     'logo.footer.image' => 'img/culturase.png',
+
+    //Capa PG Inicial
+    'homeHeader.background' => 'img/capamapa.png',
     ];

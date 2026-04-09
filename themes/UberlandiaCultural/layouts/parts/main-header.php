@@ -33,16 +33,15 @@ $redirect_to = $_SERVER['REQUEST_URI'] ?? '/';
             <template #default>
                 <?php $this->applyTemplateHook('mc-header-menu', 'begin') ?>
                 
-                <?php $this->applyTemplateHook('mc-header-menu-home', 'before') ?>
                 <li>
-                    <?php $this->applyTemplateHook('mc-header-menu-home', 'begin') ?>
-                    <a href="<?= $app->createUrl('site', 'index') ?>" class="mc-header-menu--item home">
-                        <span class="icon"> <mc-icon name="home"></mc-icon> </span>
-                        <p class="label"> <?php i::_e('Home') ?> </p>
+                    <?php $this->applyTemplateHook('mc-header-menu-turismo', 'begin') ?>
+                    <a href="<?= $app->createUrl('search', 'turismo') ?>" class="mc-header-menu--item space">
+                        <span class="icon"> <mc-icon name="space"></mc-icon> </span>
+                        <p class="label"> <?php i::_e('Turismo') ?> </p>
                     </a>
-                    <?php $this->applyTemplateHook('mc-header-menu-home', 'end') ?>
+                    <?php $this->applyTemplateHook('mc-header-menu-turismo', 'end') ?>
                 </li>
-                <?php $this->applyTemplateHook('mc-header-menu-home', 'after') ?>
+                <?php $this->applyTemplateHook('mc-header-menu-turismo', 'after') ?>
 
                 <?php $this->applyTemplateHook('mc-header-menu-opportunity', 'before') ?>
                 <li v-if="global.enabledEntities.opportunities">

@@ -5,9 +5,9 @@ use MapasCulturais\i;
     <nav>
         <ul>
             <li>
-                <a class="main-navbar__link home" href="#">
-                    <mc-icon name="home"></mc-icon>
-                    <span><?= i::__('Início') ?></span>
+                <a class="main-navbar__link home" href="<?= $app->createUrl('search', 'turismo') ?>">
+                    <mc-icon name="space"></mc-icon>
+                    <span><?= i::__('Turismo') ?></span>
                 </a>
             </li>
             <li>
