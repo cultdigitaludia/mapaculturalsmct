@@ -134,7 +134,7 @@ $config = $app->config['social-media'];
         <div class="main-footer__reg-content">
             <?php $this->part('main-footer/developed-by') ?>
 
-            <a class="link" href="https://github.com/culturagovbr/mapadacultura">
+            <a class="link" href="https://github.com/cultdigitaludia/mapaculturalsmct">
                 <?php i::_e("Conheça o repositório") ?>
                 <mc-icon name="github"></mc-icon>
             </a>

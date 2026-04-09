@@ -27,3 +27,19 @@
 
     <body <?php $this->bodyProperties() ?> style="opacity:0" >
         <?php $this->bodyBegin() ?>
+<style>
+.home-header {
+    background: transparent !important;
+}
+.home-header__content::before {
+    background: none !important;
+}
+.home-header__background .img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.home-header__content {
+    min-height: 600px;
+}
+</style>

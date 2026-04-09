@@ -30,6 +30,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         });
 
         $app->hook('template(<<*>>.head):end', function () {
+            echo '<style>
+.home-header { background: transparent !important; }
+.home-header__content::before { background: rgba(0, 0, 0, 0.5) !important; }
+.home-header__background .img > img { width: 100%; height: 100%; object-fit: cover; }
+.home-header__content { min-height: 600px; }
+.main-footer__reg { background-color: #0055A5 !important; }
+</style>';
             echo "<script>
                     document.addEventListener('DOMContentLoaded', (e) => {
                         let opacity = 0.01;
