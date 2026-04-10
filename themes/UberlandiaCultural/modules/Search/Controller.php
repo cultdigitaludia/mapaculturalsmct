@@ -3,6 +3,11 @@ namespace Search;
 use MapasCulturais\App;
 class Controller extends \Search\Controller
 {
+    function GET_index() {
+        header('Location: /search/turismo');
+        exit;
+    }
+
     function GET_turismo() {
         $app = App::i();
         $initial_pseudo_query = [

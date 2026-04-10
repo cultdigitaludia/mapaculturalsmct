@@ -5,6 +5,7 @@
  */
 ?>
         <?php $this->bodyEnd() ?>
+        <script src="/themes/UberlandiaCultural/assets/js/chatbot-widget.js"></script>
     </body>
     <?php $this->applyTemplateHook('body','after'); ?>
     <?php $this->printJsObject(); ?>

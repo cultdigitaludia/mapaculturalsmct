@@ -20,6 +20,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $this->bodyClasses[] = 'base-v2';
         $this->enqueueStyle('app-v2', 'main', 'css/theme-UberlandiaCultural.css');
         $this->assetManager->publishFolder('fonts');
+        $this->enqueueScript('app-v2', 'chatbot', 'js/chatbot-widget.js');
+        $this->assetManager->publishFolder('img'); 
 
         // Adiciona a rota de turismo ao controller de search
         $app->hook('GET(search.turismo)', function() use ($app) {
@@ -31,11 +33,43 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 
         $app->hook('template(<<*>>.head):end', function () {
             echo '<style>
+@font-face {
+    font-family: "AvenirNext";
+    src: url("/assets/fonts/AvenirNextLTPro-BoldCn.woff") format("woff");
+    font-weight: bold;
+}
+.home-entities .card__left--content-title .title {
+    font-family: "AvenirNext", sans-serif !important;
+    font-size: 3rem !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+}
+.home-entities .card__right .button {
+    font-size: 1.2rem !important;
+    margin-top: 1rem !important;
+}
+.home-entities .card__right {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
+
 .home-header { background: transparent !important; }
-.home-header__content::before { background: rgba(0, 0, 0, 0.5) !important; }
+.home-header__content::before { background: none !important; }
 .home-header__background .img > img { width: 100%; height: 100%; object-fit: cover; }
 .home-header__content { min-height: 600px; }
+.home-header__main { display: none !important; }
 .main-footer__reg { background-color: #0055A5 !important; }
+@media (max-width: 768px) {
+    .home-header__background {
+        background-image: url("/assets/img/capa_vertical.img.png") !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+    .home-header__background .img > img {
+        display: none !important;
+    }
+}
 </style>';
             echo "<script>
                     document.addEventListener('DOMContentLoaded', (e) => {

@@ -12,5 +12,5 @@ return [
     'logo.footer.image' => 'img/culturase.png',
 
     //Capa PG Inicial
-    'homeHeader.background' => 'img/capamapa.png',
+    'homeHeader.background' => 'img/capa_horizontal.png',
     ];

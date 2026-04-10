@@ -11,7 +11,6 @@ $this->import('
 ');
 ?>
 <div class="home-entities">
-    
     <div class="home-entities__content">
         <div class="home-entities__content--header">
             <label class="title">
@@ -23,12 +22,34 @@ $this->import('
         </div>
         
         <div class="home-entities__content--cards">
+
+            <!-- Turismo -->
+            <div class="card">
+                <div class="card__left">
+                    <div class="card__left--content">
+                        <div class="card__left--content-title">
+                            <label class="title">
+                                <?= i::__('Turismo') ?>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card__left--img">
+                        <img src="<?= $this->asset('img/boton_1.png', false) ?>" />
+                    </div>
+                </div>
+                <div class="card__right">
+                    <p><?= $this->text('turismo', i::__('Explore os pontos turísticos, espaços culturais, gastronomia, meios de hospedagem e muito mais de Uberlândia. Conheça e divulgue o turismo da nossa cidade.')) ?></p>
+                        <a href="/search/turismo" class="button button--icon button--sm space__color">    
+                            <?= i::__('Ver todos')?>
+                        <mc-icon name="access"></mc-icon>
+                    </mc-link>
+                </div>
+            </div>
+
+            <!-- Oportunidades -->
             <div v-if="global.enabledEntities.opportunities" class="card">
                 <div class="card__left">
                     <div class="card__left--content">
-                        <div class="card__left--content-icon opportunity__background">
-                            <mc-icon name="opportunity"></mc-icon>
-                        </div>                        
                         <div class="card__left--content-title">
                             <label class="title">
                                 <?= i::__('Oportunidades') ?>
@@ -36,7 +57,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img :src="subsite?.files?.opportunityBanner ? subsite?.files?.opportunityBanner?.url : '<?php $this->asset($app->config['module.home']['home-opportunities']) ?>'" />
+                        <img src="<?= $this->asset('img/boton_2.png', false) ?>" />
                     </div>
                 </div>
                 <div class="card__right">
@@ -48,12 +69,10 @@ $this->import('
                 </div>
             </div>
 
+            <!-- Eventos -->
             <div v-if="global.enabledEntities.events" class="card">
                 <div class="card__left">
                     <div class="card__left--content">
-                        <div class="card__left--content-icon event__background">
-                            <mc-icon name="event"></mc-icon>
-                        </div>                        
                         <div class="card__left--content-title">
                             <label class="title">
                                 <?= i::__('Eventos') ?>
@@ -61,11 +80,11 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img :src="subsite?.files?.eventBanner ? subsite?.files?.eventBanner?.url : '<?php $this->asset($app->config['module.home']['home-events']) ?>'" />
+                        <img src="<?= $this->asset('img/boton_3.png', false) ?>" />
                     </div>
                 </div>
                 <div class="card__right">
-                    <p><?= $this->text('events', i::__('Você pode pesquisar eventos culturais nos campos de busca combinada. Como usuário cadastrado, você pode incluir seus eventos na plataforma e divulgá-los gratuitamente. (Mais uma linha aqui pra fechar cinco linhas)')) ?></p>
+                    <p><?= $this->text('events', i::__('Você pode pesquisar eventos culturais nos campos de busca combinada. Como usuário cadastrado, você pode incluir seus eventos na plataforma e divulgá-los gratuitamente.')) ?></p>
                     <mc-link route="search/events" class="button button--icon button--sm event__color">
                         <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>
@@ -73,12 +92,10 @@ $this->import('
                 </div>
             </div>
 
+            <!-- Espaços -->
             <div v-if="global.enabledEntities.spaces" class="card">
                 <div class="card__left">
                     <div class="card__left--content">
-                        <div class="card__left--content-icon space__background">
-                            <mc-icon name="space"></mc-icon>
-                        </div>                        
                         <div class="card__left--content-title">
                             <label class="title">
                                 <?= i::__('Espaços') ?>
@@ -86,7 +103,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img :src="subsite?.files?.spaceBanner ? subsite?.files?.spaceBanner?.url : '<?php $this->asset($app->config['module.home']['home-spaces']) ?>'" />
+                        <img src="<?= $this->asset('img/boton_4.png', false) ?>" />
                     </div>
                 </div>
                 <div class="card__right">
@@ -98,12 +115,10 @@ $this->import('
                 </div>
             </div>
 
+            <!-- Agentes -->
             <div v-if="global.enabledEntities.agents" class="card">
                 <div class="card__left">
                     <div class="card__left--content">
-                        <div class="card__left--content-icon agent__background">
-                            <mc-icon name="agent-2"></mc-icon>
-                        </div>                        
                         <div class="card__left--content-title">
                             <label class="title">
                                 <?= i::__('Agentes') ?>
@@ -111,11 +126,11 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img :src="subsite?.files?.agentBanner ? subsite?.files?.agentBanner?.url : '<?php $this->asset($app->config['module.home']['home-agents']) ?>'" />
+                        <img src="<?= $this->asset('img/boton_5.png', false) ?>" />
                     </div>
                 </div>
                 <div class="card__right">
-                    <p><?= $this->text('agents', i::__('Neste espaço, estão registrados artistas, gestores e produtores; uma rede de atores envolvidos na cena cultural da região. Você pode cadastrar um ou mais agentes (grupos, coletivos, bandas instituições, empresas, etc.), (...)')) ?></p>
+                    <p><?= $this->text('agents', i::__('Neste espaço, estão registrados artistas, gestores e produtores; uma rede de atores envolvidos na cena cultural da região. Você pode cadastrar um ou mais agentes (grupos, coletivos, bandas, instituições, empresas, etc.).')) ?></p>
                     <mc-link route="search/agents" class="button button--icon button--sm agent__color">
                         <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>
@@ -123,12 +138,10 @@ $this->import('
                 </div>
             </div>
 
+            <!-- Projetos -->
             <div v-if="global.enabledEntities.projects" class="card">
                 <div class="card__left">
                     <div class="card__left--content">
-                        <div class="card__left--content-icon project__background">
-                            <mc-icon name="project"></mc-icon>
-                        </div>                        
                         <div class="card__left--content-title">
                             <label class="title">
                                 <?= i::__('Projetos') ?>
@@ -136,7 +149,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img :src="subsite?.files?.projectBanner ? subsite?.files?.projectBanner?.url : '<?php $this->asset($app->config['module.home']['home-projects']) ?>'" />
+                        <img src="<?= $this->asset('img/boton_6.png', false) ?>" />
                     </div>
                 </div>
                 <div class="card__right">
@@ -147,6 +160,7 @@ $this->import('
                     </mc-link>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
