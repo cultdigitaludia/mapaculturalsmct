@@ -18,33 +18,34 @@ $config = $app->config['social-media'];
         <div class="main-footer__support">
             <?php $this->part('footer-support-message') ?>
         </div>
-        <div class="main-footer__content--logo-img">
-            <?php if ($app->config['logo.footer.image']): ?>
-                <a href="<?= $app->createUrl('site', 'index') ?>" title="<?= $app->siteName ?>">
-                    <img 
-                        src="<?= $this->asset($app->config['logo.footer.image'], false) ?>" 
-                        alt="<?= $app->siteName ?>"
-                        style="max-height: 80px; width: auto;"
-                    />
-                </a>
-            <?php else: ?>
-                <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
-            <?php endif; ?>
-        </div>
+        <div class="main-footer__content--logo">
+            <div class="main-footer__content--logo-img">
+                <?php if ($app->config['logo.footer.image']): ?>
+                    <a href="<?= $app->createUrl('site', 'index') ?>" title="<?= $app->siteName ?>">
+                        <img 
+                            src="<?= $this->asset($app->config['logo.footer.image'], false) ?>" 
+                            alt="<?= $app->siteName ?>"
+                            style="max-height: 80px; width: auto; max-width: 100%;"
+                        />
+                    </a>
+                <?php else: ?>
+                    <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
+                <?php endif; ?>
+            </div>
             <div class="main-footer__content--logo-share">
                 <?php foreach ($config as $meta => $conf) : ?>
                     <a target="_blank" href="<?= $conf['link'] ?>">
-                        <c-icon name='<?= $conf['icon'] ?>'></mc-icon>
+                        <mc-icon name='<?= $conf['icon'] ?>'></mc-icon>
                     </a>
                 <?php endforeach; ?>
             </div>
         </div>
         <?php $this->applyTemplateHook("main-footer-logo", "after")?>
-    
+
         <?php $this->applyTemplateHook("main-footer-links", "before")?>
         <div class="main-footer__content--links">
             <?php $this->applyTemplateHook("main-footer-links", "begin")?>
-    
+
             <ul class="main-footer__content--links-group">
                 <li>
                     <a><?php i::_e("Acesse"); ?></a>
@@ -80,7 +81,7 @@ $config = $app->config['social-media'];
                     </a>
                 </li>
             </ul>
-    
+
             <ul class="main-footer__content--links-group">
                 <li>
                     <a href="<?= $app->createUrl('panel', 'index') ?>"><?php i::_e('Painel'); ?></a>
@@ -103,19 +104,17 @@ $config = $app->config['social-media'];
                     </li>
                 <?php endif; ?>
             </ul>
-    
-                <ul class="main-footer__content--links-group">
-                    <li>
-                        <a><?php i::_e('Ajuda e privacidade'); ?></a>
-                    </li>
-                    
-                    <li>
-                        <a href="<?= $app->createUrl('faq') ?>"><?php i::_e('Dúvidas frequentes'); ?></a>
-                        <p style="margin-top: 15px !important;">
-                            <?= $this->text('description', "") ?>
-                        </p>
-                    </li>
-                    
+
+            <ul class="main-footer__content--links-group">
+                <li>
+                    <a><?php i::_e('Ajuda e privacidade'); ?></a>
+                </li>
+                <li>
+                    <a href="<?= $app->createUrl('faq') ?>"><?php i::_e('Dúvidas frequentes'); ?></a>
+                    <p style="margin-top: 15px !important;">
+                        <?= $this->text('description', "") ?>
+                    </p>
+                </li>
                 <?php if (count($app->config['module.LGPD']) > 0): ?>
                     <?php foreach ($app->config['module.LGPD'] as $slug => $cfg) : ?>
                         <li>
@@ -123,11 +122,13 @@ $config = $app->config['social-media'];
                         </li>
                     <?php endforeach ?>
                 <?php endif; ?>
-                </ul>
+            </ul>
+
             <?php $this->applyTemplateHook("main-footer-links", "end")?>
         </div>
-        <?php $this->applyTemplateHook("main-footer-links", "after")?>      
+        <?php $this->applyTemplateHook("main-footer-links", "after")?>
     </div>
+
     <?php $this->applyTemplateHook("main-footer-reg", "before")?>
     <div class="main-footer__reg">
         <?php $this->applyTemplateHook("main-footer-reg", "begin")?>
@@ -141,7 +142,7 @@ $config = $app->config['social-media'];
         </div>
         <?php $this->applyTemplateHook("main-footer-reg", "end")?>
     </div>
-    <?php $this->applyTemplateHook("main-footer-reg", "after")?>  
+    <?php $this->applyTemplateHook("main-footer-reg", "after")?>
     <?php $this->applyTemplateHook("main-footer", "end")?>
 </div>
 <?php $this->applyTemplateHook("main-footer", "after")?>

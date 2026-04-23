@@ -8,6 +8,11 @@ return [
     'themes.active' => 'UberlandiaCultural',
 
     // Ids dos selos verificadores. Para utilizar múltiplos selos informe os ids separados por vírgula.
-    'app.verifiedSealsIds' => '1', 
+    'app.verifiedSealsIds' => '1',
+
+    //Uberlândia
+    'maps.latitude'  => -18.9186,
+    'maps.longitude' => -48.2772,
+    'maps.zoom'      => 15,
 
 ];

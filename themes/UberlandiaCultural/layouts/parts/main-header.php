@@ -35,7 +35,7 @@ $redirect_to = $_SERVER['REQUEST_URI'] ?? '/';
                 
                 <li>
                     <?php $this->applyTemplateHook('mc-header-menu-turismo', 'begin') ?>
-                    <a href="<?= $app->createUrl('search', 'turismo') ?>" class="mc-header-menu--item space">
+                    <a href="<?= $app->createUrl('search', 'turismo') ?>" class="mc-header-menu--item turismo">
                         <span class="icon"> <mc-icon name="space"></mc-icon> </span>
                         <p class="label"> <?php i::_e('Turismo') ?> </p>
                     </a>

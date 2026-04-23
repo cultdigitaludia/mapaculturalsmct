@@ -7,27 +7,12 @@
     gap: size(13);
     max-width: size(360);
     width: 100%;
-
-    a {
-        color: var(--mc-low-500);
-        text-decoration: none;
-    }
-
-    .theme-logo {
-        width: 100%;
-    }
-
+    a { color: var(--mc-low-500); text-decoration: none; }
+    .theme-logo { width: 100%; }
     @media (max-width: size(430)){
-        .theme-logo__text {
-            font-size: size(11);
-            letter-spacing: size(3);
-            line-height: size(15);
-        }
+        .theme-logo__text { font-size: size(11); letter-spacing: size(3); line-height: size(15); }
     }
-
-    @media (max-width: size(1070)) {
-        max-width: size(422);
-    }
+    @media (max-width: size(1070)) { max-width: size(422); }
 }
 
 .mc-header-menu {
@@ -35,7 +20,6 @@
     gap: size(32);
     list-style: none;
     padding: 0;
-
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -51,26 +35,15 @@
         justify-content: center;
         margin: 0;
         padding: 0;
-
-        .iconify {
-            height: size(24);
-            margin: size(3);
-            width: size(24);
-        }
+        .iconify { height: size(24); margin: size(3); width: size(24); color: #002C41; }
     }
 
-    @media (max-width: 1190px) {
-        gap: size(20);
-    }
+    @media (max-width: 1190px) { gap: size(20); }
 
     @media (max-width: 1070px) {
         display: none;
-
-        &__btn-mobile {
-            display: flex;
-        }
+        &__btn-mobile { display: flex; }
     }
-
 
     &--btn {
         background: none;
@@ -78,11 +51,7 @@
         display: flex;
         margin: 0;
         padding: 0;
-
-        .iconify {
-            height: size(25);
-            width: size(25);
-        }
+        .iconify { height: size(25); width: size(25); color: #002C41; }
     }
 
     &--item {
@@ -91,22 +60,21 @@
         flex-direction: column;
         justify-content: center;
         padding: 0;
-        text-decoration: none;
+        text-decoration: none !important;
 
         .icon {
             align-items: center;
-            background-color: var(--mc-low-500);
+            background-color: #002C41;
             border-radius: 50%;
-            color: var(--mc-white);
+            color: #FFFFFF;
             display: flex;
             height: size(32);
             justify-content: center;
             width: size(32);
-
         }
 
         .label {                    
-            color: var(--mc-black);
+            color: #002C41;
             font-family: var(--mc-font-body);
             font-size: size(14);
             font-style: normal;
@@ -115,79 +83,23 @@
             line-height: size(15);
             margin: size(8) 0 0;
             text-align: center;
+            text-decoration: none !important;
+            border-bottom: none !important;
         }
 
+        &:hover {
+            text-decoration: none !important;
+            .icon { background-color: #FFD300 !important; color: #002C42 !important; }
+            .label { color: #FFD300 !important; text-decoration: none !important; border-bottom: none !important; }
+        }
 
-        &.home {
-            &:hover{
-                .icon {
-                    background-color: var(--mc-primary-500);
-                }
-                .label {
-                    color: var(--mc-primary-500);
-                }
+        &.home, &.project, &.space, &.turismo,
+        &.event, &.agent, &.opportunity {
+            &:hover {
+                .icon { background-color: #FFD300 !important; color: #002C42 !important; }
+                .label { color: #FFD300 !important; border-bottom: none !important; }
             }
         }
-
-        &.project {
-            &:hover{
-                .icon {
-                    background-color: var(--mc-projects-500);
-                }
-                .label {
-                    color: var(--mc-projects-500);
-                }
-            }
-        }
-
-        &.space {
-            &:hover{
-                .icon {
-                    background-color: var(--mc-spaces-500);
-                }
-                .label {
-                    color: var(--mc-spaces-500);
-                }
-            }
-        }
-
-        &.event {
-            &:hover{
-                .icon {
-                    background-color: var(--mc-events-500);
-                }
-                .label {
-                    color: var(--mc-events-500);
-                }
-            }
-        }
-
-        &.agent {
-            .icon {
-                font-size: 14px;
-            }   
-            
-            &:hover{
-                .icon {
-                    background-color: var(--mc-agents-500);
-                }
-                .label {
-                    color: var(--mc-agents-500);
-                }
-            }
-        }
-
-        &.opportunity {
-            &:hover{
-                .icon {
-                    background-color: var(--mc-opportunities-500);
-                }
-                .label {
-                    color: var(--mc-opportunities-500);
-                }
-            }
-        }
-        
     }
 
     &.mobile {
@@ -203,9 +115,7 @@
         width: 100%;
         z-index: 100;
 
-        @media (max-width: size(1070)) {
-            display: block;
-        }
+        @media (max-width: size(1070)) { display: block; }
 
         .mc-header-menu__itens {
             list-style: none;
@@ -215,30 +125,19 @@
 
             li {
                 border-bottom: var(--mc-border-hairline) #BBBBBB;
-    
-                &:last-child {
-                    border-bottom: none;
-                }
-    
+                &:last-child { border-bottom: none; }
                 .mc-header-menu--item {
                     display: flex;
                     flex-direction: row;
                     gap: 24px;
                     justify-content: flex-start;
                     padding: size(12) 0;
-    
-                    .label {
-                        margin: 0;
-                    }
-    
+                    .label { margin: 0; color: #002C41; }
                     &.painel {
                         .icon {
                             background: none;
-                            color: var(--mc-low-500);
-                            .iconify {
-                                width: size(24);
-                                height: size(24);
-                            }
+                            color: #002C41;
+                            .iconify { width: size(24); height: size(24); }
                         }
                     }
                 }
@@ -262,45 +161,29 @@
             width: 100%;
             z-index: 1;
 
-            @media (max-width:size(400)){
-                height: size(53);
-            }
+            @media (max-width:size(400)){ height: size(53); }
             
             &__btn {
                 align-items: center;
                 background: none;
                 border: none;
-                color: var(--mc-low-500);
+                color: #002C41;
                 justify-content: center;
                 margin: 0;
                 padding: 0;
                 text-decoration: none;
-
                 cursor: pointer;
                 display: flex;
-                
-                .iconify {
-                    height: size(24);
-                    margin: size(3);
-                    width: size(24);
-                }
+                .iconify { height: size(24); margin: size(3); width: size(24); }
             }
 
-            &:hover {
-                background-color: white;
-                color: var(--mc-low-500);
-            }
+            &:hover { background-color: white; color: #002C41; }
 
             .theme-logo {
                 max-width: size(379);
                 width: 100%;
-
                 @media (max-width: size(430)){
-                    .theme-logo__text {
-                        font-size: size(11);
-                        letter-spacing: size(3);
-                        line-height: size(15);
-                    }
+                    .theme-logo__text { font-size: size(11); letter-spacing: size(3); line-height: size(15); }
                 }
             }
         }

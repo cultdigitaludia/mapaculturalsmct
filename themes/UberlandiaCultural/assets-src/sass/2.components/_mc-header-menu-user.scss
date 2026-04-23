@@ -185,3 +185,14 @@
         }
     }
 }
+.mc-header-menu--item.turismo {
+    &:hover, &.active, &.router-link-active {
+        .icon {
+            background-color: var(--mc-spaces-500);
+        }
+        .label {
+            color: var(--mc-spaces-500);
+            border-bottom: 2px solid var(--mc-spaces-500);
+        }
+    }
+}

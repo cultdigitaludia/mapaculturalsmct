@@ -8,9 +8,14 @@ return [
     'logo.hideLabel' => true,
     'logo.colors'    => ['#0055A5', '#F2A900', '#0099D6', '#003F7D'],
 
-    //Logo rodapé
+    // Logo rodapé
     'logo.footer.image' => 'img/culturase.png',
 
-    //Capa PG Inicial
+    // Capa PG Inicial
     'homeHeader.background' => 'img/capa_horizontal.png',
-    ];
+
+    // Imagem de fundo da seção de cadastro na home
+    'module.home' => [
+        'home-register' => 'img/cadastro.png',
+    ],
+];
