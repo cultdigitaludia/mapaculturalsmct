@@ -1,9 +1,6 @@
 <?php
 
 use MapasCulturais\Utils;
-/**
- * See https://github.com/Respect/Validation to know how to write validations
- */
 
  $items = array(
     \MapasCulturais\i::__('Espaços de Exibição de Filmes') => array(
@@ -15,22 +12,19 @@ use MapasCulturais\Utils;
             13 => array( 'name' => \MapasCulturais\i::__('Espaço Público Para Projeção de Filmes') ),
             14 => array( 'name' => \MapasCulturais\i::__('Sala de cinema')),
         ),
-
     ),
-
     \MapasCulturais\i::__('Bibliotecas') => array(
         'range' => array(20,29),
         'items' => array(
             20 => array( 'name' => \MapasCulturais\i::__('Biblioteca Pública') ),
             21 => array( 'name' => \MapasCulturais\i::__('Biblioteca Privada')),
-            22 => array( 'name' => \MapasCulturais\i::__('Biblioteca Comunitária (incluí­dos os pontos de leitura)')),
+            22 => array( 'name' => \MapasCulturais\i::__('Biblioteca Comunitária (incluídos os pontos de leitura)')),
             23 => array( 'name' => \MapasCulturais\i::__('Biblioteca Escolar')),
             24 => array( 'name' => \MapasCulturais\i::__('Biblioteca Nacional')),
             25 => array( 'name' => \MapasCulturais\i::__('Biblioteca Universitária')),
             26 => array( 'name' => \MapasCulturais\i::__('Biblioteca Especializada'))
         )
     ),
-
     \MapasCulturais\i::__('Teatros') => array(
         'range' => array(30,39),
         'items' => array(
@@ -38,7 +32,6 @@ use MapasCulturais\Utils;
             31 => array('name' => \MapasCulturais\i::__('Teatro Privado'))
         )
     ),
-
     \MapasCulturais\i::__('Circos') => array(
         'range' => array(90,99),
         'items' => array(
@@ -49,31 +42,27 @@ use MapasCulturais\Utils;
             92 => array( 'name' => \MapasCulturais\i::__('Terreno para Circo') ),
         )
     ),
-
-   \MapasCulturais\i::__('Centros Culturais') => array(
+    \MapasCulturais\i::__('Centros Culturais') => array(
         'range' => array(40,49),
         'items' => array(
             40 => array( 'name' => \MapasCulturais\i::__('Centro Cultural Público')),
             41 => array( 'name' => \MapasCulturais\i::__('Centro Cultural Privado')),
         )
     ),
-
-   \MapasCulturais\i::__('Arquivos') => array(
+    \MapasCulturais\i::__('Arquivos') => array(
         'range' => array(50,59),
         'items' => array(
             50 => array( 'name' => \MapasCulturais\i::__('Arquivo Público') ),
             51 => array( 'name' => \MapasCulturais\i::__('Arquivo Privado')),
         )
     ),
-
-   \MapasCulturais\i::__('Museus') => array(
+    \MapasCulturais\i::__('Museus') => array(
         'range' => array(60,69),
         'items' => array(
             60 => array( 'name' => \MapasCulturais\i::__('Museu Público') ),
             61 => array( 'name' => \MapasCulturais\i::__('Museu Privado')),
         )
     ),
-
     \MapasCulturais\i::__('Demais Equipamentos Culturais') => array(
         'range' => array(100,199),
         'items' => array(
@@ -115,20 +104,17 @@ use MapasCulturais\Utils;
             127 => array( 'name' => \MapasCulturais\i::__('Trio elétrico')),
             118 => array( 'name' => \MapasCulturais\i::__('Usina Cultural')),
             103 => array( 'name' => \MapasCulturais\i::__('Videolocadora') ),
-
-            199 => array( 'name' => \MapasCulturais\i::__('Outros Equipamentos Culturais')), // adicionado na importação dos dados do Ceará para receber as endidades do tipo "equipamento"
+            199 => array( 'name' => \MapasCulturais\i::__('Outros Equipamentos Culturais')),
         )
     ),
-
-   \MapasCulturais\i::__('Centros de Documentação') => array(
+    \MapasCulturais\i::__('Centros de Documentação') => array(
         'range' => array(70,79),
         'items' => array(
             70 => array( 'name' => \MapasCulturais\i::__('Centro de Documentação Público') ),
             71 => array( 'name' => \MapasCulturais\i::__('Centro de Documentação Privado')),
         )
     ),
-
-   \MapasCulturais\i::__('Espaços Religiosos') => array(
+    \MapasCulturais\i::__('Espaços Religiosos') => array(
         'range' => array(80,89),
         'items' => array(
             85 => array( 'name' => \MapasCulturais\i::__('Centro Espírita') ),
@@ -137,54 +123,45 @@ use MapasCulturais\Utils;
             83 => array( 'name' => \MapasCulturais\i::__('Sinagoga')),
             81 => array( 'name' => \MapasCulturais\i::__('Terreiro')),
             80 => array( 'name' => \MapasCulturais\i::__('Templo')),
-          )
+        )
     ),
-
-/**
-* Espaços de Formação Cultural
-*/
-
-   \MapasCulturais\i::__('Instituições Públicas de Ensino Regular') => array(
+    \MapasCulturais\i::__('Instituições Públicas de Ensino Regular') => array(
         'range' => array(300,399),
         'items' => array(
             300 => array( 'name' => \MapasCulturais\i::__('Instituição Pública de Ensino Regular Federal')),
             301 => array( 'name' => \MapasCulturais\i::__('Instituição Pública de Ensino Regular Estadual')),
             302 => array( 'name' => \MapasCulturais\i::__('Instituição Pública de Ensino Regular Municipal')),
             303 => array( 'name' => \MapasCulturais\i::__('Instituição Pública de Ensino Regular Distrital')),
-          )
+        )
     ),
-
-   \MapasCulturais\i::__('Instituições Privadas de Ensino Regular') => array(
+    \MapasCulturais\i::__('Instituições Privadas de Ensino Regular') => array(
         'range' => array(400,499),
         'items' => array(
             400 => array( 'name' => \MapasCulturais\i::__('Instituição Privada Particular')),
             401 => array( 'name' => \MapasCulturais\i::__('Instituição Privada Comunitária')),
             402 => array( 'name' => \MapasCulturais\i::__('Instituição Privada Confessional')),
             403 => array( 'name' => \MapasCulturais\i::__('Instituição Privada Filantrópica')),
-          )
+        )
     ),
-
-   \MapasCulturais\i::__('Instituições Públicas exclusivamente voltada para formação artistica e cultural') => array(
+    \MapasCulturais\i::__('Instituições Públicas exclusivamente voltada para formação artistica e cultural') => array(
         'range' => array(601,699),
         'items' => array(
             601 => array( 'name' => \MapasCulturais\i::__('Instituição Pública Federal exclusivamente voltada para formação artistica e cultural')),
             602 => array( 'name' => \MapasCulturais\i::__('Instituição Pública Estadual exclusivamente voltada para formação artistica e cultural')),
             603 => array( 'name' => \MapasCulturais\i::__('Instituição Pública Municipal exclusivamente voltada para formação artistica e cultural')),
             604 => array( 'name' => \MapasCulturais\i::__('Instituição Pública Distrital exclusivamente voltada para formação artistica e cultural')),
-          )
+        )
     ),
-
-   \MapasCulturais\i::__('Instituições Privadas exclusivamente voltada para formação artistica e cultural') => array(
+    \MapasCulturais\i::__('Instituições Privadas exclusivamente voltada para formação artistica e cultural') => array(
         'range' => array(700,799),
         'items' => array(
             700 => array( 'name' => \MapasCulturais\i::__('Instituição Privada Particular exclusivamente voltada para formação artistica e cultural')),
             701 => array( 'name' => \MapasCulturais\i::__('Instituição Privada Comunitária exclusivamente voltada para formação artistica e cultural')),
             702 => array( 'name' => \MapasCulturais\i::__('Instituição Privada Confessional exclusivamente voltada para formação artistica e cultural')),
             703 => array( 'name' => \MapasCulturais\i::__('Instituição Privada Filantrópica exclusivamente voltada para formação artistica e cultural')),
-          )
+        )
     ),
-
-   \MapasCulturais\i::__('Escolas livres') => array(
+    \MapasCulturais\i::__('Escolas livres') => array(
         'range' => array(800,899),
         'items' => array(
             800 => array( 'name' => \MapasCulturais\i::__('Escola livre de Artes Cênicas')),
@@ -198,13 +175,8 @@ use MapasCulturais\Utils;
             808 => array( 'name' => \MapasCulturais\i::__('Escola livre de Pontinhos de cultura') ),
             809 => array( 'name' => \MapasCulturais\i::__('Escola livre de Patrimônio')),
             810 => array( 'name' => \MapasCulturais\i::__('Escola livre de Design')),
-          )
+        )
     ),
-
-/**
-* Patrimônios Culturais
-*/
-
     \MapasCulturais\i::__('Bens culturais de natureza material') => array(
         'range' => array(200, 299),
         'items' => array(
@@ -213,15 +185,13 @@ use MapasCulturais\Utils;
             202 => array( 'name' => \MapasCulturais\i::__('Bem Arqueológico')),
             203 => array( 'name' => \MapasCulturais\i::__('Bem Paisagístico')),
             204 => array( 'name' => \MapasCulturais\i::__('Bem Móvel ou Integrado')),
-            210 => array( 'name' => \MapasCulturais\i::__('Bens culturais de natureza imaterial')), // adicionado na importação dos dados do Ceará para receber as endidades do tipo "patrimonio-imaterial"
+            210 => array( 'name' => \MapasCulturais\i::__('Bens culturais de natureza imaterial')),
             207 => array( 'name' => \MapasCulturais\i::__('Coleções')),
             206 => array( 'name' => \MapasCulturais\i::__('Documentação')),
             205 => array( 'name' => \MapasCulturais\i::__('Sitio Histórico')),
-
-            299 => array( 'name' => \MapasCulturais\i::__('Outros')) // adicionado na importação dos dados do Ceará para receber as endidades do tipo "post"
+            299 => array( 'name' => \MapasCulturais\i::__('Outros'))
         )
     ),
-
     \MapasCulturais\i::__('Temporário') => array(
         'range' => array(500,600),
         'items' => array(
@@ -229,9 +199,13 @@ use MapasCulturais\Utils;
         )
     ),
 
+    // ================================================================
+    // TURISMO — usa IDs já existentes no sistema (sem criar novos)
+    // ================================================================
     \MapasCulturais\i::__('Turismo — Tipos de Espaços') => array(
         'range' => array(1000, 1099),
         'items' => array(
+            // Categorias exclusivas de Turismo
             1000 => array('name' => \MapasCulturais\i::__('Pontos-Espaços')),
             1001 => array('name' => \MapasCulturais\i::__('Gastronomia')),
             1002 => array('name' => \MapasCulturais\i::__('Estrutura Esportiva')),
@@ -252,6 +226,45 @@ use MapasCulturais\Utils;
             1017 => array('name' => \MapasCulturais\i::__('Segurança Pública')),
             1018 => array('name' => \MapasCulturais\i::__('Meios de Hospedagem')),
             1019 => array('name' => \MapasCulturais\i::__('Agências')),
+
+            // Teatros (IDs já existentes)
+            30 => array('name' => \MapasCulturais\i::__('Teatro Público')),
+            31 => array('name' => \MapasCulturais\i::__('Teatro Privado')),
+
+            // Bibliotecas (IDs já existentes)
+            21 => array('name' => \MapasCulturais\i::__('Biblioteca Privada')),
+            22 => array('name' => \MapasCulturais\i::__('Biblioteca Comunitária (incluídos os pontos de leitura)')),
+            23 => array('name' => \MapasCulturais\i::__('Biblioteca Escolar')),
+            24 => array('name' => \MapasCulturais\i::__('Biblioteca Nacional')),
+            25 => array('name' => \MapasCulturais\i::__('Biblioteca Universitária')),
+            26 => array('name' => \MapasCulturais\i::__('Biblioteca Especializada')),
+
+            // Pontos e Memória (IDs já existentes)
+            125 => array('name' => \MapasCulturais\i::__('Ponto de Cultura')),
+            136 => array('name' => \MapasCulturais\i::__('Pontos de Memória')),
+
+            // Galeria (ID já existente)
+            100 => array('name' => \MapasCulturais\i::__('Galeria de arte')),
+
+            // Salas (IDs já existentes)
+            130 => array('name' => \MapasCulturais\i::__('Sala Multiuso')),
+            135 => array('name' => \MapasCulturais\i::__('Sala de Leitura')),
+
+            // Outros Equipamentos (ID já existente)
+            199 => array('name' => \MapasCulturais\i::__('Outros Equipamentos Culturais')),
+
+            // Escolas Livres (IDs já existentes)
+            800 => array('name' => \MapasCulturais\i::__('Escola livre de Artes Cênicas')),
+            801 => array('name' => \MapasCulturais\i::__('Escola livre de Artes Visuais')),
+            802 => array('name' => \MapasCulturais\i::__('Escola livre de Audiovisual')),
+            803 => array('name' => \MapasCulturais\i::__('Escola livre de Hip Hop')),
+            804 => array('name' => \MapasCulturais\i::__('Escola livre de Cultura Digital')),
+            805 => array('name' => \MapasCulturais\i::__('Escola livre de Música')),
+            806 => array('name' => \MapasCulturais\i::__('Escola livre de Cultura Popular')),
+            807 => array('name' => \MapasCulturais\i::__('Escola livre de Gestão Cultural')),
+            808 => array('name' => \MapasCulturais\i::__('Escola livre de Pontinhos de cultura')),
+            809 => array('name' => \MapasCulturais\i::__('Escola livre de Patrimônio')),
+            810 => array('name' => \MapasCulturais\i::__('Escola livre de Design')),
         )
     ),
 );
@@ -259,7 +272,6 @@ use MapasCulturais\Utils;
 
 function ordenaSubcategorias(&$array) {
     ksort($array);
-
     foreach ($array as &$item) {
         if (isset($item['items'])) {
             uasort($item['items'], function($a, $b) {
@@ -268,7 +280,6 @@ function ordenaSubcategorias(&$array) {
         }
     }
 }
-
 
 ordenaSubcategorias($items);
 
@@ -281,13 +292,12 @@ return array(
             ),
             'available_for_opportunities' => true
         ),
-
         'emailPrivado' => array(
             'label' => \MapasCulturais\i::__('Email Privado'),
             'validations' => array(
                 'v::email()' => \MapasCulturais\i::__('O email privado não é um email válido.')
             ),
-        	'private' => true,
+            'private' => true,
             'available_for_opportunities' => true
         ),
         'cnpj' => array(
@@ -312,41 +322,26 @@ return array(
             'available_for_opportunities' => true,
             'field_type' => 'brPhone'
         ),
-
         'telefone1' => array(
             'label' => \MapasCulturais\i::__('Telefone 1'),
             'type' => 'string',
             'validations' => array(
                 'v::brPhone()' => \MapasCulturais\i::__('Por favor, informe o telefone 1 no formato (xx) xxxx xxxx.')
             ),
-        	'private' => true,
+            'private' => true,
             'available_for_opportunities' => true,
             'field_type' => 'brPhone'
         ),
-
-
         'telefone2' => array(
             'label' => \MapasCulturais\i::__('Telefone 2'),
             'type' => 'string',
             'validations' => array(
                 'v::brPhone()' => \MapasCulturais\i::__('Por favor, informe o telefone 2 no formato ')
             ),
-        	'private' => true,
+            'private' => true,
             'available_for_opportunities' => true,
             'field_type' => 'brPhone',
-
         ),
-
-        /*
-        'virtual_fisico' => array(
-            'label' => \MapasCulturais\i::__('Virtual ou físico'),
-            'type' => 'select',
-            'options' => array(
-                '' => \MapasCulturais\i::__('Físico'),
-                'virtual' => \MapasCulturais\i::__('Virtual')
-            )
-        ),
-        */
         'acessibilidade' => array(
             'label' => \MapasCulturais\i::__('Acessibilidade'),
             'type' => 'select',
@@ -366,14 +361,11 @@ return array(
                 \MapasCulturais\i::__('Rampa de acesso'),
                 \MapasCulturais\i::__('Elevador'),
                 \MapasCulturais\i::__('Sinalização tátil'),
-
-                // vindos do sistema de museus.cultura.gov.br
                 \MapasCulturais\i::__('Bebedouro adaptado'),
                 \MapasCulturais\i::__('Cadeira de rodas para uso do visitante'),
                 \MapasCulturais\i::__('Circuito de visitação adaptado'),
                 \MapasCulturais\i::__('Corrimão nas escadas e rampas'),
                 \MapasCulturais\i::__('Elevador adaptado'),
-                \MapasCulturais\i::__('Rampa de acesso'),
                 \MapasCulturais\i::__('Sanitário adaptado'),
                 \MapasCulturais\i::__('Telefone público adaptado'),
                 \MapasCulturais\i::__('Vaga de estacionamento exclusiva para deficientes'),
@@ -388,76 +380,40 @@ return array(
             ),
             'available_for_opportunities' => true
         ),
-
         'endereco' => array(
             'label' => \MapasCulturais\i::__('Endereço'),
             'type' => 'text'
         ),
-
-
-        'En_CEP' => [
-            'label' => \MapasCulturais\i::__('CEP'),
-        ],
-        'En_Nome_Logradouro' => [
-            'label' => \MapasCulturais\i::__('Logradouro'),
-        ],
-        'En_Num' => [
-            'label' => \MapasCulturais\i::__('Número'),
-        ],
-        'En_Complemento' => [
-            'label' => \MapasCulturais\i::__('Complemento'),
-        ],
-        'En_Bairro' => [
-            'label' => \MapasCulturais\i::__('Bairro'),
-        ],
-        'En_Municipio' => [
-            'label' => \MapasCulturais\i::__('Município'),
-        ],
+        'En_CEP' => ['label' => \MapasCulturais\i::__('CEP')],
+        'En_Nome_Logradouro' => ['label' => \MapasCulturais\i::__('Logradouro')],
+        'En_Num' => ['label' => \MapasCulturais\i::__('Número')],
+        'En_Complemento' => ['label' => \MapasCulturais\i::__('Complemento')],
+        'En_Bairro' => ['label' => \MapasCulturais\i::__('Bairro')],
+        'En_Municipio' => ['label' => \MapasCulturais\i::__('Município')],
         'En_Estado' => [
             'label' => \MapasCulturais\i::__('Estado'),
             'type' => 'select',
             'options' => array(
-                'AC'=>'Acre',
-                'AL'=>'Alagoas',
-                'AP'=>'Amapá',
-                'AM'=>'Amazonas',
-                'BA'=>'Bahia',
-                'CE'=>'Ceará',
-                'DF'=>'Distrito Federal',
-                'ES'=>'Espírito Santo',
-                'GO'=>'Goiás',
-                'MA'=>'Maranhão',
-                'MT'=>'Mato Grosso',
-                'MS'=>'Mato Grosso do Sul',
-                'MG'=>'Minas Gerais',
-                'PA'=>'Pará',
-                'PB'=>'Paraíba',
-                'PR'=>'Paraná',
-                'PE'=>'Pernambuco',
-                'PI'=>'Piauí',
-                'RJ'=>'Rio de Janeiro',
-                'RN'=>'Rio Grande do Norte',
-                'RS'=>'Rio Grande do Sul',
-                'RO'=>'Rondônia',
-                'RR'=>'Roraima',
-                'SC'=>'Santa Catarina',
-                'SP'=>'São Paulo',
-                'SE'=>'Sergipe',
+                'AC'=>'Acre', 'AL'=>'Alagoas', 'AP'=>'Amapá', 'AM'=>'Amazonas',
+                'BA'=>'Bahia', 'CE'=>'Ceará', 'DF'=>'Distrito Federal',
+                'ES'=>'Espírito Santo', 'GO'=>'Goiás', 'MA'=>'Maranhão',
+                'MT'=>'Mato Grosso', 'MS'=>'Mato Grosso do Sul', 'MG'=>'Minas Gerais',
+                'PA'=>'Pará', 'PB'=>'Paraíba', 'PR'=>'Paraná', 'PE'=>'Pernambuco',
+                'PI'=>'Piauí', 'RJ'=>'Rio de Janeiro', 'RN'=>'Rio Grande do Norte',
+                'RS'=>'Rio Grande do Sul', 'RO'=>'Rondônia', 'RR'=>'Roraima',
+                'SC'=>'Santa Catarina', 'SP'=>'São Paulo', 'SE'=>'Sergipe',
                 'TO'=>'Tocantins',
             )
         ],
-
         'horario' => array(
             'label' => \MapasCulturais\i::__('Horário de funcionamento'),
             'type' => 'textarea',
             'available_for_opportunities' => true
         ),
-
         'criterios' => array(
             'label' => \MapasCulturais\i::__('Critérios de uso do espaço'),
             'type' => 'text'
         ),
-
         'site' => array(
             'label' => \MapasCulturais\i::__('Site'),
             'validations' => array(
@@ -468,24 +424,16 @@ return array(
         'facebook' => array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Facebook'),
-            'serialize' =>function($value){
-                return Utils::parseSocialMediaUser('facebook.com', $value);
-            },
-            'validations' => array(
-                "v::oneOf(v::urlDomain('facebook.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL válida ou o nome ou id do usuário.")
-            ),
+            'serialize' => function($value){ return Utils::parseSocialMediaUser('facebook.com', $value); },
+            'validations' => array("v::oneOf(v::urlDomain('facebook.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL válida ou o nome ou id do usuário.")),
             'placeholder' => \MapasCulturais\i::__('nomedousuario ou iddousuario'),
             'available_for_opportunities' => true
         ),
         'twitter' => array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Twitter'),
-            'serialize' =>function($value){
-                return Utils::parseSocialMediaUser('x.com', $value);
-            },
-            'validations' => array(
-                "v::oneOf(v::urlDomain('x.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")
-            ),
+            'serialize' => function($value){ return Utils::parseSocialMediaUser('x.com', $value); },
+            'validations' => array("v::oneOf(v::urlDomain('x.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")),
             'placeholder' => \MapasCulturais\i::__('nomedousuario'),
             'available_for_opportunities' => true
         ),
@@ -493,87 +441,59 @@ return array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Instagram'),
             'available_for_opportunities' => true,
-            'serialize' =>function($value){
+            'serialize' => function($value){
                 $result = Utils::parseSocialMediaUser('instagram.com', $value);
-                if($result && $result[0] == '@'){
-                    $result = substr($result,1);
-                }
+                if($result && $result[0] == '@'){ $result = substr($result,1); }
                 return $result;
             },
-            'validations' => array(
-                "v::oneOf(v::urlDomain('instagram.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")
-            ),
+            'validations' => array("v::oneOf(v::urlDomain('instagram.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")),
             'placeholder' => \MapasCulturais\i::__('nomedousuario'),
         ),
         'linkedin' => array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Linkedin'),
-            'serialize' =>function($value){
-                return Utils::parseSocialMediaUser('linkedin.com', $value, 'linkedin');
-            },
-            'validations' => array(
-                "v::oneOf(v::urlDomain('linkedin.com'), v::regex('/^@?([\-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")
-            ),
+            'serialize' => function($value){ return Utils::parseSocialMediaUser('linkedin.com', $value, 'linkedin'); },
+            'validations' => array("v::oneOf(v::urlDomain('linkedin.com'), v::regex('/^@?([\-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")),
             'placeholder' => \MapasCulturais\i::__('nomedousuario'),
             'available_for_opportunities' => true
         ),
         'vimeo' => array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Vimeo'),
-            'validations' => array(
-                "v::oneOf(v::urlDomain('vimeo.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")
-            ),
-            'serialize' =>function($value){
-                return Utils::parseSocialMediaUser('vimeo.com', $value);
-            },
+            'serialize' => function($value){ return Utils::parseSocialMediaUser('vimeo.com', $value); },
+            'validations' => array("v::oneOf(v::urlDomain('vimeo.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")),
             'placeholder' => \MapasCulturais\i::__('nomedousuario'),
             'available_for_opportunities' => true
         ),
         'spotify' => array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Spotify'),
-            'validations' => array(
-                "v::oneOf(v::urlDomain('open.spotify.com'), v::regex('/^([a-zA-Z0-9]+|(user|artist|playlist|show|album|track):[a-zA-Z0-9]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL válida do Spotify ou um identificador válido.")
-            ),
-            'serialize' => function($value) {
-                return Utils::parseSocialMediaUser('open.spotify.com', $value);
-            },
+            'serialize' => function($value){ return Utils::parseSocialMediaUser('open.spotify.com', $value); },
+            'validations' => array("v::oneOf(v::urlDomain('open.spotify.com'), v::regex('/^([a-zA-Z0-9]+|(user|artist|playlist|show|album|track):[a-zA-Z0-9]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL válida do Spotify ou um identificador válido.")),
             'placeholder' => \MapasCulturais\i::__('URL ou identificador do Spotify'),
             'available_for_opportunities' => true
         ),
         'youtube' => array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('YouTube'),
-            'validations' => array(
-                "v::oneOf(v::urlDomain('youtube.com'), v::regex('/^(@|channel\/)?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")
-            ),
-            'serialize' =>function($value){
-                return Utils::parseSocialMediaUser('youtube.com', $value);
-            },
+            'serialize' => function($value){ return Utils::parseSocialMediaUser('youtube.com', $value); },
+            'validations' => array("v::oneOf(v::urlDomain('youtube.com'), v::regex('/^(@|channel\/)?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")),
             'placeholder' => \MapasCulturais\i::__('iddocanal'),
             'available_for_opportunities' => true
         ),
         'pinterest' => array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Pinterest'),
-            'validations' => array(
-                "v::oneOf(v::urlDomain('pinterest.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")
-            ),
-            'serialize' =>function($value){
-                return Utils::parseSocialMediaUser('pinterest.com', $value);
-            },
+            'serialize' => function($value){ return Utils::parseSocialMediaUser('pinterest.com', $value); },
+            'validations' => array("v::oneOf(v::urlDomain('pinterest.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")),
             'placeholder' => \MapasCulturais\i::__('nomedousuario'),
             'available_for_opportunities' => true
         ),
         'tiktok' => array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Tiktok'),
-            'serialize' =>function($value){
-                return Utils::parseSocialMediaUser('tiktok.com', $value);
-            },
-            'validations' => array(
-                "v::oneOf(v::urlDomain('tiktok.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")
-            ),
+            'serialize' => function($value){ return Utils::parseSocialMediaUser('tiktok.com', $value); },
+            'validations' => array("v::oneOf(v::urlDomain('tiktok.com'), v::regex('/^@?([-\w\d\.]+)$/i'))" => \MapasCulturais\i::__("O valor deve ser uma URL ou usuário válido.")),
             'placeholder' => \MapasCulturais\i::__('nomedousuario'),
             'available_for_opportunities' => true
         ),
@@ -581,118 +501,10 @@ return array(
             'type' => "socialMedia",
             'label' => \MapasCulturais\i::__('Fediverso'),
             'available_for_opportunities' => true,
-            'serialize' => function ($value) {
-                return $value;
-            },
-            'validations' => array(
-                "v::url()" => \MapasCulturais\i::__("A url informada é inválida.")
-            ),
+            'serialize' => function($value){ return $value; },
+            'validations' => array("v::url()" => \MapasCulturais\i::__("A url informada é inválida.")),
             'placeholder' => \MapasCulturais\i::__('https://nomedoservidor.com.br/@nomedousuario'),
         ),
     ),
-
-/**
- * Equipamentos Culturais
- */
     'items' => $items,
-    /* EXEMPLOS DE METADADOS:
-
-    'cnpj' => array(
-        'label' => 'CNPJ',
-        'type' => 'text',
-        'validations' => array(
-            'unique' => 'Este CNPJ já está cadastrado em nosso sistema.',
-            'v::cnpj()' => 'O CNPJ é inválido.'
-        )
-    ),
-    'cpf' => array(
-        'label' => 'CPF',
-        'type' => 'text',
-        'validations' => array(
-            'required' => 'Por favor, informe o CPF.',
-            'v::cpf()' => 'O CPF é inválido.'
-        )
-    ),
-    'radio' => array(
-        'label' => 'Um exemplo de input radio',
-        'type' => 'radio',
-        'options' => array(
-            'valor1' => 'Label do valor 1',
-            'valor2' => 'Label do valor 2',
-        ),
-        'default_value' => 'valor1'
-    ),
-    'checkboxes' => array(
-        'label' => 'Um exemplo de grupo de checkboxes',
-        'type' => 'checkboxes',
-        'options' => array(
-            'valor1' => 'Label do Primeiro checkbox',
-            'valor2' => 'Label do Primeiro checkbox'
-        ),
-        'default_value' => array(),
-        'validations' => array(
-            'v::arrayType()->notEmpty()' => 'Você deve marcar ao menos uma opção.'
-        )
-    ),
-    'checkbox' => array(
-        'label' => 'Um exemplo de campo booleano com checkbox.',
-        'type' => 'checkbox',
-        'input_value' => 1,
-        'default_value' => 0
-    ),
-    'email' => array(
-        'label' => 'Email público para contato',
-        'type' => 'text',
-        'validations'=> array(
-            'v::email()' => 'O email informado é inválido.'
-        )
-    ),
-    'site' => array(
-        'label' => 'Site',
-        'type' => 'text',
-        'validations'=> array(
-            'v::url()' => 'A URL informada é inválida.'
-        )
-    ),
-    'estado' => array(
-        'label' => 'Estado de Residência',
-        'type' => 'select',
-        'options' => array(
-            ''   => '',
-            'AC' => 'Acre',
-            'AL' => 'Alagoas',
-            'AM' => 'Amazonas',
-            'AP' => 'Amapá',
-            'BA' => 'Bahia',
-            'CE' => 'Ceará',
-            'DF' => 'Distrito Federal',
-            'ES' => 'Espírito Santo',
-            'GO' => 'Goiás',
-            'MA' => 'Maranhão',
-            'MG' => 'Minas Gerais',
-            'MS' => 'Mato Grosso do Sul',
-            'MT' => 'Mato Grosso',
-            'PA' => 'Pará',
-            'PB' => 'Paraíba',
-            'PE' => 'Pernambuco',
-            'PI' => 'Piauí',
-            'PR' => 'Paraná',
-            'RJ' => 'Rio de Janeiro',
-            'RN' => 'Rio Grande do Norte',
-            'RO' => 'Rondônia',
-            'RR' => 'Roraima',
-            'RS' => 'Rio Grande do Sul',
-            'SC' => 'Santa Catarina',
-            'SE' => 'Sergipe',
-            'SP' => 'São Paulo',
-            'TO' => 'Tocantins',
-            ''   => '',
-            'OUT'   => 'Resido Fora do Brasil'
-        ),
-
-        'validations' => array(
-            "v::stringType()->in('AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO','OUT')" => 'O estado informado não existe.'
-        )
-    )
-     */
 );

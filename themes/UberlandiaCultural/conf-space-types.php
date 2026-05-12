@@ -2,7 +2,7 @@
 return [
     'items' => [
         \MapasCulturais\i::__('Turismo — Tipos de Espaços') => [
-            'range' => [1000, 1099],
+            'range' => [1, 1099],
             'items' => [
                 1000 => ['name' => \MapasCulturais\i::__('Pontos-Espaços')],
                 1001 => ['name' => \MapasCulturais\i::__('Gastronomia')],
@@ -24,6 +24,13 @@ return [
                 1017 => ['name' => \MapasCulturais\i::__('Segurança Pública')],
                 1018 => ['name' => \MapasCulturais\i::__('Meios de Hospedagem')],
                 1019 => ['name' => \MapasCulturais\i::__('Agências')],
+
+                // Teatros (IDs já existentes)
+                30 => ['name' => \MapasCulturais\i::__('Teatro Público')],
+                31 => ['name' => \MapasCulturais\i::__('Teatro Privado')],
+
+                // Bibliotecas (IDs já existentes)
+                21 => ['name' => \MapasCulturais\i::__('Biblioteca Privada')],
             ],
         ],
     ],
