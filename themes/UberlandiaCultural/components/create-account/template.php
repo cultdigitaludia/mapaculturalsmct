@@ -41,10 +41,9 @@ $taxonomies = $app->getRegisteredTaxonomies("MapasCulturais\Entities\Agent");
                         <input type="text" name="email" id="email" v-model="email" />
                     </div>
 
-
                     <div class="field col-12">
                         <label class="document-label"> 
-                        <?= i::__('CPF ou CNPJ') ?> 
+                        <?= i::__('CPF') ?> 
                             <div class="question">
                                 <VMenu class="popover">
                                     <button tabindex="-1" class="question" type="button"> <?= i::__('Por que pedimos este dado') ?> <mc-icon name="question"></mc-icon> </button>
@@ -54,18 +53,8 @@ $taxonomies = $app->getRegisteredTaxonomies("MapasCulturais\Entities\Agent");
                                 </VMenu>
                             </div>
                         </label>
-                    <div class="document-type">
-                        <label>
-                            <input type="radio" v-model="documentType" value="cpf" /> CPF
-                        </label>
-                        <label>
-                            <input type="radio" v-model="documentType" value="cnpj" /> CNPJ
-                        </label>
+                        <input type="text" name="cpf" id="cpf" v-model="cpf" v-maska data-maska="###.###.###-##" maxlength="14" />
                     </div>
-                        <input v-if="documentType === 'cpf'" type="text" name="cpf" id="cpf" v-model="cpf" v-maska data-maska="###.###.###-##" maxlength="14" />
-                        <input v-if="documentType === 'cnpj'" type="text" name="cpf" id="cnpj" v-model="cpf" v-maska data-maska="##.###.###/####-##" maxlength="18" />
-                    </div>
-
 
                     <div class="field col-12 password">
                         <label for="pwd"> <?= i::__('Senha'); ?> </label>

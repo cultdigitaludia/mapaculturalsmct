@@ -6,8 +6,8 @@
   'use strict';
 
   const MAPA_BASE = window.location.origin;
-  const WIDGET_TITLE = 'Culturese Bot';
-  const WIDGET_SUBTITLE = 'Seu Assistente do Mapa Cultural de Uberlândia';
+  const WIDGET_TITLE = 'Culture se BOT';
+  const WIDGET_SUBTITLE = 'Sua Assistente do Mapa Cultural de Uberlândia';
   const AVATAR_URL = '/assets/img/culturesebot.png';
 
   const css = `
@@ -113,7 +113,7 @@
             <strong>${WIDGET_TITLE}</strong>
             <span>${WIDGET_SUBTITLE}</span>
           </div>
-          <button id="mc-close-btn" onclick="mcToggle()" aria-label="Fechar chat" style="background:transparent;border:none;cursor:pointer;padding:4px;color:#FFD700;font-size:28px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#FFF500'" onmouseout="this.style.color='#FFD700'">&times;</button>
+          <div class="mc-status"></div>
         </div>
         <div class="mc-messages" id="mc-messages"></div>
         <div class="mc-qr" id="mc-qr"></div>

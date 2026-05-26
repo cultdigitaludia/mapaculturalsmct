@@ -84,21 +84,17 @@ app.component('create-account', {
                 if (this.passwordRules.passwordMustHaveCapitalLetters) {
                     rules.push(passwordMustHaveCapitalLetters);
                 }
-
                 if (this.passwordRules.passwordMustHaveLowercaseLetters) {
                     rules.push(passwordMustHaveLowercaseLetters);
                 }
-
                 if (this.passwordRules.passwordMustHaveSpecialCharacters) {
                     rules.push(passwordMustHaveSpecialCharacters);
                 }
-
                 if (this.passwordRules.passwordMustHaveNumbers) {
                     rules.push(passwordMustHaveNumbers);
                 }
-
                 if (this.passwordRules.minimumPasswordLength) {
-                    minimumPasswordLength = this.passwordRules.minimumPasswordLength
+                    minimumPasswordLength = this.passwordRules.minimumPasswordLength;
                 }
 
                 let rulesLength = rules.length;
@@ -113,16 +109,10 @@ app.component('create-account', {
                     currentPercent = currentPercent + percentToAdd;
                 }
 
-                let strongness = currentPercent.toFixed(0)
-                if (strongness >= 0 && strongness <= 40) {
-                    this.strongnessClass = 'fraco';
-                }
-                if (strongness >= 40 && strongness <= 90) {
-                    this.strongnessClass = 'medio';
-                }
-                if (strongness >= 90 && strongness <= 100) {
-                    this.strongnessClass = 'forte';
-                }
+                let strongness = currentPercent.toFixed(0);
+                if (strongness >= 0 && strongness <= 40) { this.strongnessClass = 'fraco'; }
+                if (strongness >= 40 && strongness <= 90) { this.strongnessClass = 'medio'; }
+                if (strongness >= 90 && strongness <= 100) { this.strongnessClass = 'forte'; }
 
                 return currentPercent.toFixed(0);
             } else {
@@ -135,7 +125,7 @@ app.component('create-account', {
         startAgent() {
             this.agent = Vue.ref(new Entity('agent'));
             this.agent.type = 1;
-            this.agent.terms = { area: [] }
+            this.agent.terms = { area: [] };
         },
 
         async nextStep() {
@@ -185,7 +175,7 @@ app.component('create-account', {
                     'name': this.agent.name,
                     'email': this.email,
                     'cpf': this.cpf,
-                    'documentType': this.documentType,
+                    'documentType': 'cpf',
                     'password': this.password,
                     'confirm_password': this.confirmPassword,
                     'slugs': this.slugs,
@@ -195,7 +185,7 @@ app.component('create-account', {
                         'terms:area': this.agent.terms.area,
                         'shortDescription': this.agent.shortDescription,
                     },
-                }
+                };
 
                 await api.POST($MAPAS.baseURL + "autenticacao/register", dataPost).then(response => response.json().then(dataReturn => {
                     if (dataReturn.error) {
@@ -242,72 +232,32 @@ app.component('create-account', {
             return remainder === parseInt(cpf[10]);
         },
 
-        validateCNPJ(cnpj) {
-            cnpj = cnpj.replace(/[^\d]/g, '');
-            if (cnpj.length !== 14) return false;
-            if (/^(\d)\1+$/.test(cnpj)) return false;
-            let size = cnpj.length - 2;
-            let numbers = cnpj.substring(0, size);
-            let digits = cnpj.substring(size);
-            let sum = 0;
-            let pos = size - 7;
-            for (let i = size; i >= 1; i--) {
-                sum += parseInt(numbers[size - i]) * pos--;
-                if (pos < 2) pos = 9;
-            }
-            let result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-            if (result !== parseInt(digits[0])) return false;
-            size = size + 1;
-            numbers = cnpj.substring(0, size);
-            sum = 0;
-            pos = size - 7;
-            for (let i = size; i >= 1; i--) {
-                sum += parseInt(numbers[size - i]) * pos--;
-                if (pos < 2) pos = 9;
-            }
-            result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-            return result === parseInt(digits[1]);
-        },
-
         async validateFields() {
             const messages = useMessages();
 
-            // Validação local de CPF ou CNPJ
-            if (this.documentType === 'cpf') {
-                if (!this.validateCPF(this.cpf)) {
-                    messages.error(__('Por favor, informe um CPF válido.', 'create-account'));
-                    return false;
-                }
-            } else {
-                if (!this.validateCNPJ(this.cpf)) {
-                    messages.error(__('Por favor, informe um CNPJ válido.', 'create-account'));
-                    return false;
-                }
+            if (!this.validateCPF(this.cpf)) {
+                messages.error(__('Por favor, informe um CPF válido.', 'create-account'));
+                return false;
             }
 
-            // Validação no servidor — envia cpf fictício válido se for CNPJ
-            // para não bloquear na validação de CPF do backend
             let api = new API();
             let success = true;
             let data = {
-                'cpf': this.documentType === 'cpf' ? this.cpf : this.cpf,
+                'cpf': this.cpf,
                 'email': this.email,
                 'password': this.password,
                 'confirm_password': this.confirmPassword,
                 'g-recaptcha-response': this.recaptchaResponse,
-                'documentType': this.documentType,
-            }
+                'documentType': 'cpf',
+            };
 
             await api.POST($MAPAS.baseURL + "autenticacao/validate", data).then(response => response.json().then(dataReturn => {
                 if (dataReturn.error) {
-                    // Ignorar erros de CPF se o tipo for CNPJ
-                    if (this.documentType === 'cnpj' && dataReturn.data && dataReturn.data.cpf) {
+                    // Ignorar erro de CPF já cadastrado — permite múltiplos agentes com o mesmo CPF
+                    if (dataReturn.data && dataReturn.data.cpf) {
                         delete dataReturn.data.cpf;
-                        if (Object.keys(dataReturn.data).length > 0) {
-                            this.throwErrors(dataReturn.data);
-                            success = false;
-                        }
-                    } else {
+                    }
+                    if (dataReturn.data && Object.keys(dataReturn.data).length > 0) {
                         this.throwErrors(dataReturn.data);
                         success = false;
                     }
@@ -348,9 +298,7 @@ app.component('create-account', {
         },
 
         validateAgent() {
-            let errors = {
-                'agent': [],
-            };
+            let errors = { 'agent': [] };
             if (!this.agent.name) {
                 errors.agent.push(__('Nome obrigatório', 'create-account'));
             }
@@ -387,10 +335,10 @@ app.component('create-account', {
 
         togglePassword(id, event) {
             if (document.getElementById(id).type == 'password') {
-                event.target.style.background = "url('https://api.iconify.design/carbon/view-off-filled.svg') no-repeat center center / 22.5px"
+                event.target.style.background = "url('https://api.iconify.design/carbon/view-off-filled.svg') no-repeat center center / 22.5px";
                 document.getElementById(id).type = 'text';
             } else {
-                event.target.style.background = "url('https://api.iconify.design/carbon/view-filled.svg') no-repeat center center / 22.5px"
+                event.target.style.background = "url('https://api.iconify.design/carbon/view-filled.svg') no-repeat center center / 22.5px";
                 document.getElementById(id).type = 'password';
             }
         },
