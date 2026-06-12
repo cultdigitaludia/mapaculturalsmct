@@ -40,22 +40,29 @@ $taxonomies = $app->getRegisteredTaxonomies("MapasCulturais\Entities\Agent");
                         <label for="email"> <?= i::__('E-mail') ?> </label>
                         <input type="text" name="email" id="email" v-model="email" />
                     </div>
-
                     <div class="field col-12">
-                        <label class="document-label"> 
-                        <?= i::__('CPF') ?> 
+                        <div style="display:flex;gap:1.5rem;margin-bottom:0.5rem;">
+                            <label style="cursor:pointer;font-weight:normal;">
+                                <input type="radio" v-model="documentType" value="cpf" /> CPF
+                            </label>
+                            <label style="cursor:pointer;font-weight:normal;">
+                                <input type="radio" v-model="documentType" value="cnpj" /> CNPJ
+                            </label>
+                        </div>
+                        <label class="document-label" :for="documentType">
+                            {{ documentType === 'cpf' ? 'CPF' : 'CNPJ' }}
                             <div class="question">
                                 <VMenu class="popover">
                                     <button tabindex="-1" class="question" type="button"> <?= i::__('Por que pedimos este dado') ?> <mc-icon name="question"></mc-icon> </button>
                                     <template #popper>
-                                        <?= i::__('Para previnir fraudes e por questão de segurança, sendo utilizado para verificar a identidade do usuário e garantir a segurança dos processos de identificação na plataforma.') ?>
+                                        <?= i::__('Para previnir fraudes e por questão de segurança, sendo utilizado para verificar a identidade do <br> usuário e garantir a segurança dos processos de identificação na plataforma, <br> evitando golpes e contas falsas.') ?>
                                     </template>
                                 </VMenu>
                             </div>
                         </label>
-                        <input type="text" name="cpf" id="cpf" v-model="cpf" v-maska data-maska="###.###.###-##" maxlength="14" />
+                        <input v-if="documentType === 'cpf'" type="text" name="cpf" id="cpf" v-model="cpf" v-maska data-maska="###.###.###-##" maxlength="14" />
+                        <input v-if="documentType === 'cnpj'" type="text" name="cpf" id="cnpj" v-model="cpf" v-maska data-maska="##.###.###/####-##" maxlength="18" />
                     </div>
-
                     <div class="field col-12 password">
                         <label for="pwd"> <?= i::__('Senha'); ?> </label>
                         <input autocomplete="off" id="pwd" type="password" name="password" v-model="password" />

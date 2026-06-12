@@ -84,17 +84,21 @@ app.component('create-account', {
                 if (this.passwordRules.passwordMustHaveCapitalLetters) {
                     rules.push(passwordMustHaveCapitalLetters);
                 }
+
                 if (this.passwordRules.passwordMustHaveLowercaseLetters) {
                     rules.push(passwordMustHaveLowercaseLetters);
                 }
+
                 if (this.passwordRules.passwordMustHaveSpecialCharacters) {
                     rules.push(passwordMustHaveSpecialCharacters);
                 }
+
                 if (this.passwordRules.passwordMustHaveNumbers) {
                     rules.push(passwordMustHaveNumbers);
                 }
+
                 if (this.passwordRules.minimumPasswordLength) {
-                    minimumPasswordLength = this.passwordRules.minimumPasswordLength;
+                    minimumPasswordLength = this.passwordRules.minimumPasswordLength
                 }
 
                 let rulesLength = rules.length;
@@ -109,23 +113,30 @@ app.component('create-account', {
                     currentPercent = currentPercent + percentToAdd;
                 }
 
-                let strongness = currentPercent.toFixed(0);
-                if (strongness >= 0 && strongness <= 40) { this.strongnessClass = 'fraco'; }
-                if (strongness >= 40 && strongness <= 90) { this.strongnessClass = 'medio'; }
-                if (strongness >= 90 && strongness <= 100) { this.strongnessClass = 'forte'; }
+                let strongness = currentPercent.toFixed(0)
+                if (strongness >= 0 && strongness <= 40) {
+                    this.strongnessClass = 'fraco';
+                }
+                if (strongness >= 40 && strongness <= 90) {
+                    this.strongnessClass = 'medio';
+                }
+                if (strongness >= 90 && strongness <= 100) {
+                    this.strongnessClass = 'forte';
+                }
 
                 return currentPercent.toFixed(0);
             } else {
                 return 0;
             }
+
         }
     },
 
     methods: {
         startAgent() {
             this.agent = Vue.ref(new Entity('agent'));
-            this.agent.type = 1;
-            this.agent.terms = { area: [] };
+            this.agent.type = this.documentType === 'cnpj' ? 2 : 1;
+            this.agent.terms = { area: [] }
         },
 
         async nextStep() {
@@ -163,10 +174,12 @@ app.component('create-account', {
             window.scrollTo(0, 0);
         },
 
+        /* Terms */
         acceptTerm(slug) {
             this.slugs.push(slug);
         },
 
+        /* Do register */
         async register() {
             let api = new API();
 
@@ -175,7 +188,6 @@ app.component('create-account', {
                     'name': this.agent.name,
                     'email': this.email,
                     'cpf': this.cpf,
-                    'documentType': 'cpf',
                     'password': this.password,
                     'confirm_password': this.confirmPassword,
                     'slugs': this.slugs,
@@ -184,8 +196,9 @@ app.component('create-account', {
                         'name': this.agent.name,
                         'terms:area': this.agent.terms.area,
                         'shortDescription': this.agent.shortDescription,
+                        'type': this.agent.type,
                     },
-                };
+                }
 
                 await api.POST($MAPAS.baseURL + "autenticacao/register", dataPost).then(response => response.json().then(dataReturn => {
                     if (dataReturn.error) {
@@ -204,11 +217,11 @@ app.component('create-account', {
             }
         },
 
+        /* Cancel register */
         cancel() {
             this.strongnessClass = 'fraco';
             this.email = '';
             this.cpf = '';
-            this.documentType = 'cpf';
             this.password = '';
             this.confirmPassword = '';
             this.agent = null;
@@ -216,30 +229,17 @@ app.component('create-account', {
             this.goToStep(0);
         },
 
-        validateCPF(cpf) {
-            cpf = cpf.replace(/[^\d]/g, '');
-            if (cpf.length !== 11) return false;
-            if (/^(\d)\1+$/.test(cpf)) return false;
-            let sum = 0;
-            for (let i = 0; i < 9; i++) sum += parseInt(cpf[i]) * (10 - i);
-            let remainder = (sum * 10) % 11;
-            if (remainder === 10 || remainder === 11) remainder = 0;
-            if (remainder !== parseInt(cpf[9])) return false;
-            sum = 0;
-            for (let i = 0; i < 10; i++) sum += parseInt(cpf[i]) * (11 - i);
-            remainder = (sum * 10) % 11;
-            if (remainder === 10 || remainder === 11) remainder = 0;
-            return remainder === parseInt(cpf[10]);
+        /* Validações */
+
+        async verifyCaptcha(response) {
+            this.recaptchaResponse = response;
+        },
+
+        expiredCaptcha() {
+            this.recaptchaResponse = '';
         },
 
         async validateFields() {
-            const messages = useMessages();
-
-            if (!this.validateCPF(this.cpf)) {
-                messages.error(__('Por favor, informe um CPF válido.', 'create-account'));
-                return false;
-            }
-
             let api = new API();
             let success = true;
             let data = {
@@ -248,19 +248,11 @@ app.component('create-account', {
                 'password': this.password,
                 'confirm_password': this.confirmPassword,
                 'g-recaptcha-response': this.recaptchaResponse,
-                'documentType': 'cpf',
-            };
-
+            }
             await api.POST($MAPAS.baseURL + "autenticacao/validate", data).then(response => response.json().then(dataReturn => {
                 if (dataReturn.error) {
-                    // Ignorar erro de CPF já cadastrado — permite múltiplos agentes com o mesmo CPF
-                    if (dataReturn.data && dataReturn.data.cpf) {
-                        delete dataReturn.data.cpf;
-                    }
-                    if (dataReturn.data && Object.keys(dataReturn.data).length > 0) {
-                        this.throwErrors(dataReturn.data);
-                        success = false;
-                    }
+                    this.throwErrors(dataReturn.data);
+                    success = false;
                 } else {
                     this.recaptchaResponse = '';
                 }
@@ -298,7 +290,9 @@ app.component('create-account', {
         },
 
         validateAgent() {
-            let errors = { 'agent': [] };
+            let errors = {
+                'agent': [],
+            };
             if (!this.agent.name) {
                 errors.agent.push(__('Nome obrigatório', 'create-account'));
             }
@@ -309,10 +303,11 @@ app.component('create-account', {
                 errors.agent.push(__('Área de atuação obrigatória', 'create-account'));
             }
 
+            // Validação de campos obrigatórios das taxonomias
             Object.keys($TAXONOMIES).forEach(taxonomy => {
                 const t = $TAXONOMIES[taxonomy];
-                if (t.required && t.entities.includes('MapasCulturais\\Entities\\Agent')) {
-                    if (this.agent.terms[taxonomy].length == 0) {
+                if (t.required  && t.entities.includes('MapasCulturais\\Entities\\Agent')) {
+                    if(this.agent.terms[taxonomy].length == 0) {
                         errors.agent.push(`${t.description} ${__('required', 'create-account')}`);
                     }
                 }
@@ -325,20 +320,12 @@ app.component('create-account', {
             return true;
         },
 
-        async verifyCaptcha(response) {
-            this.recaptchaResponse = response;
-        },
-
-        expiredCaptcha() {
-            this.recaptchaResponse = '';
-        },
-
         togglePassword(id, event) {
             if (document.getElementById(id).type == 'password') {
-                event.target.style.background = "url('https://api.iconify.design/carbon/view-off-filled.svg') no-repeat center center / 22.5px";
+                event.target.style.background = "url('https://api.iconify.design/carbon/view-off-filled.svg') no-repeat center center / 22.5px"
                 document.getElementById(id).type = 'text';
             } else {
-                event.target.style.background = "url('https://api.iconify.design/carbon/view-filled.svg') no-repeat center center / 22.5px";
+                event.target.style.background = "url('https://api.iconify.design/carbon/view-filled.svg') no-repeat center center / 22.5px"
                 document.getElementById(id).type = 'password';
             }
         },
