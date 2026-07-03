@@ -62,7 +62,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 .main-footer__reg { background-color: #0055A5 !important; }
 @media (max-width: 768px) {
     .home-header__background {
-        background-image: url("/assets/img/capa_vertical.img.png") !important;
+        background-image: url("/assets/img/capa_vertical.png") !important;
         background-size: cover !important;
         background-position: center !important;
     }

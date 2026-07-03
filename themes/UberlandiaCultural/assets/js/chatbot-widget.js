@@ -20,7 +20,8 @@
       overflow: visible;
     }
     #mc-chat-btn:hover { transform: scale(1.08); }
-    #mc-chat-btn.open svg.icon-chat { display: none; }
+    #mc-chat-btn.open { opacity: 0; pointer-events: none; }
+    #mc-chat-btn.open img.icon-chat { display: none; }
     #mc-chat-btn.open svg.icon-close { display: block !important; }
     #mc-badge {
       position: absolute; top: -2px; right: -2px;
@@ -32,19 +33,19 @@
     #mc-badge.hidden { display: none; }
     #mc-chat-panel {
       position: fixed; bottom: 100px; right: 28px;
-      width: 370px; height: 580px;
+      width: 370px; height: min(580px, calc(100vh - 128px));
       background: #0d0f14; border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
       display: flex; flex-direction: column; overflow: hidden;
-      z-index: 99997; opacity: 0;
+      z-index: 99999; opacity: 0;
       transform: translateY(20px) scale(0.96); pointer-events: none;
       transition: opacity 0.25s ease, transform 0.25s ease;
       font-family: 'Segoe UI', sans-serif;
     }
     #mc-chat-panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
     @media (max-width: 480px) {
-      #mc-chat-panel { width: calc(100vw - 20px); right: 10px; bottom: 90px; height: 70vh; }
-      #mc-chat-btn { bottom: 16px; right: 16px; }
+      #mc-chat-panel { width: calc(100vw - 20px); right: 10px; bottom: 90px; height: min(70vh, calc(100vh - 110px)); z-index: 99999; }
+      #mc-chat-btn { position: fixed; z-index: 99998; bottom: 16px; right: 16px; width: clamp(120px, 38vw, 175px); height: clamp(120px, 38vw, 175px); }
     }
     .mc-header {
       padding: 14px 16px; background: #161920;
@@ -113,7 +114,7 @@
             <strong>${WIDGET_TITLE}</strong>
             <span>${WIDGET_SUBTITLE}</span>
           </div>
-          <button id="mc-close-btn" onclick="mcToggle()" aria-label="Fechar chat" style="background:transparent;border:none;cursor:pointer;padding:4px;color:#FFD700;font-size:28px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#FFF500'" onmouseout="this.style.color='#FFD700'">&times;</button>
+          <button id="mc-close-btn" aria-label="Fechar chat" style="background:transparent;border:none;cursor:pointer;padding:4px;color:#FFD700;font-size:28px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#FFF500'" onmouseout="this.style.color='#FFD700'">&times;</button>
         </div>
         <div class="mc-messages" id="mc-messages"></div>
         <div class="mc-qr" id="mc-qr"></div>
@@ -310,6 +311,7 @@
     const style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
     const wrapper = document.createElement('div'); wrapper.id = 'mc-chat-root'; wrapper.innerHTML = buildHTML(); document.body.appendChild(wrapper);
     document.getElementById('mc-chat-btn').addEventListener('click', mcToggle);
+    document.getElementById('mc-close-btn').addEventListener('click', mcToggle);
     document.getElementById('mc-input').addEventListener('keydown', e => { if (e.key === 'Enter') mcSend(); });
     if (AVATAR_URL) { document.getElementById('mc-avatar-hdr').innerHTML = `<img src="${AVATAR_URL}" alt="">`; }
     setTimeout(() => {
