@@ -13,6 +13,6 @@ return [
     //Uberlândia
     'maps.latitude'  => -18.9186,
     'maps.longitude' => -48.2772,
-    'maps.zoom'      => 15,
+    'maps.zoom'      => 17,
 
 ];

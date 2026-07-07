@@ -5,7 +5,7 @@
  */
 ?>
         <?php $this->bodyEnd() ?>
-        <script src="/themes/UberlandiaCultural/assets/js/chatbot-widget.js"></script>
+    <script src="<?= $app->baseUrl ?>assets/js/geolocalizacao.js?v=<?= time() ?>"></script>
     </body>
     <?php $this->applyTemplateHook('body','after'); ?>
     <?php $this->printJsObject(); ?>

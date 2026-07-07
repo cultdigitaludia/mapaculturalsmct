@@ -21,6 +21,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $this->enqueueStyle('app-v2', 'main', 'css/theme-UberlandiaCultural.css');
         $this->assetManager->publishFolder('fonts');
         $this->enqueueScript('app-v2', 'chatbot', 'js/chatbot-widget.js');
+        $this->enqueueScript('app-v2', 'geolocalizacao', 'js/geolocalizacao.js');
         $this->assetManager->publishFolder('img'); 
 
         // Adiciona a rota de turismo ao controller de search

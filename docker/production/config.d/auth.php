@@ -4,6 +4,7 @@ return [
     'auth.config' => [
         'salt' => env('AUTH_SALT', null),
         'timeout' => '24 hours',
+        'requireCpf' => false,
         'strategies' => [
             'Google' => [
                 'visible' => true,

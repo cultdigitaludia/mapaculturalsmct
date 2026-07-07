@@ -111,17 +111,24 @@ $config = $app->config['social-media'];
                 </li>
                 <li>
                     <a href="<?= $app->createUrl('faq') ?>"><?php i::_e('Dúvidas frequentes'); ?></a>
-                    <p style="margin-top: 15px !important;">
-                        <?= $this->text('description', "") ?>
+                </li>
+                <li>
+                    <p style="margin: 4px 0 12px 0; font-size: 0.85em; line-height: 1.4;">
+                        <?php i::_e('Dúvidas ou problemas com o sistema entrar em contato pelo e-mail'); ?>
+                        <a href="mailto:suporte.mapasculturais@uberlandia.mg.gov.br" style="display: block; margin-top: 4px;">
+                            suporte.mapasculturais@uberlandia.mg.gov.br
+                        </a>
                     </p>
                 </li>
-                <?php if (count($app->config['module.LGPD']) > 0): ?>
-                    <?php foreach ($app->config['module.LGPD'] as $slug => $cfg) : ?>
-                        <li>
-                            <a href="<?= $app->createUrl('lgpd', 'view', [$slug]) ?>"><?= $cfg['title'] ?></a>
-                        </li>
-                    <?php endforeach ?>
-                <?php endif; ?>
+                <li>
+                    <a href="<?= $app->createUrl('page', 'site', ['termos-de-uso']) ?>"><?php i::_e('Termos e Condições de Uso'); ?></a>
+                </li>
+                <li>
+                    <a href="<?= $app->createUrl('page', 'site', ['politica-de-privacidade']) ?>"><?php i::_e('Política de Privacidade'); ?></a>
+                </li>
+                <li>
+                    <a href="<?= $app->createUrl('page', 'site', ['autorizacao-de-uso-de-imagem']) ?>"><?php i::_e('Autorização de Uso de Imagem'); ?></a>
+                </li>
             </ul>
 
             <?php $this->applyTemplateHook("main-footer-links", "end")?>

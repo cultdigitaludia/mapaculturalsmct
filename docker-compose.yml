@@ -1,6 +1,7 @@
 version: '3'
 services:
   nginx:
+    container_name: nginx
     image: nginx:latest
     restart: unless-stopped
     volumes:
@@ -16,6 +17,9 @@ services:
     #  - ./docker/production/nginx-ssl.conf:/etc/nginx/conf.d/default.conf
     #  - ./docker-data/certs/conf:/etc/letsencrypt
     #  - ./docker-data/certs/www:/var/www/certbot
+      - ./docker/production/nginx-ssl.conf:/etc/nginx/conf.d/default.conf
+      - /etc/ssl/culturese:/etc/ssl/culturese:ro
+
     ports:
      - "80:80"
      - "443:443"
@@ -25,6 +29,7 @@ services:
       - mapasculturais
   
   mapasculturais:
+    container_name: mapasculturais
     env_file:
       - .env
     build:
@@ -41,6 +46,7 @@ services:
       - ./docker-data/logs:/var/www/var/logs
 
       - ./docker/production/config.d:/var/www/config/prod.d
+      - ./themes/UberlandiaCultural:/var/www/src/themes/UberlandiaCultural
     links:
       - db
       - redis
