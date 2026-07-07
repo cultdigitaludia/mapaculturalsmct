@@ -51,33 +51,33 @@ $config = $app->config['social-media'];
                     <a><?php i::_e("Acesse"); ?></a>
                 </li>
                 <li>
-                    <a href="<?= $app->createUrl('search', 'turismo') ?>">
-                        <mc-icon name="space"></mc-icon> <?php i::_e('turismo'); ?>
+                    <a href="<?= $app->createUrl('search', 'Turismo') ?>">
+                        <mc-icon name="space"></mc-icon> <?php i::_e('Turismo'); ?>
                     </a>
                 </li>
                 <li v-if="global.enabledEntities.opportunities">
                     <a href="<?= $app->createUrl('search', 'opportunities') ?>">
-                        <mc-icon name="opportunity"></mc-icon> <?= $this->text('main-footer', i::__('editais e oportunidade')); ?>
+                        <mc-icon name="opportunity"></mc-icon> <?= $this->text('main-footer', i::__('Editais e Oportunidades')); ?>
                     </a>
                 </li>
                 <li v-if="global.enabledEntities.events">
                     <a href="<?= $app->createUrl('search', 'events') ?>">
-                        <mc-icon name="event"></mc-icon> <?php i::_e('eventos'); ?>
+                        <mc-icon name="event"></mc-icon> <?php i::_e('Eventos'); ?>
                     </a>
                 </li>
                 <li v-if="global.enabledEntities.agents">
                     <a href="<?= $app->createUrl('search', 'agents') ?>">
-                        <mc-icon name="agent"></mc-icon> <?php i::_e('agentes'); ?>
+                        <mc-icon name="agent"></mc-icon> <?php i::_e('Agentes'); ?>
                     </a>
                 </li>
                 <li v-if="global.enabledEntities.spaces">
                     <a href="<?= $app->createUrl('search', 'spaces') ?>">
-                        <mc-icon name="space"></mc-icon> <?php i::_e('espaços'); ?>
+                        <mc-icon name="space"></mc-icon> <?php i::_e('Espaços'); ?>
                     </a>
                 </li>
                 <li v-if="global.enabledEntities.projects">
                     <a href="<?= $app->createUrl('search', 'projects') ?>">
-                        <mc-icon name="project"></mc-icon> <?php i::_e('projetos'); ?>
+                        <mc-icon name="project"></mc-icon> <?php i::_e('Projetos'); ?>
                     </a>
                 </li>
             </ul>
@@ -87,16 +87,16 @@ $config = $app->config['social-media'];
                     <a href="<?= $app->createUrl('panel', 'index') ?>"><?php i::_e('Painel'); ?></a>
                 </li>
                 <li v-if="global.enabledEntities.opportunities">
-                    <a href="<?= $app->createUrl('panel', 'opportunities') ?>"><?php i::_e('Editais e oportunidades'); ?></a>
+                    <a href="<?= $app->createUrl('panel', 'opportunities') ?>"><?php i::_e('Editais e Oportunidades'); ?></a>
                 </li>
                 <li v-if="global.enabledEntities.events">
-                    <a href="<?= $app->createUrl('panel', 'events') ?>"><?php i::_e('Meus eventos'); ?></a>
+                    <a href="<?= $app->createUrl('panel', 'events') ?>"><?php i::_e('Meus Eventos'); ?></a>
                 </li>
                 <li v-if="global.enabledEntities.agents">
-                    <a href="<?= $app->createUrl('panel', 'agents') ?>"><?php i::_e('Meus agentes'); ?></a>
+                    <a href="<?= $app->createUrl('panel', 'agents') ?>"><?php i::_e('Meus Agentes'); ?></a>
                 </li>
                 <li v-if="global.enabledEntities.spaces">
-                    <a href="<?= $app->createUrl('panel', 'spaces') ?>"><?php i::_e('Meus espaços'); ?></a>
+                    <a href="<?= $app->createUrl('panel', 'spaces') ?>"><?php i::_e('Meus Espaços'); ?></a>
                 </li>
                 <?php if (!($app->user->is('guest'))) : ?>
                     <li>
@@ -107,10 +107,10 @@ $config = $app->config['social-media'];
 
             <ul class="main-footer__content--links-group">
                 <li>
-                    <a><?php i::_e('Ajuda e privacidade'); ?></a>
+                    <a><?php i::_e('Ajuda e Privacidade'); ?></a>
                 </li>
                 <li>
-                    <a href="<?= $app->createUrl('faq') ?>"><?php i::_e('Dúvidas frequentes'); ?></a>
+                    <a href="<?= $app->createUrl('faq') ?>"><?php i::_e('Dúvidas Frequentes'); ?></a>
                 </li>
                 <li>
                     <p style="margin: 4px 0 12px 0; font-size: 0.85em; line-height: 1.4;">
