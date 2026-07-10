@@ -9,28 +9,33 @@
   const WIDGET_TITLE = 'Culturese Bot';
   const WIDGET_SUBTITLE = 'Seu Assistente do Mapa Cultural de Uberlândia';
   const AVATAR_URL = '/assets/img/culturesebot.png';
+  const DISMISSED_KEY = 'mc-chat-dismissed';
 
   const css = `
-   #mc-chat-btn {
+    #mc-chat-launcher {
       position: fixed; bottom: 28px; right: 28px;
       width: 200px; height: 200px; border-radius: 50%;
+      z-index: 99998;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    #mc-chat-btn {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border-radius: 50%;
       background: transparent;
       border: none; cursor: pointer;
       box-shadow: none;
       overflow: visible;
     }
     #mc-chat-btn:hover { transform: scale(1.08); }
-    #mc-chat-btn.open { opacity: 0; pointer-events: none; }
-    #mc-chat-btn.open img.icon-chat { display: none; }
-    #mc-chat-btn.open svg.icon-close { display: block !important; }
-    #mc-badge {
-      position: absolute; top: -2px; right: -2px;
-      width: 18px; height: 18px; background: #F2A900;
-      border-radius: 50%; font-size: 10px; color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; border: 2px solid #fff; pointer-events: none;
+    #mc-chat-launcher.open { opacity: 0; pointer-events: none; }
+    #mc-chat-dismiss {
+      align-items: center; background: #003F7D; border: 2px solid #fff;
+      border-radius: 50%; color: #fff; cursor: pointer; display: flex;
+      font-size: 18px; height: 26px; justify-content: center;
+      line-height: 1; padding: 0; position: absolute; right: 6px; top: 10px;
+      width: 26px; z-index: 2;
     }
-    #mc-badge.hidden { display: none; }
+    #mc-chat-dismiss:hover, #mc-chat-dismiss:focus-visible { background: #002C42; }
     #mc-chat-panel {
       position: fixed; bottom: 100px; right: 28px;
       width: 370px; height: min(580px, calc(100vh - 128px));
@@ -43,9 +48,18 @@
       font-family: 'Segoe UI', sans-serif;
     }
     #mc-chat-panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+    @media (max-width: 800px) {
+      #mc-chat-root.footer-visible #mc-chat-launcher,
+      #mc-chat-root.footer-visible #mc-chat-panel {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+      }
+    }
     @media (max-width: 480px) {
       #mc-chat-panel { width: calc(100vw - 20px); right: 10px; bottom: 90px; height: min(70vh, calc(100vh - 110px)); z-index: 99999; }
-      #mc-chat-btn { position: fixed; z-index: 99998; bottom: 16px; right: 16px; width: clamp(120px, 38vw, 175px); height: clamp(120px, 38vw, 175px); }
+      #mc-chat-launcher { bottom: 16px; right: 16px; width: clamp(120px, 38vw, 175px); height: clamp(120px, 38vw, 175px); }
+      #mc-chat-dismiss { font-size: 16px; height: 22px; right: 2px; top: 6px; width: 22px; }
     }
     .mc-header {
       padding: 14px 16px; background: #161920;
@@ -62,6 +76,8 @@
     .mc-header-info { flex: 1; }
     .mc-header-info strong { display: block; font-size: 14px; color: #eef0f8; }
     .mc-header-info span { font-size: 11px; color: #7a7f9a; }
+    #mc-close-btn { background: transparent; border: none; color: #FFD700; cursor: pointer; font-size: 28px; line-height: 1; padding: 4px; }
+    #mc-close-btn:hover, #mc-close-btn:focus-visible { color: #FFF500; }
     .mc-status { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 5px #4ade80; animation: mc-pulse 2s infinite; flex-shrink: 0; }
     @keyframes mc-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
     .mc-messages { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
@@ -100,13 +116,12 @@
 
   function buildHTML() {
     return `
-      <button id="mc-chat-btn" aria-label="Abrir assistente cultural" title="Assistente Cultural UDI">
-        <div id="mc-badge" class="hidden">1</div>
-        <img class="icon-chat" src="${AVATAR_URL}" style="width:110%;height:110%;object-fit:contain;border-radius:0;" alt="Assistente" />
-        <svg class="icon-close" style="display:none" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
+      <div id="mc-chat-launcher">
+        <button id="mc-chat-btn" aria-label="Abrir assistente cultural" title="Assistente Cultural UDI">
+          <img class="icon-chat" src="${AVATAR_URL}" style="width:110%;height:110%;object-fit:contain;border-radius:0;" alt="Assistente" />
+        </button>
+        <button id="mc-chat-dismiss" aria-label="Ocultar assistente cultural" title="Ocultar assistente">&times;</button>
+      </div>
       <div id="mc-chat-panel" role="dialog" aria-label="Assistente Cultural UDI">
         <div class="mc-header">
           <div class="mc-avatar" id="mc-avatar-hdr">🎭</div>
@@ -114,7 +129,7 @@
             <strong>${WIDGET_TITLE}</strong>
             <span>${WIDGET_SUBTITLE}</span>
           </div>
-          <button id="mc-close-btn" aria-label="Fechar chat" style="background:transparent;border:none;cursor:pointer;padding:4px;color:#FFD700;font-size:28px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#FFF500'" onmouseout="this.style.color='#FFD700'">&times;</button>
+          <button id="mc-close-btn" aria-label="Fechar chat" title="Fechar chat">&times;</button>
         </div>
         <div class="mc-messages" id="mc-messages"></div>
         <div class="mc-qr" id="mc-qr"></div>
@@ -127,7 +142,33 @@
     `;
   }
 
-  let mcOpen = false, mcUnread = 0, mcTyping = false;
+  let mcOpen = false, mcTyping = false, mcFooterObserver, mcGreetingTimer;
+
+  function wasDismissed() {
+    try { return sessionStorage.getItem(DISMISSED_KEY) === '1'; }
+    catch { return false; }
+  }
+
+  function mcDismiss() {
+    try { sessionStorage.setItem(DISMISSED_KEY, '1'); } catch {}
+    clearTimeout(mcGreetingTimer);
+    mcFooterObserver?.disconnect();
+    document.getElementById('mc-chat-root')?.remove();
+  }
+
+  function mcObserveFooter(attempt = 0) {
+    if (!('IntersectionObserver' in window)) return;
+    const footerReg = document.querySelector('.main-footer__reg');
+    if (!footerReg) {
+      if (attempt < 20) setTimeout(() => mcObserveFooter(attempt + 1), 250);
+      return;
+    }
+
+    mcFooterObserver = new IntersectionObserver(entries => {
+      document.getElementById('mc-chat-root')?.classList.toggle('footer-visible', entries[0].isIntersecting);
+    });
+    mcFooterObserver.observe(footerReg);
+  }
 
   function avHtml() { return AVATAR_URL ? `<img src="${AVATAR_URL}" alt="">` : '🎭'; }
 
@@ -138,7 +179,6 @@
     const ch = (cards||[]).map(c=>`<div class="mc-ev-card" onclick="window.open('${c.url}','_blank')"><div class="mc-ev-title">${c.title}</div><div class="mc-ev-meta">${c.meta}</div>${c.desc?`<div class="mc-ev-desc">${c.desc}</div>`:''}</div>`).join('');
     div.innerHTML = `<div class="mc-msg-av">${avHtml()}</div><div class="mc-bubble">${html}${ch}</div>`;
     msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
-    if (!mcOpen) { mcUnread++; updateBadge(); }
   }
 
   function mcAddUser(text) {
@@ -167,13 +207,6 @@
       b.onclick = () => { document.getElementById('mc-input').value = o; mcSend(); };
       el.appendChild(b);
     });
-  }
-
-  function updateBadge() {
-    const badge = document.getElementById('mc-badge');
-    if (!badge) return;
-    if (mcUnread > 0 && !mcOpen) { badge.textContent = mcUnread; badge.classList.remove('hidden'); }
-    else badge.classList.add('hidden');
   }
 
   async function apiGet(endpoint) {
@@ -301,20 +334,23 @@
 
   function mcToggle() {
     const panel = document.getElementById('mc-chat-panel');
-    const btn = document.getElementById('mc-chat-btn');
+    const launcher = document.getElementById('mc-chat-launcher');
     mcOpen = !mcOpen;
-    panel.classList.toggle('open', mcOpen); btn.classList.toggle('open', mcOpen);
-    if (mcOpen) { mcUnread = 0; updateBadge(); setTimeout(() => document.getElementById('mc-input')?.focus(), 300); }
+    panel.classList.toggle('open', mcOpen); launcher.classList.toggle('open', mcOpen);
+    if (mcOpen) setTimeout(() => document.getElementById('mc-input')?.focus(), 300);
   }
 
   function mcInit() {
+    if (wasDismissed()) return;
     const style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
     const wrapper = document.createElement('div'); wrapper.id = 'mc-chat-root'; wrapper.innerHTML = buildHTML(); document.body.appendChild(wrapper);
     document.getElementById('mc-chat-btn').addEventListener('click', mcToggle);
+    document.getElementById('mc-chat-dismiss').addEventListener('click', mcDismiss);
     document.getElementById('mc-close-btn').addEventListener('click', mcToggle);
     document.getElementById('mc-input').addEventListener('keydown', e => { if (e.key === 'Enter') mcSend(); });
     if (AVATAR_URL) { document.getElementById('mc-avatar-hdr').innerHTML = `<img src="${AVATAR_URL}" alt="">`; }
-    setTimeout(() => {
+    mcObserveFooter();
+    mcGreetingTimer = setTimeout(() => {
       mcAddBot('Olá! 👋 Sou o <strong>Assistente Cultural de Uberlândia</strong>!<br><br>Posso te ajudar a encontrar <strong>eventos</strong>, <strong>espaços culturais</strong>, <strong>agentes</strong> e <strong>editais</strong> cadastrados no Mapa Cultural, ou te guiar no <strong>cadastro</strong>. O que você procura?');
       mcSetQR(['🗓️ Ver agenda', '🏛️ Espaços culturais', '📋 Editais abertos', '📝 Como me cadastrar?']);
     }, 800);

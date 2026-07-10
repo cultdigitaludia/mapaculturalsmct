@@ -5,132 +5,62 @@
     background: #FFFFFF;
     box-shadow: var(--mc-shadow-lv1-up);
     display: flex;
-    gap: size(40);
+    gap: 0;
     justify-content: center;
-    padding: size(24) 0 0;
+    padding: 0;
     position: relative;
     flex-wrap: wrap;
+
     &__support {
-        padding-bottom: size(39);
-        @include mobile {
-            padding-bottom: size(24);
+        margin: 0 auto;
+        max-width: size(1170);
+        padding: size(32) size(16) 0;
+    }
+
+    &__msgspt {
+        font-size: size(16);
+        line-height: size(22);
+        text-align: center;
+
+        a {
+            color: var(--mc-primary-500);
+            font-weight: 600;
+            overflow-wrap: anywhere;
         }
     }
-    &__msgspt {
-        text-align: center;
-    }
-    
-    @include mobile {
-        gap: 0;
-    }
-    
+
     &__content {
         margin: 0 auto;
-        max-width: size(1440);
         width: 100%;
-
-        &--logo,
-        &--links {
-            max-width: size(1170);
-            margin: 0 auto;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 size(16);
-
-            @include mobile {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-        }
-
-        &--logo {
-            &-img {
-                flex-basis: 100%;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-
-                .theme-logo {
-                    width: 30%;
-                }
-
-                .theme-logo.onlyImg {
-                    width: unset;
-                }
-
-                @media (max-width: size(800)) {
-                    width: 70%;
-
-                    .theme-logo {
-                        grid-template-columns: 100%;
-                        text-align: center;
-                        justify-content: center;
-                        justify-items: center;
-                        margin: 0 auto;
-                        width: 50%;
-
-                        &__logo {
-                            width: 50%;
-                            margin: 0 25%;
-                        }
-                    }
-                }
-
-                @media (max-width: size(490)) {
-                    width: 100%;
-                }
-
-                svg {
-                    width: 100%;
-                }
-            }
-
-            &-share {
-                align-items: center;
-                color: var(--mc-low-700);
-                display: flex;
-                gap: size(20);
-                justify-content: center;
-                padding: size(34) 0;
-                font-size: size(20);
-                a, a:hover, a:active, a:focus, a:visited
-                {
-                    color: var(--mc-low-700);
-                    text-decoration: none;
-                }
-            }
-
-            @include mobile {
-                align-items: center;
-            }    
-        }
 
         &--links {
             align-items: flex-start;
-            justify-content: space-evenly;
-            gap: size(40);
-            padding: 0 size(56);
-            
-            @include mobile {
-                gap: 0;
-            }
+            display: grid;
+            gap: size(64);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin: 0 auto;
+            max-width: size(1170);
+            padding: size(40) size(16) size(36);
+            width: 100%;
 
-            @media (max-width: size(450)) {
-                width: 100%;
-                padding: 0 size(40);
+            @include mobile {
+                gap: size(32);
+                grid-template-columns: 1fr;
+                padding: size(32) size(16);
             }
 
             &-group {
+                display: flex;
+                flex-direction: column;
+                gap: size(14);
                 list-style: none;
+                margin: 0;
                 padding: 0;
 
                 li {
                     font-weight: 400;
                     font-size: size(16);
                     line-height: size(22);
-                    padding-bottom: size(16);
 
                     a {
                         align-items: center;
@@ -140,18 +70,86 @@
                         text-decoration: none;
                     }
                 }
+            }
 
-                li:first-child {
-                    font-weight: 700;
+            &-title {
+                margin-bottom: size(8);
+
+                h2 {
+                    color: var(--mc-primary-500);
                     font-size: size(24);
-                    line-height: size(28);
                     font-weight: 600;
-                    padding-bottom: size(24);    
-                    
+                    line-height: size(28);
+                    margin: 0;
+
                     a {
-                        color: var(--mc-primary-500);
+                        color: inherit;
+                        font-weight: inherit;
                     }
                 }
+            }
+        }
+
+        &--logo {
+            align-items: center;
+            border-top: var(--mc-border-hairline) var(--mc-gray-300);
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            max-width: size(1170);
+            padding: size(24) size(16);
+            width: calc(100% - #{size(32)});
+
+            &-img {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+
+                a {
+                    display: flex;
+                    justify-content: center;
+                    max-width: size(560);
+                    width: 100%;
+                }
+
+                img,
+                svg {
+                    display: block;
+                    height: auto;
+                    max-width: 100%;
+                    width: 100%;
+                }
+
+                .theme-logo {
+                    width: 100%;
+                }
+            }
+
+            &-share {
+                align-items: center;
+                color: var(--mc-low-700);
+                display: flex;
+                font-size: size(20);
+                gap: size(20);
+                justify-content: center;
+                padding-top: size(16);
+
+                &:empty {
+                    display: none;
+                }
+
+                a,
+                a:hover,
+                a:active,
+                a:focus,
+                a:visited {
+                    color: var(--mc-low-700);
+                    text-decoration: none;
+                }
+            }
+
+            @include mobile {
+                padding: size(20) 0;
             }
         }
     }

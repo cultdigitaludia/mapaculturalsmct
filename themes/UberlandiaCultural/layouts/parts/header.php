@@ -42,4 +42,16 @@
 .home-header__content {
     min-height: 600px;
 }
+@media (max-width: 768px) {
+    .home-header__content {
+        aspect-ratio: 1070 / 1338;
+        min-height: auto !important;
+        padding: 0 !important;
+    }
+    .home-header__background {
+        background-size: calc(100% + 2px) 100% !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
+    }
+}
 </style>
