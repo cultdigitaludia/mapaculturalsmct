@@ -121,66 +121,9 @@
         );
     }
 
-    // ─── BOTÃO "MINHA LOCALIZAÇÃO" (para o usuário re-centralizar) ────────────
-    function adicionarBotaoRelocalizar() {
-        const style = document.createElement('style');
-        style.textContent = `
-            #geo-btn-relocalizar {
-                position: fixed;
-                bottom: 24px;
-                right: 16px;
-                z-index: 9998;
-                width: 44px;
-                height: 44px;
-                border-radius: 50%;
-                background: #fff;
-                border: 2px solid #bbb;
-                font-size: 18px;
-                cursor: pointer;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-                display: none;
-                align-items: center;
-                justify-content: center;
-                transition: box-shadow 0.2s, transform 0.1s;
-            }
-            #geo-btn-relocalizar:hover {
-                box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-                transform: scale(1.08);
-            }
-            .geo-mapa-ativo #geo-btn-relocalizar {
-                display: flex;
-            }
-        `;
-        document.head.appendChild(style);
-
-        const btn = document.createElement('button');
-        btn.id = 'geo-btn-relocalizar';
-        btn.innerHTML = '📍';
-        btn.title = 'Centralizar na minha localização';
-        btn.setAttribute('aria-label', 'Centralizar na minha localização');
-
-        btn.onclick = function () {
-            // Força nova busca limpando cache
-            sessionStorage.removeItem(GEO_STORAGE_KEY);
-            document.querySelectorAll('.leaflet-container').forEach(el => {
-                if (el._leaflet_map) el._geo_aplicado = false;
-            });
-            solicitarLocalizacao();
-        };
-
-        document.body.appendChild(btn);
-
-        // Mostra botão só quando há mapa visível
-        new MutationObserver(function () {
-            const temMapa = !!document.querySelector('.leaflet-container');
-            document.body.classList.toggle('geo-mapa-ativo', temMapa);
-        }).observe(document.body, { childList: true, subtree: true });
-    }
-
     // ─── INIT ─────────────────────────────────────────────────────────────────
     function init() {
         if (!navigator.geolocation) return;
-        adicionarBotaoRelocalizar();
         solicitarLocalizacao();
     }
 

@@ -8,6 +8,11 @@
     align-items: center;
     overflow: hidden;
 
+    @media (max-width: size(800)) {
+        background-color: #0055A5;
+        padding: size(32) size(16);
+    }
+
     &__background {
         position: absolute;
         width: 100%;
@@ -16,6 +21,10 @@
         justify-content: center;
         height: 100%;
         overflow: hidden;
+
+        @media (max-width:size(800)) {
+            display: none;
+        }
 
         &--img {
             width: 100%;
@@ -38,26 +47,32 @@
         flex-direction: column;
         margin: 0 auto;
         max-width: size(1170);
+        width: 100%;
         z-index: 2;
 
         &--title {
             font-weight: 700;
             font-size: size(32);
             line-height: size(44);
+            max-width: size(560);
+
             @media (max-width:size(800)) {
-                font-size: size(24);
-                line-height: size(28);
+                font-size: size(22);
+                line-height: size(26);
+                max-width: size(330);
             }
         }
 
         &--description{
             margin: size(16) 0 size(25);
+            max-width: size(720);
             font-weight: 400;
             font-size: size(18);
             line-height: size(25);
             @media (max-width:size(800)) {
-                font-size: size(14);
-                line-height: size(19);
+                max-width: 100%;
+                font-size: size(16);
+                line-height: size(22);
             }
         }
 
@@ -83,4 +98,4 @@
             }
         }
     } 
-}   
+}

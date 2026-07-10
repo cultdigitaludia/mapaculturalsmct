@@ -63,6 +63,27 @@
         width: 100%;
         margin: 0 auto;
 
+        @media (min-width: size(1071)) {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+
+            .mc-header-logo {
+                grid-column: 1;
+                justify-self: start;
+                min-width: 0;
+            }
+
+            .mc-header-menu {
+                grid-column: 2;
+                justify-self: center;
+            }
+
+            .main-header__buttons {
+                grid-column: 3;
+                justify-self: end;
+            }
+        }
+
         .logIn {
             align-items: center;
             background: #0057AA;

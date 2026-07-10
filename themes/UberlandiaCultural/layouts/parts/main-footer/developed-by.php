@@ -11,5 +11,5 @@ $this->import('mc-icon');
 <p>
     <?php i::_e("plataforma criada pela comunidade") ?> 
     <span class="mapas"> <mc-icon name="map"></mc-icon><?php i::_e("mapas culturais"); ?> </span> 
-    <?php i::_e("e desenvolvida por "); ?><strong>hacklab<span style="color: #0055A5">/</span></strong>
+    <?php i::_e("e desenvolvida por "); ?><strong>hacklab/</strong>
 </p>

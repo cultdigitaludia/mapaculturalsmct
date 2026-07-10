@@ -14,41 +14,14 @@ $config = $app->config['social-media'];
 <div v-if="globalState.visibleFooter" class="main-footer">
     <?php $this->applyTemplateHook("main-footer", "begin")?>
     <div class="main-footer__content">
-        <?php $this->applyTemplateHook("main-footer-logo", "before")?>
-        <div class="main-footer__support">
-            <?php $this->part('footer-support-message') ?>
-        </div>
-        <div class="main-footer__content--logo">
-            <div class="main-footer__content--logo-img">
-                <?php if ($app->config['logo.footer.image']): ?>
-                    <a href="<?= $app->createUrl('site', 'index') ?>" title="<?= $app->siteName ?>">
-                        <img 
-                            src="<?= $this->asset($app->config['logo.footer.image'], false) ?>" 
-                            alt="<?= $app->siteName ?>"
-                            style="max-height: 80px; width: auto; max-width: 100%;"
-                        />
-                    </a>
-                <?php else: ?>
-                    <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
-                <?php endif; ?>
-            </div>
-            <div class="main-footer__content--logo-share">
-                <?php foreach ($config as $meta => $conf) : ?>
-                    <a target="_blank" href="<?= $conf['link'] ?>">
-                        <mc-icon name='<?= $conf['icon'] ?>'></mc-icon>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <?php $this->applyTemplateHook("main-footer-logo", "after")?>
-
+        <?php $this->part('footer-support-message') ?>
         <?php $this->applyTemplateHook("main-footer-links", "before")?>
         <div class="main-footer__content--links">
             <?php $this->applyTemplateHook("main-footer-links", "begin")?>
 
             <ul class="main-footer__content--links-group">
-                <li>
-                    <a><?php i::_e("Acesse"); ?></a>
+                <li class="main-footer__content--links-title">
+                    <h2><?php i::_e("Acesse"); ?></h2>
                 </li>
                 <li>
                     <a href="<?= $app->createUrl('search', 'Turismo') ?>">
@@ -83,8 +56,8 @@ $config = $app->config['social-media'];
             </ul>
 
             <ul class="main-footer__content--links-group">
-                <li>
-                    <a href="<?= $app->createUrl('panel', 'index') ?>"><?php i::_e('Painel'); ?></a>
+                <li class="main-footer__content--links-title">
+                    <h2><a href="<?= $app->createUrl('panel', 'index') ?>"><?php i::_e('Painel'); ?></a></h2>
                 </li>
                 <li v-if="global.enabledEntities.opportunities">
                     <a href="<?= $app->createUrl('panel', 'opportunities') ?>"><?php i::_e('Editais e Oportunidades'); ?></a>
@@ -106,19 +79,11 @@ $config = $app->config['social-media'];
             </ul>
 
             <ul class="main-footer__content--links-group">
-                <li>
-                    <a><?php i::_e('Ajuda e Privacidade'); ?></a>
+                <li class="main-footer__content--links-title">
+                    <h2><?php i::_e('Ajuda e Privacidade'); ?></h2>
                 </li>
                 <li>
                     <a href="<?= $app->createUrl('faq') ?>"><?php i::_e('Dúvidas Frequentes'); ?></a>
-                </li>
-                <li>
-                    <p style="margin: 4px 0 12px 0; font-size: 0.85em; line-height: 1.4;">
-                        <?php i::_e('Dúvidas ou problemas com o sistema entrar em contato pelo e-mail'); ?>
-                        <a href="mailto:suporte.mapasculturais@uberlandia.mg.gov.br" style="display: block; margin-top: 4px;">
-                            suporte.mapasculturais@uberlandia.mg.gov.br
-                        </a>
-                    </p>
                 </li>
                 <li>
                     <a href="<?= $app->createUrl('page', 'site', ['termos-de-uso']) ?>"><?php i::_e('Termos e Condições de Uso'); ?></a>
@@ -134,6 +99,30 @@ $config = $app->config['social-media'];
             <?php $this->applyTemplateHook("main-footer-links", "end")?>
         </div>
         <?php $this->applyTemplateHook("main-footer-links", "after")?>
+
+        <?php $this->applyTemplateHook("main-footer-logo", "before")?>
+        <div class="main-footer__content--logo">
+            <div class="main-footer__content--logo-img">
+                <?php if ($app->config['logo.footer.image']): ?>
+                    <a href="<?= $app->createUrl('site', 'index') ?>" title="<?= $app->siteName ?>">
+                        <img
+                            src="<?= $this->asset($app->config['logo.footer.image'], false) ?>"
+                            alt="<?= $app->siteName ?>"
+                        />
+                    </a>
+                <?php else: ?>
+                    <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
+                <?php endif; ?>
+            </div>
+            <div class="main-footer__content--logo-share">
+                <?php foreach ($config as $meta => $conf) : ?>
+                    <a target="_blank" href="<?= $conf['link'] ?>">
+                        <mc-icon name='<?= $conf['icon'] ?>'></mc-icon>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php $this->applyTemplateHook("main-footer-logo", "after")?>
     </div>
 
     <?php $this->applyTemplateHook("main-footer-reg", "before")?>

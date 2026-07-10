@@ -3,6 +3,10 @@
 .home-entities {
     background-color: var(--mc-home-entities);
     padding: size(60) size(16);
+
+    @media (max-width: size(800)) {
+        padding: size(32) size(16) size(24);
+    }
     
     &__content {
         min-height:size(156);
@@ -82,15 +86,15 @@
                         margin: 0 auto;
 
                         @media (max-width: size(800)) {
-                            padding: size(46) size(30);
+                            padding: 0 size(20);
+                            grid-template-columns: minmax(0, 52%);
+                            justify-items: start;
+                            align-items: center;
+                            gap: 0;
                         }
 
                         @media (max-width: size(400)) {
-                            padding: 0 size(16);
-                            grid-template-columns: 1fr;
-                            justify-items: center;
-                            align-items: center;
-                            gap: 0;
+                            padding: 0 size(20);
                         }
 
                         &-icon {
@@ -118,11 +122,22 @@
                     &--img{
                         height: size(215);
 
+                        @media (max-width: size(800)) {
+                            aspect-ratio: 778 / 260;
+                            height: auto;
+                        }
+
                         img {
+                            display: block;
                             object-fit: cover;
                             -o-object-fit: cover;
+                            height: 100%;
                             width: 100%;
                             min-height: 100%;
+
+                            @media (max-width: size(800)) {
+                                min-height: 0;
+                            }
                         }
                     }
                 }

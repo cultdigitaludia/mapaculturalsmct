@@ -54,6 +54,39 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
     flex-direction: column !important;
     align-items: flex-start !important;
 }
+@media (max-width: 800px) {
+    .home-entities__content--cards .card__left--img {
+        aspect-ratio: 778 / 260;
+        height: auto !important;
+    }
+    .home-entities__content--cards .card__left--img img {
+        display: block;
+        height: 100%;
+        min-height: 0 !important;
+    }
+    .home-entities__content--cards .card__left--content {
+        grid-template-columns: minmax(0, 52%) !important;
+        justify-items: start !important;
+        align-items: center !important;
+        padding: 0 1.25rem !important;
+    }
+    .home-entities .card__left--content-title {
+        max-width: 100%;
+    }
+    .home-entities .card__left--content-title .title {
+        display: block;
+        font-size: clamp(1.625rem, 8vw, 2.25rem) !important;
+        line-height: 0.95 !important;
+        overflow-wrap: normal;
+    }
+    .home-entities .card--opportunities .card__left--content-title .title {
+        font-size: clamp(1.125rem, 5.4vw, 1.625rem) !important;
+    }
+    .home-entities .card--agents .card__left--content-title .title,
+    .home-entities .card--projects .card__left--content-title .title {
+        font-size: clamp(1.5rem, 7vw, 2rem) !important;
+    }
+}
 
 .home-header { background: transparent !important; }
 .home-header__content::before { background: none !important; }
@@ -62,10 +95,16 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 .home-header__main { display: none !important; }
 .main-footer__reg { background-color: #0055A5 !important; }
 @media (max-width: 768px) {
+    .home-header__content {
+        aspect-ratio: 1070 / 1338;
+        min-height: auto !important;
+        padding: 0 !important;
+    }
     .home-header__background {
         background-image: url("/assets/img/capa_vertical.png") !important;
-        background-size: cover !important;
-        background-position: center !important;
+        background-size: calc(100% + 2px) 100% !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
     }
     .home-header__background .img > img {
         display: none !important;
