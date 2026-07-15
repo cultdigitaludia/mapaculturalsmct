@@ -22,7 +22,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $this->assetManager->publishFolder('fonts');
         $this->enqueueScript('app-v2', 'chatbot', 'js/chatbot-widget.js');
         $this->enqueueScript('app-v2', 'geolocalizacao', 'js/geolocalizacao.js');
-        $this->assetManager->publishFolder('img'); 
+        $this->enqueueScript('app-v2', 'vlibras', 'js/vlibras-widget.js');
+        $this->assetManager->publishFolder('img');
 
         // Adiciona a rota de turismo ao controller de search
         $app->hook('GET(search.turismo)', function() use ($app) {

@@ -39,10 +39,10 @@ $this->import('
                 </div>
                 <div class="card__right">
                     <p><?= $this->text('turismo', i::__('Explore os pontos turísticos, espaços culturais, gastronomia, meios de hospedagem e muito mais de Uberlândia. <br> Conheça e divulgue o turismo da nossa cidade.')) ?></p>
-                        <a href="/search/turismo" class="button button--icon button--sm space__color">    
+                        <a href="/search/turismo" class="button button--icon button--sm space__color">
                             <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>
-                    </mc-link>
+                    </a>
                 </div>
             </div>
 
