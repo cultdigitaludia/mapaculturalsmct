@@ -33,7 +33,7 @@ Para ativar o tema, edite `docker/common/0.main.php`:
  
 ### Plugin — `MultipleLocalAuth`
 
-Permite login com e-mail e senha, sem necessidade de conta gov.br. O plugin e suas customizações são versionados diretamente em `plugins/MultipleLocalAuth/`.
+Permite login com e-mail e senha, sem necessidade de conta gov.br. Localizado em `plugins/MultipleLocalAuth/` como submódulo.
  
 ### Páginas padrão
  
@@ -89,7 +89,7 @@ Localizados em `scripts/`. Fazem backup do banco de dados e dos arquivos persist
 │   ├── db/                      # Dump SQL inicial
 │   └── production/              # Configs exclusivas de produção (nginx, Dockerfile)
 ├── plugins/
-│   └── MultipleLocalAuth/       # Login por e-mail e senha
+│   └── MultipleLocalAuth/       # Login por e-mail e senha (submódulo Git)
 ├── scripts/                     # Scripts de backup
 ├── themes/
 │   └── UberlandiaCultural/      # Tema customizado da SMCT (submódulo Git)
