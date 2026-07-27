@@ -21773,3 +21773,90 @@ ol.mc-stepper-vertical > li.active::before {
 .user-management__properties-tabs > .tabs-component__panels {
   margin: 0.625rem 0;
 }
+
+.change-password__modal .modal-content {
+  max-height: none;
+  max-width: 42.5rem;
+  overflow: visible;
+  width: calc(100% - 2rem);
+}
+.change-password__modal .modal-content form {
+  row-gap: 1.5rem;
+}
+.change-password__modal .modal-content .change-password__current-password {
+  margin-top: 0;
+}
+.change-password__modal .modal-content .change-password__new-password {
+  border: 0;
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+}
+.change-password__modal .modal-content .change-password__new-password-divider {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+.change-password__modal .modal-content .change-password__new-password-divider::before,
+.change-password__modal .modal-content .change-password__new-password-divider::after {
+  background-color: var(--mc-gray-300);
+  content: "";
+  flex: 1;
+  height: 0.0625rem;
+}
+.change-password__modal .modal-content .change-password__new-password-divider h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.375rem;
+  margin: 0;
+  white-space: nowrap;
+}
+.change-password__modal .modal-content .change-password__new-password .password {
+  margin-top: 0;
+}
+.change-password__modal .modal-content .password-requirements {
+  color: var(--mc-gray-700);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin: 0.75rem 0 0;
+  min-height: 1.25rem;
+}
+.change-password__modal .modal-content .password-requirements strong {
+  color: inherit;
+  margin-right: 0.25rem;
+}
+.change-password__modal .modal-content .password-requirements span {
+  color: var(--mc-danger-500);
+  font-weight: 600;
+}
+.change-password__modal .modal-content .password {
+  position: relative;
+}
+.change-password__modal .modal-content .password .seePassword {
+  background: url("https://api.iconify.design/carbon/view-filled.svg") no-repeat center center/1.40625rem;
+  content: "";
+  height: 3rem;
+  position: absolute;
+  right: 0;
+  top: 1.6875rem;
+  width: 3rem;
+}
+.change-password__modal .modal__content {
+  height: auto !important;
+  overflow: visible !important;
+}
+@media (max-width: 800px) {
+  .change-password__modal .modal-content {
+    height: auto;
+    margin: 1rem;
+    max-height: none;
+    overflow: visible;
+    width: calc(100% - 2rem);
+  }
+  .change-password__modal .modal__header,
+  .change-password__modal .modal__content {
+    flex-shrink: 0;
+  }
+}
