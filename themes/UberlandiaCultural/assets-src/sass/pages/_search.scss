@@ -214,13 +214,23 @@
                     margin-bottom: size(10);
             
                     .field {
+                        margin-left: auto;
+                        order: 1;
                         width: auto;
+
+                        label {
+                            color: var(--mc-gray-700);
+                            font-size: size(14);
+                            font-weight: 600;
+                            line-height: size(19);
+                        }
 
                         select {
                             border-radius: var(--mc-border-radius-sm);
                             border: var(--mc-border-solid) var(--mc-primary-500);
+                            color: var(--mc-gray-700);
                             font-size: size(14);
-                            font-weight: 800;
+                            font-weight: 600;
                             line-height: size(19);
                             padding: size(9) size(32) size(8) size(12);
                         }
@@ -266,10 +276,10 @@
                     }
 
                     @media (max-width: size(610)) {
-                        align-items: center;
-                        flex-direction: column-reverse;
+                        align-items: flex-end;
+                        flex-direction: column;
 
-                        .field, .foundResults {
+                        .foundResults {
                             width: 100%;
                         }
                     }

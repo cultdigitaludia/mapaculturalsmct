@@ -11,7 +11,260 @@
     }
 
     &--account-privacy {
+        box-sizing: border-box;
+        min-height: 100%;
         padding-top: 0;
+
+        > * {
+            box-sizing: border-box;
+        }
+
+        .user-management__title {
+            border-bottom: size(1) solid var(--mc-gray-300);
+            margin-bottom: 0;
+            padding-block: size(32);
+
+            h2 {
+                font-size: size(28);
+                line-height: 1.25;
+                margin: 0;
+            }
+        }
+
+        .user-management__header {
+            align-items: center;
+            background-color: var(--mc-high-500);
+            grid-template-columns: size(112) minmax(0, 1fr);
+            margin-bottom: size(24);
+            padding-block: size(32);
+        }
+
+        .user-management__header-content {
+            min-width: 0;
+        }
+
+        .user-management__user {
+            align-items: center;
+            border-bottom: size(1) solid var(--mc-gray-300);
+            gap: size(24);
+            padding-bottom: size(20);
+
+            h3 {
+                font-size: size(24);
+                line-height: 1.3;
+                margin: 0;
+                overflow-wrap: anywhere;
+            }
+        }
+
+        .user-management__user-delete {
+            flex: 0 0 auto;
+        }
+
+        .user-management__user-info {
+            column-gap: size(48);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin: size(20) 0 0;
+            row-gap: size(12);
+
+            p {
+                line-height: 1.5;
+                margin: 0;
+            }
+        }
+
+        .p-user-detail__seals:empty {
+            display: none;
+        }
+
+        .account-config,
+        > user-accepted-terms {
+            background-color: var(--mc-high-500);
+            border: size(1) solid var(--mc-gray-300);
+            border-radius: var(--mc-border-radius-xs);
+            display: block;
+            margin: 0 size(32) size(24);
+            padding: size(24);
+        }
+
+        user-mail {
+            display: block;
+        }
+
+        .user-mail__title {
+            border-bottom: size(1) solid var(--mc-gray-300);
+            display: block;
+            font-size: size(20);
+            font-weight: 700;
+            margin-bottom: size(20);
+            padding-bottom: size(16);
+        }
+
+        .user-mail__config {
+            display: flex;
+            flex-direction: column;
+            gap: size(8);
+        }
+
+        .user-mail__config-title {
+            font-size: size(14);
+            font-weight: 600;
+            line-height: size(19);
+        }
+
+        .user-mail__config-content {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: size(12);
+            justify-content: space-between;
+            line-height: size(19);
+        }
+
+        .user-mail__config-edit,
+        .change-password__password--edit {
+            align-items: center;
+            background: transparent;
+            border: 0;
+            color: var(--mc-helper-500);
+            cursor: pointer;
+            display: inline-flex;
+            font-size: size(14);
+            font-weight: 700;
+            gap: size(6);
+            line-height: size(19);
+            padding: 0;
+            text-decoration: none;
+
+            svg {
+                color: currentColor;
+                height: size(16);
+                margin: 0;
+                width: size(16);
+            }
+
+            label,
+            .label,
+            .user-mail__config-edit-label {
+                color: currentColor;
+                font: inherit;
+                line-height: inherit;
+                margin: 0;
+            }
+        }
+
+        .user-mail__form {
+            align-items: end;
+            display: grid;
+            gap: size(16);
+            grid-template-columns: minmax(0, 1fr) auto;
+            margin-top: size(20);
+
+            > .col-4 {
+                grid-column: 1 / 2;
+                min-width: 0;
+                width: 100%;
+            }
+
+            .mail-buttons {
+                align-items: center;
+                display: flex;
+                flex-wrap: nowrap;
+                gap: size(8);
+                grid-column: 2 / 3;
+                justify-self: end;
+
+                .button {
+                    float: none;
+                    grid-column: auto;
+                    min-width: max-content;
+                    white-space: nowrap;
+                    width: auto;
+                }
+            }
+        }
+
+        .change-password {
+            border-top: size(1) solid var(--mc-gray-300);
+            gap: size(10);
+            margin-top: size(20);
+            padding: size(20) 0 0;
+
+            &__password {
+                flex-wrap: wrap;
+                gap: size(16);
+                justify-content: space-between;
+            }
+        }
+
+        .user-accepted-terms__privacy--accept {
+            background: transparent;
+            padding: 0;
+
+            &-title {
+                font-size: size(20);
+                margin-bottom: size(16);
+            }
+        }
+
+        @include mobile {
+            .user-management__title {
+                gap: size(12);
+                grid-template-columns: size(40) minmax(0, 1fr);
+                padding: size(24) size(20);
+
+                h2 {
+                    font-size: size(24);
+                }
+            }
+
+            .user-management__header {
+                gap: size(20);
+                grid-template-columns: 1fr;
+                padding: size(24) size(20);
+            }
+
+            .user-management__header-icon {
+                height: size(88);
+                justify-self: start;
+                width: size(88);
+
+                .iconify {
+                    height: size(44);
+                    width: size(44);
+                }
+            }
+
+            .user-management__user {
+                align-items: flex-start;
+                margin-bottom: 0;
+            }
+
+            .user-management__user-info {
+                grid-template-columns: 1fr;
+                justify-items: start;
+            }
+
+            .account-config,
+            > user-accepted-terms {
+                margin: 0 size(16) size(16);
+                padding: size(20);
+            }
+
+            .user-mail__form {
+                grid-template-columns: 1fr;
+
+                > .col-4 {
+                    grid-column: 1;
+                }
+
+                .mail-buttons {
+                    flex-wrap: wrap;
+                    grid-column: 1;
+                    justify-self: start;
+                }
+            }
+        }
     }
 
     &__title {

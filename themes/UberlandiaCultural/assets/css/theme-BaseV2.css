@@ -14736,7 +14736,6 @@ ol.mc-stepper-vertical > li.active::before {
   flex-direction: column;
   gap: 3.75rem;
 }
-
 .panel__sidebar {
   border-right: 1px solid var(--mc-gray-100);
 }
@@ -14879,8 +14878,11 @@ ol.mc-stepper-vertical > li.active::before {
   width: 1.5rem;
 }
 
+.controller-panel {
+  background: var(--mc-white);
+}
 .controller-panel.action-index {
-  background: linear-gradient(90deg, white, white 50%, var(--mc-gray-100) 50%, var(--mc-gray-100));
+  background: var(--mc-white);
 }
 .controller-panel.action-agents .panel .tabs-component__buttons, .controller-panel.action-spaces .panel .tabs-component__buttons, .controller-panel.action-projects .panel .tabs-component__buttons, .controller-panel.action-opportunities .panel .tabs-component__buttons, .controller-panel.action-events .panel .tabs-component__buttons {
   gap: 2.5rem;
@@ -18794,11 +18796,28 @@ ol.mc-stepper-vertical > li.active::before {
   color: var(--mc-error);
 }
 .entity-tabs__filters {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
 }
 .entity-tabs__filters > * {
   margin: 0 0.5rem 0.5rem 0;
+}
+.entity-tabs__filters > label:has(> .entity-tabs__search-select) {
+  align-items: center;
+  color: var(--mc-gray-700);
+  display: flex;
+  font-size: 0;
+  gap: 0.5rem;
+  margin-left: auto;
+  margin-right: 0;
+}
+.entity-tabs__filters > label:has(> .entity-tabs__search-select)::before {
+  content: "Ordenar por:";
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.1875rem;
+  white-space: nowrap;
 }
 .entity-tabs__search-input {
   background: url(https://api.iconify.design/ant-design/search-outlined.svg) no-repeat 92% center/contain;
@@ -18836,8 +18855,16 @@ ol.mc-stepper-vertical > li.active::before {
   background: url("https://api.iconify.design/ic/baseline-arrow-drop-down.svg?color=%230074c1") no-repeat 96% center/contain;
   background-size: 1.25rem;
   background-color: var(--mc-high-500);
+  color: var(--mc-gray-700);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.1875rem;
   padding: 0.625rem 1.625rem 0.625rem 1rem;
   border-radius: var(--mc-border-radius-sm);
+}
+.entity-tabs__search-select option {
+  background-color: var(--mc-white);
+  color: var(--mc-gray-700);
 }
 
 .layout-entity {
@@ -19650,25 +19677,45 @@ ol.mc-stepper-vertical > li.active::before {
 .panel-evaluations__filter {
   align-items: center;
   display: flex;
-  gap: 1.5rem;
+  gap: 0.5rem;
   width: 100%;
+}
+.panel-evaluations__filter::before {
+  color: var(--mc-gray-700);
+  content: "Ordenar por:";
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.1875rem;
+  margin-left: auto;
+  white-space: nowrap;
 }
 @media (max-width: 40.625rem) {
   .panel-evaluations__filter {
-    align-items: stretch;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  .panel-evaluations__filter::before {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: end;
   }
 }
 .panel-evaluations__filter .search {
   align-items: center;
   display: flex;
+  margin-right: 1rem;
   max-width: 23.125rem;
+  order: -1;
   position: relative;
   width: 100%;
 }
 @media (max-width: 40.625rem) {
   .panel-evaluations__filter .search {
+    grid-column: 1/-1;
+    grid-row: 1;
+    margin-right: 0;
     max-width: unset;
+    order: initial;
   }
 }
 .panel-evaluations__filter .search .input {
@@ -19695,11 +19742,26 @@ ol.mc-stepper-vertical > li.active::before {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+  align-self: center;
   background: url("https://api.iconify.design/ic/baseline-arrow-drop-down.svg?color=%230074c1") no-repeat 96% center/contain;
   background-color: var(--mc-high-500);
   background-size: 1.25rem;
   border-radius: var(--mc-border-radius-sm);
+  color: var(--mc-gray-700);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.1875rem;
   padding: 0.625rem 1.625rem 0.625rem 1rem;
+}
+.panel-evaluations__filter .order option {
+  background-color: var(--mc-white);
+  color: var(--mc-gray-700);
+}
+@media (max-width: 40.625rem) {
+  .panel-evaluations__filter .order {
+    grid-column: 2;
+    grid-row: 2;
+  }
 }
 .panel-evaluations__cards {
   display: grid;
@@ -19729,13 +19791,25 @@ ol.mc-stepper-vertical > li.active::before {
 .registrations__filter .form {
   align-items: center;
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   width: 100%;
+}
+.registrations__filter .form::before {
+  color: var(--mc-gray-700);
+  content: "Ordenar por:";
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.1875rem;
+  margin-left: auto;
+  white-space: nowrap;
 }
 .registrations__filter .form .search {
   align-items: center;
   display: flex;
   max-width: 23.125rem;
+  margin-right: 1rem;
+  order: -1;
   position: relative;
   width: 100%;
 }
@@ -19763,11 +19837,42 @@ ol.mc-stepper-vertical > li.active::before {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+  align-self: center;
   background: url("https://api.iconify.design/ic/baseline-arrow-drop-down.svg?color=%230074c1") no-repeat 96% center/contain;
   background-color: var(--mc-high-500);
   background-size: 1.25rem;
   border-radius: var(--mc-border-radius-sm);
+  color: var(--mc-gray-700);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.1875rem;
   padding: 0.625rem 1.625rem 0.625rem 1rem;
+}
+.registrations__filter .form .order option {
+  background-color: var(--mc-white);
+  color: var(--mc-gray-700);
+}
+@media (max-width: 40.625rem) {
+  .registrations__filter .form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  .registrations__filter .form::before {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: end;
+  }
+  .registrations__filter .form .search {
+    grid-column: 1/-1;
+    grid-row: 1;
+    margin-right: 0;
+    max-width: unset;
+    order: initial;
+  }
+  .registrations__filter .form .order {
+    grid-column: 2;
+    grid-row: 2;
+  }
 }
 .registrations__list {
   display: flex;
@@ -20483,13 +20588,22 @@ ol.mc-stepper-vertical > li.active::before {
   margin-bottom: 0.625rem;
 }
 .search__tabs--list .search-list__order .field {
+  margin-left: auto;
+  order: 1;
   width: auto;
+}
+.search__tabs--list .search-list__order .field label {
+  color: var(--mc-gray-700);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.1875rem;
 }
 .search__tabs--list .search-list__order .field select {
   border-radius: var(--mc-border-radius-sm);
   border: var(--mc-border-solid) var(--mc-primary-500);
+  color: var(--mc-gray-700);
   font-size: 0.875rem;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.1875rem;
   padding: 0.5625rem 2rem 0.5rem 0.75rem;
 }
@@ -20528,10 +20642,10 @@ ol.mc-stepper-vertical > li.active::before {
 }
 @media (max-width: 38.125rem) {
   .search__tabs--list .search-list__order {
-    align-items: center;
-    flex-direction: column-reverse;
+    align-items: flex-end;
+    flex-direction: column;
   }
-  .search__tabs--list .search-list__order .field, .search__tabs--list .search-list__order .foundResults {
+  .search__tabs--list .search-list__order .foundResults {
     width: 100%;
   }
 }
@@ -21287,7 +21401,227 @@ ol.mc-stepper-vertical > li.active::before {
   padding-inline: 2rem;
 }
 .user-management--account-privacy {
+  box-sizing: border-box;
+  min-height: 100%;
   padding-top: 0;
+}
+.user-management--account-privacy > * {
+  box-sizing: border-box;
+}
+.user-management--account-privacy .user-management__title {
+  border-bottom: 0.0625rem solid var(--mc-gray-300);
+  margin-bottom: 0;
+  padding-block: 2rem;
+}
+.user-management--account-privacy .user-management__title h2 {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  margin: 0;
+}
+.user-management--account-privacy .user-management__header {
+  align-items: center;
+  background-color: var(--mc-high-500);
+  grid-template-columns: 7rem minmax(0, 1fr);
+  margin-bottom: 1.5rem;
+  padding-block: 2rem;
+}
+.user-management--account-privacy .user-management__header-content {
+  min-width: 0;
+}
+.user-management--account-privacy .user-management__user {
+  align-items: center;
+  border-bottom: 0.0625rem solid var(--mc-gray-300);
+  gap: 1.5rem;
+  padding-bottom: 1.25rem;
+}
+.user-management--account-privacy .user-management__user h3 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.user-management--account-privacy .user-management__user-delete {
+  flex: 0 0 auto;
+}
+.user-management--account-privacy .user-management__user-info {
+  -moz-column-gap: 3rem;
+       column-gap: 3rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 1.25rem 0 0;
+  row-gap: 0.75rem;
+}
+.user-management--account-privacy .user-management__user-info p {
+  line-height: 1.5;
+  margin: 0;
+}
+.user-management--account-privacy .p-user-detail__seals:empty {
+  display: none;
+}
+.user-management--account-privacy .account-config,
+.user-management--account-privacy > user-accepted-terms {
+  background-color: var(--mc-high-500);
+  border: 0.0625rem solid var(--mc-gray-300);
+  border-radius: var(--mc-border-radius-xs);
+  display: block;
+  margin: 0 2rem 1.5rem;
+  padding: 1.5rem;
+}
+.user-management--account-privacy user-mail {
+  display: block;
+}
+.user-management--account-privacy .user-mail__title {
+  border-bottom: 0.0625rem solid var(--mc-gray-300);
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+}
+.user-management--account-privacy .user-mail__config {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.user-management--account-privacy .user-mail__config-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.1875rem;
+}
+.user-management--account-privacy .user-mail__config-content {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  line-height: 1.1875rem;
+}
+.user-management--account-privacy .user-mail__config-edit,
+.user-management--account-privacy .change-password__password--edit {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--mc-helper-500);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.875rem;
+  font-weight: 700;
+  gap: 0.375rem;
+  line-height: 1.1875rem;
+  padding: 0;
+  text-decoration: none;
+}
+.user-management--account-privacy .user-mail__config-edit svg,
+.user-management--account-privacy .change-password__password--edit svg {
+  color: currentColor;
+  height: 1rem;
+  margin: 0;
+  width: 1rem;
+}
+.user-management--account-privacy .user-mail__config-edit label,
+.user-management--account-privacy .user-mail__config-edit .label,
+.user-management--account-privacy .user-mail__config-edit .user-mail__config-edit-label,
+.user-management--account-privacy .change-password__password--edit label,
+.user-management--account-privacy .change-password__password--edit .label,
+.user-management--account-privacy .change-password__password--edit .user-mail__config-edit-label {
+  color: currentColor;
+  font: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+.user-management--account-privacy .user-mail__form {
+  align-items: end;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-top: 1.25rem;
+}
+.user-management--account-privacy .user-mail__form > .col-4 {
+  grid-column: 1/2;
+  min-width: 0;
+  width: 100%;
+}
+.user-management--account-privacy .user-mail__form .mail-buttons {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  grid-column: 2/3;
+  justify-self: end;
+}
+.user-management--account-privacy .user-mail__form .mail-buttons .button {
+  float: none;
+  grid-column: auto;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  white-space: nowrap;
+  width: auto;
+}
+.user-management--account-privacy .change-password {
+  border-top: 0.0625rem solid var(--mc-gray-300);
+  gap: 0.625rem;
+  margin-top: 1.25rem;
+  padding: 1.25rem 0 0;
+}
+.user-management--account-privacy .change-password__password {
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.user-management--account-privacy .user-accepted-terms__privacy--accept {
+  background: transparent;
+  padding: 0;
+}
+.user-management--account-privacy .user-accepted-terms__privacy--accept-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+@media screen and (max-width: 50rem) {
+  .user-management--account-privacy .user-management__title {
+    gap: 0.75rem;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    padding: 1.5rem 1.25rem;
+  }
+  .user-management--account-privacy .user-management__title h2 {
+    font-size: 1.5rem;
+  }
+  .user-management--account-privacy .user-management__header {
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1.25rem;
+  }
+  .user-management--account-privacy .user-management__header-icon {
+    height: 5.5rem;
+    justify-self: start;
+    width: 5.5rem;
+  }
+  .user-management--account-privacy .user-management__header-icon .iconify {
+    height: 2.75rem;
+    width: 2.75rem;
+  }
+  .user-management--account-privacy .user-management__user {
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+  .user-management--account-privacy .user-management__user-info {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .user-management--account-privacy .account-config,
+  .user-management--account-privacy > user-accepted-terms {
+    margin: 0 1rem 1rem;
+    padding: 1.25rem;
+  }
+  .user-management--account-privacy .user-mail__form {
+    grid-template-columns: 1fr;
+  }
+  .user-management--account-privacy .user-mail__form > .col-4 {
+    grid-column: 1;
+  }
+  .user-management--account-privacy .user-mail__form .mail-buttons {
+    flex-wrap: wrap;
+    grid-column: 1;
+    justify-self: start;
+  }
 }
 .user-management__title {
   padding: 3.125rem 2rem 1.875rem;

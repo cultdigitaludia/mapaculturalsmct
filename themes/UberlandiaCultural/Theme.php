@@ -18,12 +18,40 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
     {
         $app = App::i();
         $this->bodyClasses[] = 'base-v2';
-        $this->enqueueStyle('app-v2', 'main', 'css/theme-UberlandiaCultural.css');
+        $this->enqueueStyle('app-v2', 'main', 'css/theme-BaseV2.css');
         $this->assetManager->publishFolder('fonts');
         $this->enqueueScript('app-v2', 'chatbot', 'js/chatbot-widget.js');
         $this->enqueueScript('app-v2', 'geolocalizacao', 'js/geolocalizacao.js');
         $this->enqueueScript('app-v2', 'vlibras', 'js/vlibras-widget.js');
+        $this->enqueueScript('app-v2', 'panel-ordering', 'js/panel-ordering.js');
         $this->assetManager->publishFolder('img');
+
+        $app->hook('component(mc-icon).iconset', function (&$iconset) {
+            $iconset['panel-opportunities'] = 'material-symbols:campaign';
+            $iconset['panel-registrations'] = 'material-symbols:assignment';
+            $iconset['panel-evaluations'] = 'material-symbols:rate-review';
+            $iconset['panel-validations'] = 'material-symbols:fact-check';
+        });
+
+        $app->hook('panel.nav', function (&$navItems) {
+            $iconsByRoute = [
+                'panel/opportunities' => 'panel-opportunities',
+                'panel/registrations' => 'panel-registrations',
+                'panel/evaluations' => 'panel-evaluations',
+                'panel/validations' => 'panel-validations',
+            ];
+
+            if (!isset($navItems['opportunities']['items'])) {
+                return;
+            }
+
+            foreach ($navItems['opportunities']['items'] as &$item) {
+                if (isset($iconsByRoute[$item['route']])) {
+                    $item['icon'] = $iconsByRoute[$item['route']];
+                }
+            }
+            unset($item);
+        }, 100);
 
         // Adiciona a rota de turismo ao controller de search
         $app->hook('GET(search.turismo)', function() use ($app) {

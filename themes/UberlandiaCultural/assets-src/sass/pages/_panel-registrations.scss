@@ -27,13 +27,26 @@
         .form {
             align-items: center;
             display: flex;
-            gap: size(24);
+            flex-wrap: wrap;
+            gap: size(8);
             width: 100%;
+
+            &::before {
+                color: var(--mc-gray-700);
+                content: 'Ordenar por:';
+                font-size: size(14);
+                font-weight: 600;
+                line-height: size(19);
+                margin-left: auto;
+                white-space: nowrap;
+            }
 
             .search {
                 align-items: center;
                 display: flex;
                 max-width: size(370);
+                margin-right: size(16);
+                order: -1;
                 position: relative;
                 width: 100%;
 
@@ -63,11 +76,45 @@
 
             .order {
                 appearance: none;
+                align-self: center;
                 background: url('https://api.iconify.design/ic/baseline-arrow-drop-down.svg?color=%230074c1') no-repeat 96% center/contain;
                 background-color: var(--mc-high-500);
                 background-size: size(20);
                 border-radius: var(--mc-border-radius-sm);
+                color: var(--mc-gray-700);
+                font-size: size(14);
+                font-weight: 600;
+                line-height: size(19);
                 padding: size(10) size(26) size(10) size(16);
+
+                option {
+                    background-color: var(--mc-white);
+                    color: var(--mc-gray-700);
+                }
+            }
+
+            @media (max-width: size(650)) {
+                display: grid;
+                grid-template-columns: 1fr auto;
+
+                &::before {
+                    grid-column: 1;
+                    grid-row: 2;
+                    justify-self: end;
+                }
+
+                .search {
+                    grid-column: 1 / -1;
+                    grid-row: 1;
+                    margin-right: 0;
+                    max-width: unset;
+                    order: initial;
+                }
+
+                .order {
+                    grid-column: 2;
+                    grid-row: 2;
+                }
             }
         }
     }

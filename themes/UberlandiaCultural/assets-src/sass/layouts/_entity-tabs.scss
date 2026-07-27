@@ -28,11 +28,30 @@ $iconUrl: 'https://api.iconify.design/ic/baseline-arrow-drop-down.svg' +#{$iconC
     }
 
     &__filters {
+        align-items: center;
         display: flex;
         flex-wrap: wrap;
 
         &>* {
             margin: 0 size(8) size(8) 0;
+        }
+
+        > label:has(> .entity-tabs__search-select) {
+            align-items: center;
+            color: var(--mc-gray-700);
+            display: flex;
+            font-size: 0;
+            gap: size(8);
+            margin-left: auto;
+            margin-right: 0;
+
+            &::before {
+                content: 'Ordenar por:';
+                font-size: size(14);
+                font-weight: 600;
+                line-height: size(19);
+                white-space: nowrap;
+            }
         }
     }
 
@@ -77,8 +96,17 @@ $iconUrl: 'https://api.iconify.design/ic/baseline-arrow-drop-down.svg' +#{$iconC
             background: url('https://api.iconify.design/ic/baseline-arrow-drop-down.svg?color=%230074c1') no-repeat 96% center/contain;
             background-size: size(20);
             background-color: var(--mc-high-500);
+            color: var(--mc-gray-700);
+            font-size: size(14);
+            font-weight: 600;
+            line-height: size(19);
             padding: size(10) size(26) size(10) size(16);
             border-radius: var(--mc-border-radius-sm);
+
+            option {
+                background-color: var(--mc-white);
+                color: var(--mc-gray-700);
+            }
         }
         
     }
