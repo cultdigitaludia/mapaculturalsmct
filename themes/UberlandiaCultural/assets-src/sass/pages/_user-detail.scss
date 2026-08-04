@@ -210,49 +210,120 @@
         @include mobile {
             .user-management__title {
                 gap: size(12);
-                grid-template-columns: size(40) minmax(0, 1fr);
-                padding: size(24) size(20);
+                grid-template-columns: size(36) minmax(0, 1fr);
+                padding: size(20);
+
+                .user-management__title-icon {
+                    height: size(36);
+                    width: size(36);
+                }
 
                 h2 {
-                    font-size: size(24);
+                    font-size: size(22);
+                    line-height: 1.25;
                 }
             }
 
             .user-management__header {
-                gap: size(20);
-                grid-template-columns: 1fr;
+                align-items: start;
+                gap: size(16);
+                grid-template-columns: size(72) minmax(0, 1fr);
+                margin-bottom: size(16);
                 padding: size(24) size(20);
             }
 
             .user-management__header-icon {
-                height: size(88);
+                height: size(72);
                 justify-self: start;
-                width: size(88);
+                width: size(72);
 
                 .iconify {
-                    height: size(44);
-                    width: size(44);
+                    height: size(38);
+                    width: size(38);
                 }
             }
 
             .user-management__user {
-                align-items: flex-start;
+                align-items: center;
+                flex-direction: row;
+                gap: size(12);
                 margin-bottom: 0;
+                padding-bottom: size(14);
+
+                h3 {
+                    font-size: size(21);
+                    min-width: 0;
+                }
+            }
+
+            .user-management__user-delete {
+                margin-left: auto;
+
+                a {
+                    align-items: center;
+                    display: inline-flex;
+                    white-space: nowrap;
+                }
             }
 
             .user-management__user-info {
+                gap: size(8);
                 grid-template-columns: 1fr;
                 justify-items: start;
+                margin: size(14) 0 0;
+
+                p {
+                    font-size: size(14);
+                }
             }
 
             .account-config,
             > user-accepted-terms {
-                margin: 0 size(16) size(16);
-                padding: size(20);
+                margin: 0 size(12) size(16);
+                padding: size(18);
+            }
+
+            .user-mail__title {
+                font-size: size(18);
+                line-height: 1.3;
+                margin-bottom: size(16);
+                padding-bottom: size(12);
+            }
+
+            .user-mail__config-content {
+                align-items: center;
+                flex-wrap: nowrap;
+                gap: size(12);
+
+                > :first-child {
+                    min-width: 0;
+                    overflow-wrap: anywhere;
+                }
+            }
+
+            .user-mail__config-edit,
+            .change-password__password--edit {
+                flex: 0 0 auto;
+                white-space: nowrap;
+            }
+
+            .change-password {
+                margin-top: size(16);
+                padding-top: size(16);
+
+                &__password {
+                    flex-wrap: nowrap;
+                    gap: size(12);
+                }
+
+                &__password--fakePassword {
+                    min-width: 0;
+                }
             }
 
             .user-mail__form {
                 grid-template-columns: 1fr;
+                margin-top: size(16);
 
                 > .col-4 {
                     grid-column: 1;
@@ -263,6 +334,10 @@
                     grid-column: 1;
                     justify-self: start;
                 }
+            }
+
+            .user-accepted-terms__privacy--accept-title {
+                font-size: size(18);
             }
         }
     }

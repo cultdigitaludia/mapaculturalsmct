@@ -42,7 +42,7 @@
             try {
                 new window.VLibras.Widget({
                     rootPath: 'https://vlibras.gov.br/app',
-                    position: 'L',
+                    position: 'R',
                 });
             } catch (e) {
                 abort('Falha ao inicializar o widget: ' + e.message);
