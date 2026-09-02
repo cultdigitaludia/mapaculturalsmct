@@ -47,3 +47,13 @@ docker compose build --no-cache --pull
 
 ./stop.sh
 ./start.sh
+
+# Em produção, temas e plugins são incorporados à imagem pelo Dockerfile.
+# Nenhum processo do container deve reescrever os arquivos versionados do host.
+if ! git diff --quiet --ignore-submodules=all; then
+    echo "Erro: o deploy alterou arquivos versionados no servidor." >&2
+    echo "Confira o resultado de: git status --short" >&2
+    exit 1
+fi
+
+echo "Deploy concluído sem alterações nos arquivos versionados do host."

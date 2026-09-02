@@ -46,7 +46,6 @@ services:
       - ./docker-data/logs:/var/www/var/logs
 
       - ./docker/production/config.d:/var/www/config/prod.d
-      - ./themes/UberlandiaCultural:/var/www/src/themes/UberlandiaCultural
     links:
       - db
       - redis
