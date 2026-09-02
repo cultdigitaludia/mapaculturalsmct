@@ -48,12 +48,33 @@
     }
 
     &__button {
+        align-items: center;
+        align-self: center;
         background: none;
         border: none;
+        border-radius: 50%;
+        color: inherit;
         cursor: pointer;
-        font-size: size(14);
+        display: flex;
+        flex: 0 0 size(32);
+        font-size: 0;
         font-weight: 700;
-        line-height: size(19);
+        height: size(32);
+        justify-content: center;
+        line-height: 1;
         margin-left: auto;
+        padding: 0;
+        width: size(32);
+
+        &::after {
+            content: "\00d7";
+            font-size: size(24);
+            font-weight: 400;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: rgba(255, 255, 255, 0.18);
+        }
     }
 }
