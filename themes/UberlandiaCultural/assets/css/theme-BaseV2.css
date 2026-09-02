@@ -87,215 +87,6 @@
   --mc-font-size-xxxs: 0.75rem;
 }
 
-.create-account__document-type {
-  border: 0;
-  margin: 0 0 1rem;
-  padding: 0;
-}
-.create-account__document-type legend {
-  font-size: 0.875rem;
-  font-weight: 700;
-  line-height: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.create-account__document-options {
-  background-color: var(--mc-gray-100);
-  border: 1px solid var(--mc-gray-300);
-  border-radius: var(--mc-border-radius-sm);
-  display: grid;
-  gap: 0.25rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  padding: 0.25rem;
-  width: 100%;
-}
-.create-account__document-options label {
-  align-items: center;
-  border: 1px solid transparent;
-  border-radius: calc(var(--mc-border-radius-sm) - 0.125rem);
-  color: var(--mc-gray-700);
-  cursor: pointer;
-  display: flex;
-  font-size: 1rem;
-  font-weight: 600;
-  justify-content: center;
-  min-height: 2.5rem;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-.create-account__document-options input {
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-}
-.create-account__document-options label:hover {
-  color: var(--mc-primary-500);
-}
-.create-account__document-options label.is-selected {
-  background-color: var(--mc-white);
-  border-color: var(--mc-primary-500);
-  color: var(--mc-primary-500);
-  font-weight: 700;
-}
-.create-account__document-options label:focus-within {
-  border-radius: 0.25rem;
-  outline: 2px solid var(--mc-primary-300);
-  outline-offset: 0.1875rem;
-}
-
-.create-account__input-error {
-  border-color: var(--mc-error) !important;
-}
-
-.create-account__field-error,
-.create-account__form-error {
-  color: var(--mc-error);
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 1rem;
-  margin: 0.375rem 0 0;
-}
-
-.create-account__entity-field--error input,
-.create-account__entity-field--error textarea {
-  border-color: var(--mc-error) !important;
-}
-
-.create-account__entity-terms--error .entity-terms__terms-selector,
-.create-account__entity-terms--error .entity-terms__input,
-.create-account__entity-terms--error input {
-  border-color: var(--mc-error) !important;
-}
-
-.create-account__form-error {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  margin: 0;
-}
-
-.create-account__password-requirements {
-  color: var(--mc-gray-700);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  margin: 0.75rem 0 0;
-  min-height: 1.25rem;
-}
-.create-account__password-requirements strong {
-  color: inherit;
-  margin-right: 0.25rem;
-}
-.create-account__password-requirements span {
-  color: var(--mc-danger-500);
-  font-weight: 600;
-}
-
-.create-account .password input[type=password],
-.create-account .password input[type=text] {
-  box-sizing: border-box;
-  padding-right: 3.25rem;
-}
-.create-account .password .seePassword {
-  cursor: pointer;
-  right: 0.125rem;
-  width: 2.875rem;
-}
-
-.create-account__success-icon {
-  display: block;
-  flex: 0 0 auto;
-  height: 5rem;
-  width: 5rem;
-}
-
-.login__action .login__card {
-  border: 1px solid var(--mc-gray-200);
-  border-radius: var(--mc-border-radius-sm);
-  gap: 1.5rem;
-  padding: 2rem 2.5rem;
-}
-.login__action .login__card__header {
-  gap: 0.375rem;
-}
-.login__action .login__card__header h3 {
-  font-size: 1.625rem;
-  line-height: 2rem;
-  margin: 0;
-}
-.login__action .login__card__header h6 {
-  color: var(--mc-gray-700);
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.25rem;
-  margin: 0;
-}
-.login__action .login__form {
-  gap: 1.75rem;
-}
-.login__action .login__fields {
-  gap: 1.25rem;
-}
-.login__action .field {
-  gap: 0.375rem;
-}
-.login__action .field label {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-.login__action .password input {
-  box-sizing: border-box;
-  padding-right: 3.25rem;
-}
-.login__action .login__recover-link {
-  align-self: flex-end;
-  margin-top: 0.25rem;
-}
-.login__action .login__buttons {
-  gap: 1.25rem;
-}
-.login__action .create {
-  border-top: 1px solid var(--mc-gray-300);
-  gap: 1rem;
-  padding-top: 1.5rem;
-}
-.login__action .create__text {
-  display: grid;
-  gap: 0.25rem;
-  text-align: center;
-}
-.login__action .create__text h5,
-.login__action .create__text p {
-  margin: 0;
-}
-.login__action .create__text h5 {
-  font-size: 1rem;
-  line-height: 1.375rem;
-}
-.login__action .create__text p {
-  color: var(--mc-gray-700);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-.login__action .login__register-button {
-  background-color: var(--mc-white);
-  border: 2px solid var(--mc-primary-500);
-  color: var(--mc-primary-500);
-  justify-content: center;
-  text-decoration: none;
-  width: 100%;
-}
-.login__action .login__register-button:hover {
-  background-color: var(--mc-primary-500);
-  color: var(--mc-white);
-}
-@media (max-width: 31.25rem) {
-  .login__action .login__card {
-    gap: 1.25rem;
-    padding: 1.5rem 1.25rem;
-  }
-  .login__action .login__form {
-    gap: 1.5rem;
-  }
-}
-
 @font-face {
   font-display: swap;
   font-family: "AvenirNextLTPro";
@@ -9150,7 +8941,7 @@ body.galleryOpen {
   width: 2rem;
 }
 .alert__button::after {
-  content: "\00d7";
+  content: "×";
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -9552,9 +9343,12 @@ body.galleryOpen {
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 0.875rem;
+  max-width: clamp(7rem, 50vw - 32rem, 14rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
-@media (max-width: 71.875rem) {
+@media (max-width: 77.5rem) {
   .mc-header-menu-user__desktop .user__name, .mc-header-menu-user__mobile .user__name {
     display: none;
   }
@@ -11476,11 +11270,41 @@ ol.mc-stepper-vertical > li.active::before {
   }
 }
 .messages__content--message-close {
+  align-items: center;
+  background: none;
+  border: 0;
+  border-radius: 50%;
   color: white;
   cursor: pointer;
-  font-size: 1.25rem;
-  height: 1.25rem;
-  width: 1.25rem;
+  display: flex;
+  flex: 0 0 2rem;
+  height: 2rem;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  width: 2rem;
+}
+.messages__content--message-close > * {
+  display: none;
+}
+.messages__content--message-close::before, .messages__content--message-close::after {
+  background-color: currentColor;
+  border-radius: 0.0625rem;
+  content: "";
+  height: 0.125rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  width: 1rem;
+}
+.messages__content--message-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.messages__content--message-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.messages__content--message-close:hover, .messages__content--message-close:focus-visible {
+  background-color: rgba(255, 255, 255, 0.18);
 }
 .messages__content--message-text {
   color: white;
@@ -19305,7 +19129,7 @@ ol.mc-stepper-vertical > li.active::before {
 .main-header__buttons {
   align-items: center;
   display: flex;
-  gap: 0 1.875rem;
+  gap: 0 1rem;
 }
 
 .main-footer {
@@ -22343,5 +22167,214 @@ ol.mc-stepper-vertical > li.active::before {
   .change-password__modal .modal__header,
   .change-password__modal .modal__content {
     flex-shrink: 0;
+  }
+}
+
+.create-account__document-type {
+  border: 0;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+.create-account__document-type legend {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.create-account__document-options {
+  background-color: var(--mc-gray-100);
+  border: 1px solid var(--mc-gray-300);
+  border-radius: var(--mc-border-radius-sm);
+  display: grid;
+  gap: 0.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0.25rem;
+  width: 100%;
+}
+.create-account__document-options label {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: calc(var(--mc-border-radius-sm) - 0.125rem);
+  color: var(--mc-gray-700);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 2.5rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.create-account__document-options input {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+.create-account__document-options label:hover {
+  color: var(--mc-primary-500);
+}
+.create-account__document-options label.is-selected {
+  background-color: var(--mc-white);
+  border-color: var(--mc-primary-500);
+  color: var(--mc-primary-500);
+  font-weight: 700;
+}
+.create-account__document-options label:focus-within {
+  border-radius: 0.25rem;
+  outline: 2px solid var(--mc-primary-300);
+  outline-offset: 0.1875rem;
+}
+
+.create-account__input-error {
+  border-color: var(--mc-error) !important;
+}
+
+.create-account__field-error,
+.create-account__form-error {
+  color: var(--mc-error);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1rem;
+  margin: 0.375rem 0 0;
+}
+
+.create-account__entity-field--error input,
+.create-account__entity-field--error textarea {
+  border-color: var(--mc-error) !important;
+}
+
+.create-account__entity-terms--error .entity-terms__terms-selector,
+.create-account__entity-terms--error .entity-terms__input,
+.create-account__entity-terms--error input {
+  border-color: var(--mc-error) !important;
+}
+
+.create-account__form-error {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin: 0;
+}
+
+.create-account__password-requirements {
+  color: var(--mc-gray-700);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin: 0.75rem 0 0;
+  min-height: 1.25rem;
+}
+.create-account__password-requirements strong {
+  color: inherit;
+  margin-right: 0.25rem;
+}
+.create-account__password-requirements span {
+  color: var(--mc-danger-500);
+  font-weight: 600;
+}
+
+.create-account .password input[type=password],
+.create-account .password input[type=text] {
+  box-sizing: border-box;
+  padding-right: 3.25rem;
+}
+.create-account .password .seePassword {
+  cursor: pointer;
+  right: 0.125rem;
+  width: 2.875rem;
+}
+
+.create-account__success-icon {
+  display: block;
+  flex: 0 0 auto;
+  height: 5rem;
+  width: 5rem;
+}
+
+.login__action .login__card {
+  border: 1px solid var(--mc-gray-200);
+  border-radius: var(--mc-border-radius-sm);
+  gap: 1.5rem;
+  padding: 2rem 2.5rem;
+}
+.login__action .login__card__header {
+  gap: 0.375rem;
+}
+.login__action .login__card__header h3 {
+  font-size: 1.625rem;
+  line-height: 2rem;
+  margin: 0;
+}
+.login__action .login__card__header h6 {
+  color: var(--mc-gray-700);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  margin: 0;
+}
+.login__action .login__form {
+  gap: 1.75rem;
+}
+.login__action .login__fields {
+  gap: 1.25rem;
+}
+.login__action .field {
+  gap: 0.375rem;
+}
+.login__action .field label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.login__action .password input {
+  box-sizing: border-box;
+  padding-right: 3.25rem;
+}
+.login__action .login__recover-link {
+  align-self: flex-end;
+  margin-top: 0.25rem;
+}
+.login__action .login__buttons {
+  gap: 1.25rem;
+}
+.login__action .create {
+  border-top: 1px solid var(--mc-gray-300);
+  gap: 1rem;
+  padding-top: 1.5rem;
+}
+.login__action .create__text {
+  display: grid;
+  gap: 0.25rem;
+  text-align: center;
+}
+.login__action .create__text h5,
+.login__action .create__text p {
+  margin: 0;
+}
+.login__action .create__text h5 {
+  font-size: 1rem;
+  line-height: 1.375rem;
+}
+.login__action .create__text p {
+  color: var(--mc-gray-700);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.login__action .login__register-button {
+  background-color: var(--mc-white);
+  border: 2px solid var(--mc-primary-500);
+  color: var(--mc-primary-500);
+  justify-content: center;
+  text-decoration: none;
+  width: 100%;
+}
+.login__action .login__register-button:hover {
+  background-color: var(--mc-primary-500);
+  color: var(--mc-white);
+}
+@media (max-width: 31.25rem) {
+  .login__action .login__card {
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
+  }
+  .login__action .login__form {
+    gap: 1.5rem;
   }
 }
