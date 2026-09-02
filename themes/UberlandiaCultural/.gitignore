@@ -2,3 +2,4 @@ assets/css/**.css
 assets/js/**.js
 !assets/js/vlibras-widget.js
 !assets/js/panel-ordering.js
+!assets/js/space-card-pills.js
