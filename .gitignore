@@ -2,4 +2,3 @@ docker-data
 node_modules
 vendor
 .env
-LOCAL_NOTES.md
