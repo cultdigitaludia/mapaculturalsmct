@@ -17,7 +17,7 @@
 
 .mc-header-menu {
     display: flex;
-    gap: size(32);
+    gap: size(16);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -27,6 +27,10 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &:not(.mobile) > li {
+        flex: 0 0 size(84);
+    }
 
     &__btn-mobile {
         align-items: center;
@@ -39,7 +43,7 @@
         .iconify { height: size(24); margin: size(3); width: size(24); color: #002C41; }
     }
 
-    @media (max-width: 1190px) { gap: size(20); }
+    @media (max-width: 1190px) { gap: size(12); }
 
     @media (max-width: 1070px) {
         display: none;

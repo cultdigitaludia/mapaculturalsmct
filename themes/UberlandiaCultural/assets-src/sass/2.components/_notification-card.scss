@@ -2,11 +2,14 @@
 
 .notifications {
     .notification-card {
-        border-bottom: size(0.5) solid #BBBBBB;
+        border-bottom: size(1) solid var(--mc-gray-300);
         border-radius: 0;
         margin: 0;
-        padding: size(16);
-        margin-bottom: size(16);
+        padding: size(12) size(16);
+
+        &:last-child {
+            border-bottom: 0;
+        }
 
         .mc-card__title {
             display: none;
@@ -14,8 +17,8 @@
 
         .mc-card__content {
             display: grid;
-            gap: size(0) size(16);
-            grid-template-columns: size(32) 1fr;
+            gap: 0 size(12);
+            grid-template-columns: size(28) 1fr;
         }
 
         .avatar {
@@ -23,14 +26,14 @@
             background-color: var(--mc-gray-100);
             border-radius: 50%;
             display: flex;
-            height: size(32);
+            height: size(28);
             justify-content: center;
             margin: 0;
             overflow: hidden;
-            width: size(32);
+            width: size(28);
 
             svg {
-                font-size: size(16);
+                font-size: size(14);
             }
 
             img {
@@ -41,7 +44,7 @@
         .content {
             display: flex;
             flex-direction: column;
-            gap: size(16);
+            gap: size(10);
 
             &__header {
                 display: flex;
@@ -49,38 +52,63 @@
                 gap: size(4);
 
                 .title {
-                    font-size: 16px;
-                    line-height: 22px;
+                    font-size: size(14);
+                    font-weight: 400;
+                    line-height: size(20);
                     margin: 0;
                     word-break: break-word;
 
                     a {
                         color: var(--mc-low-500);
                         display: contents;
-                        font-weight: bold;
+                        font-weight: 600;
                         margin: 0;
                         padding: 0;
                         text-decoration: none;
                     }
                 }
 
+                .title strong,
+                .title b {
+                    font-weight: 600;
+                }
+
                 .subtitle {
-                    font-size: 14px;
-                    line-height: 19px;
+                    color: var(--mc-gray-600);
+                    font-size: size(12);
+                    line-height: size(16);
                     margin: 0;
                 }
             }
 
             &__groupButtons {
                 display: flex;
-                gap: size(16);
+                gap: size(8);
+
+                .button {
+                    font-size: size(14);
+                    min-height: size(34);
+                    padding: size(6) size(14);
+                }
+
+                &--notification {
+                    align-items: center;
+                    justify-content: flex-end;
+                    width: 100%;
+                }
             }
         }
 
+        &__check {
+            font-size: size(16);
+            font-weight: 700;
+            line-height: 1;
+        }
+
         &.divider {
-            border-top: 1px solid var(--mc-low-300);
-            padding: 16px 0;
-            margin: 8px 0;
+            border-top: 0;
+            margin: 0;
+            padding: size(12) size(16);
             border-radius: 0;
 
             &__divider:last-child {

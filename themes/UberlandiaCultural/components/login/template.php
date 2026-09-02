@@ -20,7 +20,7 @@ $this->import('
     <div v-if="!recoveryRequest && !recoveryMode" class="login__action">
         <div class="login__card">
             <div class="login__card__header">
-                <h3> <?= $this->text('welcome', i::__('Boas vindas!')) ?> </h3>
+                <h3> <?= $this->text('welcome', i::__('Boas-vindas!')) ?> </h3>
                 <h6> <?= sprintf($this->text('greeting', i::__('Entre na sua conta do %s')), $app->siteName) ?> </h6>
             </div>
 
@@ -67,10 +67,13 @@ $this->import('
                         </div>
                     </div>
 
-                    <div class="create ">
-                        <h5 class="bold"> <?= sprintf($this->text('register', i::__('Ainda não tem cadastro no %s? Realize seu cadastro agora!')), $app->siteName) ?> </h5>
+                    <div class="create">
+                        <div class="create__text">
+                            <h5 class="bold"><?= i::__('Ainda não tem cadastro?') ?></h5>
+                            <p><?= i::__('Crie sua conta para participar da plataforma.') ?></p>
+                        </div>
 
-                        <a class=" button button--primary button--large button--md" href="<?php echo $app->createUrl('auth', 'register') ?>"> 
+                        <a class="login__register-button button button--large button--md" href="<?php echo $app->createUrl('auth', 'register') ?>">
                             <?= $this->text('fazer-cadastro', i::__('Fazer cadastro')) ?>
                         </a>
                     </div>

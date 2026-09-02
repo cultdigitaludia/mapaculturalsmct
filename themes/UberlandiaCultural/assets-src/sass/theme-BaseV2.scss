@@ -246,3 +246,252 @@
 @import 'pages/terms';
 @import 'pages/theme-customizer';
 @import 'pages/user-detail';
+
+// Cadastro de usuário
+.create-account__document-type {
+    border: 0;
+    margin: 0 0 1rem;
+    padding: 0;
+
+    legend {
+        font-size: 0.875rem;
+        font-weight: 700;
+        line-height: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.create-account__document-options {
+    background-color: var(--mc-gray-100);
+    border: 1px solid var(--mc-gray-300);
+    border-radius: var(--mc-border-radius-sm);
+    display: grid;
+    gap: size(4);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: size(4);
+    width: 100%;
+
+    label {
+        align-items: center;
+        border: 1px solid transparent;
+        border-radius: calc(var(--mc-border-radius-sm) - #{size(2)});
+        color: var(--mc-gray-700);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 600;
+        min-height: size(40);
+        transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+
+    input {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+    }
+
+    label:hover {
+        color: var(--mc-primary-500);
+    }
+
+    label.is-selected {
+        background-color: var(--mc-white);
+        border-color: var(--mc-primary-500);
+        color: var(--mc-primary-500);
+        font-weight: 700;
+    }
+
+    label:focus-within {
+        border-radius: size(4);
+        outline: 2px solid var(--mc-primary-300);
+        outline-offset: size(3);
+    }
+}
+
+.create-account__input-error {
+    border-color: var(--mc-error) !important;
+}
+
+.create-account__field-error,
+.create-account__form-error {
+    color: var(--mc-error);
+    font-size: size(12);
+    font-weight: 700;
+    line-height: size(16);
+    margin: size(6) 0 0;
+}
+
+.create-account__entity-field--error {
+    input,
+    textarea {
+        border-color: var(--mc-error) !important;
+    }
+}
+
+.create-account__entity-terms--error {
+    .entity-terms__terms-selector,
+    .entity-terms__input,
+    input {
+        border-color: var(--mc-error) !important;
+    }
+}
+
+.create-account__form-error {
+    font-size: size(14);
+    line-height: size(20);
+    margin: 0;
+}
+
+.create-account__password-requirements {
+    color: var(--mc-gray-700);
+    font-size: size(14);
+    line-height: size(20);
+    margin: size(12) 0 0;
+    min-height: size(20);
+
+    strong {
+        color: inherit;
+        margin-right: size(4);
+    }
+
+    span {
+        color: var(--mc-danger-500);
+        font-weight: 600;
+    }
+}
+
+.create-account .password {
+    input[type='password'],
+    input[type='text'] {
+        box-sizing: border-box;
+        padding-right: size(52);
+    }
+
+    .seePassword {
+        cursor: pointer;
+        right: size(2);
+        width: size(46);
+    }
+}
+
+.create-account__success-icon {
+    display: block;
+    flex: 0 0 auto;
+    height: size(80);
+    width: size(80);
+}
+
+// Autenticação
+.login__action {
+    .login__card {
+        border: 1px solid var(--mc-gray-200);
+        border-radius: var(--mc-border-radius-sm);
+        gap: size(24);
+        padding: size(32) size(40);
+
+        &__header {
+            gap: size(6);
+
+            h3 {
+                font-size: size(26);
+                line-height: size(32);
+                margin: 0;
+            }
+
+            h6 {
+                color: var(--mc-gray-700);
+                font-size: size(14);
+                font-weight: 400;
+                line-height: size(20);
+                margin: 0;
+            }
+        }
+    }
+
+    .login__form {
+        gap: size(28);
+    }
+
+    .login__fields {
+        gap: size(20);
+    }
+
+    .field {
+        gap: size(6);
+
+        label {
+            font-size: size(14);
+            line-height: size(20);
+        }
+    }
+
+    .password {
+        input {
+            box-sizing: border-box;
+            padding-right: size(52);
+        }
+    }
+
+    .login__recover-link {
+        align-self: flex-end;
+        margin-top: size(4);
+    }
+
+    .login__buttons {
+        gap: size(20);
+    }
+
+    .create {
+        border-top: 1px solid var(--mc-gray-300);
+        gap: size(16);
+        padding-top: size(24);
+
+        &__text {
+            display: grid;
+            gap: size(4);
+            text-align: center;
+
+            h5,
+            p {
+                margin: 0;
+            }
+
+            h5 {
+                font-size: size(16);
+                line-height: size(22);
+            }
+
+            p {
+                color: var(--mc-gray-700);
+                font-size: size(14);
+                line-height: size(20);
+            }
+        }
+    }
+
+    .login__register-button {
+        background-color: var(--mc-white);
+        border: 2px solid var(--mc-primary-500);
+        color: var(--mc-primary-500);
+        justify-content: center;
+        text-decoration: none;
+        width: 100%;
+
+        &:hover {
+            background-color: var(--mc-primary-500);
+            color: var(--mc-white);
+        }
+    }
+
+    @media (max-width: size(500)) {
+        .login__card {
+            gap: size(20);
+            padding: size(24) size(20);
+        }
+
+        .login__form {
+            gap: size(24);
+        }
+    }
+}
