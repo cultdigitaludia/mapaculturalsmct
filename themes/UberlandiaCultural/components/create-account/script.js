@@ -20,12 +20,25 @@ app.component('create-account', {
             totalSteps: termsQtd + 2,
             terms,
             passwordRules: {},
+            passwordRulesLoaded: false,
             strongness: 0,
             strongnessClass: 'fraco',
             slugs: [],
             email: '',
             cpf: '',
             documentType: 'cpf',
+            fieldErrors: {
+                email: [],
+                cpf: [],
+                password: [],
+                confirm_password: [],
+                general: [],
+            },
+            agentFieldErrors: {
+                name: '',
+                shortDescription: '',
+                taxonomies: {},
+            },
             password: '',
             confirmPassword: '',
             agent: null,
@@ -46,11 +59,35 @@ app.component('create-account', {
         let api = new API();
         api.GET($MAPAS.baseURL + "auth/passwordvalidationinfos").then(async response => response.json().then(validations => {
             this.passwordRules = validations.passwordRules;
+            this.passwordRulesLoaded = true;
         }));
     },
 
     destroyed() {
         window.removeEventListener('scroll');
+    },
+
+    watch: {
+        agent: {
+            deep: true,
+            handler(agent) {
+                if (!agent) return;
+
+                if (agent.name?.trim()) {
+                    this.agentFieldErrors.name = '';
+                }
+
+                if (agent.shortDescription?.trim()) {
+                    this.agentFieldErrors.shortDescription = '';
+                }
+
+                for (const taxonomy of Object.keys(this.agentFieldErrors.taxonomies)) {
+                    if (agent.terms?.[taxonomy]?.length) {
+                        this.agentFieldErrors.taxonomies[taxonomy] = '';
+                    }
+                }
+            }
+        }
     },
 
     computed: {
@@ -69,6 +106,51 @@ app.component('create-account', {
 
         configs() {
             return JSON.parse(this.config);
+        },
+
+        passwordCriteria() {
+            if (!this.passwordRulesLoaded) {
+                return [];
+            }
+
+            const password = this.password || '';
+            const rules = this.passwordRules;
+            const minimumLength = Number(rules.minimumPasswordLength || 8);
+            const criteria = [{
+                label: this.text('{num} caracteres').replace('{num}', minimumLength),
+                met: password.length >= minimumLength
+            }];
+
+            if (rules.passwordMustHaveNumbers) {
+                criteria.push({ label: this.text('um número'), met: /[0-9]/.test(password) });
+            }
+
+            if (rules.passwordMustHaveSpecialCharacters) {
+                criteria.push({ label: this.text('um caractere especial'), met: /['^£$%&*()}{@#~?><>,|=_"!¨+`´[\].;:/-]/.test(password) });
+            }
+
+            if (rules.passwordMustHaveCapitalLetters) {
+                criteria.push({ label: this.text('uma letra maiúscula'), met: /[A-Z]/.test(password) });
+            }
+
+            if (rules.passwordMustHaveLowercaseLetters) {
+                criteria.push({ label: this.text('uma letra minúscula'), met: /[a-z]/.test(password) });
+            }
+
+            return criteria;
+        },
+
+        pendingPasswordCriteria() {
+            return this.passwordCriteria.filter((criterion) => !criterion.met);
+        },
+
+        pendingPasswordRequirementsText() {
+            return this.formatPasswordRequirements(this.pendingPasswordCriteria);
+        },
+
+        allPasswordCriteriaMet() {
+            return this.passwordCriteria.length > 0
+                && this.passwordCriteria.every((criterion) => criterion.met);
         },
 
         passwordStrongness() {
@@ -133,6 +215,16 @@ app.component('create-account', {
     },
 
     methods: {
+        formatPasswordRequirements(criteria) {
+            const labels = criteria.map((criterion) => criterion.label);
+
+            if (labels.length <= 1) {
+                return labels[0] || '';
+            }
+
+            return `${labels.slice(0, -1).join(', ')} e ${labels[labels.length - 1]}`;
+        },
+
         startAgent() {
             this.agent = Vue.ref(new Entity('agent'));
             this.agent.type = this.documentType === 'cnpj' ? 2 : 1;
@@ -188,6 +280,7 @@ app.component('create-account', {
                     'name': this.agent.name,
                     'email': this.email,
                     'cpf': this.cpf,
+                    'document_type': this.documentType,
                     'password': this.password,
                     'confirm_password': this.confirmPassword,
                     'slugs': this.slugs,
@@ -242,8 +335,10 @@ app.component('create-account', {
         async validateFields() {
             let api = new API();
             let success = true;
+            this.clearFieldErrors();
             let data = {
                 'cpf': this.cpf,
+                'document_type': this.documentType,
                 'email': this.email,
                 'password': this.password,
                 'confirm_password': this.confirmPassword,
@@ -251,7 +346,7 @@ app.component('create-account', {
             }
             await api.POST($MAPAS.baseURL + "autenticacao/validate", data).then(response => response.json().then(dataReturn => {
                 if (dataReturn.error) {
-                    this.throwErrors(dataReturn.data);
+                    this.setFieldErrors(dataReturn.data);
                     success = false;
                 } else {
                     this.recaptchaResponse = '';
@@ -270,54 +365,135 @@ app.component('create-account', {
             }
 
             for (let key in errors) {
-                if (errors[key] instanceof Array) {
-                    for (let val of errors[key]) {
-                        messages.error(val);
-                    }
-                }
-                if (!(errors[key] instanceof Array)) {
-                    for (let _key in errors[key]) {
-                        if (errors[key][_key] instanceof Array) {
-                            for (let _val of errors[key][_key]) {
-                                messages.error(_val);
-                            }
-                        } else {
-                            messages.error(errors[key][_key]);
-                        }
-                    }
+                for (const message of this.flattenErrorMessages(errors[key])) {
+                    messages.error(message);
                 }
             }
         },
 
-        validateAgent() {
-            let errors = {
-                'agent': [],
-            };
-            if (!this.agent.name) {
-                errors.agent.push(__('Nome obrigatório', 'create-account'));
-            }
-            if (!this.agent.shortDescription) {
-                errors.agent.push(__('Descrição obrigatória', 'create-account'));
-            }
-            if (this.agent.terms.area.length == 0) {
-                errors.agent.push(__('Área de atuação obrigatória', 'create-account'));
+        setFieldErrors(errors) {
+            if (this.recaptchaResponse !== '') {
+                grecaptcha.reset();
+                this.expiredCaptcha();
             }
 
-            // Validação de campos obrigatórios das taxonomias
+            this.mapFieldErrors(errors);
+        },
+
+        mapFieldErrors(errors, parentField = null) {
+            const aliases = {
+                confirmPassword: 'confirm_password',
+                'g-recaptcha-response': 'general',
+                recaptcha: 'general',
+            };
+
+            if (Array.isArray(errors)) {
+                const field = parentField || 'general';
+                const messages = this.flattenErrorMessages(errors)
+                    .map((message) => this.formatFieldError(message, field));
+                this.fieldErrors[field].push(...messages);
+                return;
+            }
+
+            if (errors && typeof errors === 'object') {
+                for (const [key, value] of Object.entries(errors)) {
+                    const field = aliases[key] || (this.fieldErrors[key] ? key : null);
+                    this.mapFieldErrors(value, field || parentField);
+                }
+                return;
+            }
+
+            if (errors) {
+                const field = parentField || 'general';
+                this.fieldErrors[field].push(this.formatFieldError(String(errors), field));
+            }
+        },
+
+        formatFieldError(message, field) {
+            if (field === 'cpf' && this.documentType === 'cnpj') {
+                return message.replace(/cpf/gi, 'CNPJ');
+            }
+
+            return message;
+        },
+
+        flattenErrorMessages(error) {
+            if (Array.isArray(error)) {
+                return error.flatMap((item) => this.flattenErrorMessages(item));
+            }
+
+            if (error && typeof error === 'object') {
+                return Object.values(error).flatMap((item) => this.flattenErrorMessages(item));
+            }
+
+            return error ? [String(error)] : [];
+        },
+
+        clearFieldError(field) {
+            this.fieldErrors[field] = [];
+        },
+
+        changeDocumentType() {
+            this.cpf = '';
+            this.clearFieldError('cpf');
+        },
+
+        formatCnpj(event) {
+            const value = event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            const base = value.slice(0, 12);
+            const digits = value.slice(12).replace(/[^0-9]/g, '').slice(0, 2);
+            const normalized = base + digits;
+            let formatted = normalized.slice(0, 2);
+
+            if (normalized.length > 2) formatted += `.${normalized.slice(2, 5)}`;
+            if (normalized.length > 5) formatted += `.${normalized.slice(5, 8)}`;
+            if (normalized.length > 8) formatted += `/${normalized.slice(8, 12)}`;
+            if (normalized.length > 12) formatted += `-${normalized.slice(12, 14)}`;
+
+            this.cpf = formatted;
+            event.target.value = formatted;
+        },
+
+        clearFieldErrors() {
+            Object.keys(this.fieldErrors).forEach((field) => {
+                this.fieldErrors[field] = [];
+            });
+        },
+
+        validateAgent() {
+            this.resetAgentFieldErrors();
+            let hasErrors = false;
+
+            if (!this.agent.name?.trim()) {
+                this.agentFieldErrors.name = __('O nome é obrigatório!', 'create-account');
+                hasErrors = true;
+            }
+
+            if (!this.agent.shortDescription?.trim()) {
+                this.agentFieldErrors.shortDescription = __('A descrição é obrigatória!', 'create-account');
+                hasErrors = true;
+            }
+
             Object.keys($TAXONOMIES).forEach(taxonomy => {
                 const t = $TAXONOMIES[taxonomy];
                 if (t.required  && t.entities.includes('MapasCulturais\\Entities\\Agent')) {
-                    if(this.agent.terms[taxonomy].length == 0) {
-                        errors.agent.push(`${t.description} ${__('required', 'create-account')}`);
+                    if (!this.agent.terms?.[taxonomy]?.length) {
+                        const message = taxonomy === 'area'
+                            ? __('A área de atuação é obrigatória!', 'create-account')
+                            : `${t.description} ${__('required', 'create-account')}`;
+                        this.agentFieldErrors.taxonomies[taxonomy] = message;
+                        hasErrors = true;
                     }
                 }
             });
 
-            if (errors.agent.length > 0) {
-                this.throwErrors(errors);
-                return false;
-            }
-            return true;
+            return !hasErrors;
+        },
+
+        resetAgentFieldErrors() {
+            this.agentFieldErrors.name = '';
+            this.agentFieldErrors.shortDescription = '';
+            this.agentFieldErrors.taxonomies = {};
         },
 
         togglePassword(id, event) {

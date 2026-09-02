@@ -1,0 +1,109 @@
+diff --git a/Provider.php b/Provider.php
+index 477a745..d524b4e 100644
+--- a/Provider.php
++++ b/Provider.php
+@@ -537,6 +537,9 @@ class Provider extends \MapasCulturais\AuthProvider {
+         $hasErrors = false;
+ 
+         $cpf = $app->request->post('cpf');
++        $documentType = strtolower((string) $app->request->post('document_type')) === 'cnpj' ? 'cnpj' : 'cpf';
++        $documentIsValid = $documentType === 'cnpj' ? $this->validateCNPJ($cpf) : $this->validateCPF($cpf);
++        $documentLabel = $documentType === 'cnpj' ? 'CNPJ' : 'CPF';
+         $email = filter_var( $app->request->post('email') , FILTER_SANITIZE_EMAIL);
+         $pass = $app->request->post('password');
+         $pass_v = $app->request->post('confirm_password');
+@@ -563,31 +566,32 @@ class Provider extends \MapasCulturais\AuthProvider {
+         // validates cpf only if login by cpf is enabled
+         if($config['enableLoginByCPF']) {
+ 
+-            // validate cpf
+-            if($config['requireCpf'] && !$this->validateCPF($cpf)) {
+-                array_push($errors['user']['cpf'], i::__('Por favor, informe um cpf válido.', 'multipleLocal'));
++            // validate CPF or CNPJ according to the document type selected during registration
++            if($config['requireCpf'] && !$documentIsValid) {
++                array_push($errors['user']['cpf'], sprintf(i::__('Por favor, informe um %s válido.', 'multipleLocal'), $documentLabel));
+                 $hasErrors = true;
+             }
+             
+-            if($this->validateCPF($cpf)) {
++            if($documentIsValid) {
+                 $foundAgent = [];
+                 $metadataFieldCpf = $this->getMetadataFieldCpfFromConfig();
+                 
+-                $_cpf = implode("','", [$cpf, preg_replace('/[^0-9]/i', '', $cpf)]);
+-                $foundAgent = $conn->fetchAll("SELECT * FROM agent_meta WHERE key IN ('{$metadataFieldCpf}', 'cpf') AND value IN ('{$_cpf}')");
+-
+-                // creates an array with agents with status == 1, because the user can have, for example, 3 agents, but 2 have status == 0
+-                $existAgent  = [];
+-                if($foundAgent){
+-                    foreach ($foundAgent as $agentMeta) {
+-                        if($agentMeta->owner->status >= 0) {
+-                            $existAgent[] = $agentMeta;
+-                        }
+-                    }
+-                }
++                $normalizedDocument = strtoupper(preg_replace('/[^A-Z0-9]/i', '', (string) $cpf));
++                $metadataKeys = implode(', ', array_map([$conn, 'quote'], array_unique([$metadataFieldCpf, 'cpf'])));
++                $documentValues = implode(', ', array_map([$conn, 'quote'], array_unique([$cpf, $normalizedDocument])));
++                // SQL bruto retorna arrays, não entidades com a relação "owner".
++                // Filtra o status do agente diretamente na consulta.
++                $existAgent = $conn->fetchAll("
++                    SELECT am.id
++                    FROM agent_meta am
++                    INNER JOIN agent a ON a.id = am.object_id
++                    WHERE am.key IN ({$metadataKeys})
++                      AND am.value IN ({$documentValues})
++                      AND a.status >= 0
++                ");
+ 
+                 if(count($existAgent) > 0) {
+-                    array_push($errors['user']['cpf'], i::__('Este CPF já esta em uso. Tente recuperar a sua senha.', 'multipleLocal'));
++                    array_push($errors['user']['cpf'], sprintf(i::__('Este %s já está em uso. Tente recuperar a sua senha.', 'multipleLocal'), $documentLabel));
+                     $hasErrors = true;
+                 }
+             }
+@@ -996,6 +1000,34 @@ class Provider extends \MapasCulturais\AuthProvider {
+     
+     }
+ 
++    function validateCNPJ($cnpj) {
++        $cnpj = strtoupper(preg_replace('/[^A-Z0-9]/i', '', (string) $cnpj));
++
++        if (!preg_match('/^[A-Z0-9]{12}[0-9]{2}$/', $cnpj) || preg_match('/^(.)\1{13}$/', $cnpj)) {
++            return false;
++        }
++
++        $weights = [
++            [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
++            [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
++        ];
++
++        foreach ($weights as $index => $digitWeights) {
++            $sum = 0;
++            foreach ($digitWeights as $position => $weight) {
++                $sum += (ord($cnpj[$position]) - 48) * $weight;
++            }
++
++            $remainder = $sum % 11;
++            $digit = $remainder < 2 ? 0 : 11 - $remainder;
++            if ((int) $cnpj[12 + $index] !== $digit) {
++                return false;
++            }
++        }
++
++        return true;
++    }
++
+     function doLogin() {
+         $app = App::i();
+         $config = $this->_config;
+@@ -1146,8 +1178,7 @@ class Provider extends \MapasCulturais\AuthProvider {
+             $pass = $app->request->post('password');
+                         
+             $cpf = $app->request->post('cpf');
+-            $cpf = str_replace("-","",$cpf); // remove "-"
+-            $cpf = str_replace(".","",$cpf); // remove "."
++            $cpf = strtoupper(preg_replace('/[^A-Z0-9]/i', '', (string) $cpf));
+ 
+             // generate the token hash
+             $source = rand(3333, 8888);

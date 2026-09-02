@@ -106,19 +106,22 @@
     }
 
 	&__header {
-		font-size: size(12);
+		font-size: size(14);
 		font-weight: 600;
-		line-height: size(16);
-		padding: size(16) size(24) size(9);
+		line-height: size(20);
+		padding: size(14) size(16) size(10);
 
 		.count {
+			align-items: center;
 			color: var(--mc-low-500);
+			display: inline-flex;
 			font-weight: 700;
+			gap: size(6);
 			text-decoration: none;
 
 			&-counter {
-				min-width: size(18);
-				height: size(18);
+				min-width: size(22);
+				height: size(22);
 				text-align: center;
 				display: inline-flex;
 				align-items: center;
@@ -127,7 +130,8 @@
 				padding: 0 size(5);
 				background-color: var(--mc-danger-500);
 				color: #FFFFFF;
-				font-weight: normal;
+				font-size: size(14);
+				font-weight: 600;
 			}
 		}
 	}
