@@ -36,11 +36,48 @@
             }
     
             &-close {
+                align-items: center;
+                background: none;
+                border: 0;
+                border-radius: 50%;
                 color:white;
                 cursor: pointer;
-                font-size: size(20);
-                height: size(20);
-                width: size(20);
+                display: flex;
+                flex: 0 0 size(32);
+                height: size(32);
+                justify-content: center;
+                padding: 0;
+                position: relative;
+                width: size(32);
+
+                > * {
+                    display: none;
+                }
+
+                &::before,
+                &::after {
+                    background-color: currentColor;
+                    border-radius: size(1);
+                    content: "";
+                    height: size(2);
+                    left: 50%;
+                    position: absolute;
+                    top: 50%;
+                    width: size(16);
+                }
+
+                &::before {
+                    transform: translate(-50%, -50%) rotate(45deg);
+                }
+
+                &::after {
+                    transform: translate(-50%, -50%) rotate(-45deg);
+                }
+
+                &:hover,
+                &:focus-visible {
+                    background-color: rgba(255, 255, 255, 0.18);
+                }
             }
             
             &-text {
