@@ -17,7 +17,9 @@ $this->import('
     </div>
 
     <div class="home-map__content">
-        <mc-map :entities="entities">
+        <mc-map
+            :entities="entities"
+            @ready="$event.options.wheelPxPerZoomLevel = 180; $event.options.wheelDebounceTime = 80">
             <template #popup="{entity}">
                 <mc-map-card :entity="entity"></mc-map-card>
             </template>

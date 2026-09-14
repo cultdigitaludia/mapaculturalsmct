@@ -8938,12 +8938,24 @@ body.galleryOpen {
   line-height: 1;
   margin-left: auto;
   padding: 0;
+  position: relative;
   width: 2rem;
 }
+.alert__button::before, .alert__button::after {
+  background-color: currentColor;
+  border-radius: 0.0625rem;
+  content: "";
+  height: 0.125rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  width: 1rem;
+}
+.alert__button::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
 .alert__button::after {
-  content: "\00d7";
-  font-size: 1.5rem;
-  font-weight: 400;
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 .alert__button:hover, .alert__button:focus-visible {
   background-color: rgba(255, 255, 255, 0.18);
@@ -18980,7 +18992,7 @@ ol.mc-stepper-vertical > li.active::before {
 @media (min-width: 66.9375rem) {
   .main-header__content {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr) auto;
   }
   .main-header__content .mc-header-logo {
     grid-column: 1;
@@ -18990,10 +19002,12 @@ ol.mc-stepper-vertical > li.active::before {
   .main-header__content .mc-header-menu {
     grid-column: 2;
     justify-self: center;
+    min-width: 0;
   }
   .main-header__content .main-header__buttons {
     grid-column: 3;
     justify-self: end;
+    min-width: 0;
   }
 }
 .main-header__content .logIn {

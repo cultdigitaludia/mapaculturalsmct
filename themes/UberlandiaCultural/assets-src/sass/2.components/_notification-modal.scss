@@ -42,24 +42,26 @@
 
 	&__menu-desk {
 		align-items: center;
-		display: grid;
-		grid-template-columns: 1fr size(30);
-		gap: size(7);
-
-		.label {
-			font-weight: 600;
-			font-size: 14px;
-			line-height: size(16);
-		}
+		background: transparent;
+		border: 0;
+		color: inherit;
+		cursor: pointer;
+		display: flex;
+		flex: 0 0 size(40);
+		height: size(40);
+		justify-content: center;
+		line-height: 0;
+		padding: size(9);
+		width: size(40);
 
 		.icon {
 			position: relative;
-			height: size(20);
-			width: size(20);
+			height: size(22);
+			width: size(22);
 
 			svg {
-				height: size(20);
-				width: size(20);
+				height: size(22);
+				width: size(22);
 			}
 
 			.count {
@@ -76,9 +78,15 @@
 				color: var(--mc-high-500);
 				font-weight: normal;
 				font-size: 12px;
-				top: size(-8);
-				left: size(8);
+				top: size(-7);
+				left: size(10);
 			}
+		}
+
+		&:focus-visible {
+			border-radius: var(--mc-border-radius-pill);
+			outline: size(2) solid var(--mc-primary-500);
+			outline-offset: size(2);
 		}
 
 		@media (max-width: size(800)) {
