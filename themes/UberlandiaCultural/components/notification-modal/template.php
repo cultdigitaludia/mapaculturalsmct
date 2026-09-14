@@ -39,13 +39,13 @@ $this->import('
     </template>
 
     <template #button="popover">
-        <div v-if="viewport=='desktop'" class="notification-modal__menu-desk" @click="popover.toggle()">
-            <label class="label"><?= i::__('Notificações') ?></label>
+        <button v-if="viewport=='desktop'" type="button" class="notification-modal__menu-desk" @click="popover.toggle()" title="<?= i::esc_attr_e('Notificações') ?>" aria-label="<?= i::esc_attr_e('Abrir notificações') ?>">
+            <span class="sr-only"><?= i::__('Notificações') ?></span>
             <div class="icon">
                 <mc-icon name="notification"></mc-icon>
                 <span v-if="notificationsCount>0" class="count">{{notificationsCount}}</span>
             </div>
-        </div>
+        </button>
 
         <a v-if="viewport=='mobile'" class="notification-modal__menu-mobile" @click="popover.toggle()">
             <div class="icon">
