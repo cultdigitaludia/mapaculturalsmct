@@ -20,8 +20,8 @@ $this->import('
     <div v-if="!recoveryRequest && !recoveryMode" class="login__action">
         <div class="login__card">
             <div class="login__card__header">
-                <h3> <?= $this->text('welcome', i::__('Boas-vindas!')) ?> </h3>
-                <h6> <?= sprintf($this->text('greeting', i::__('Entre na sua conta do %s')), $app->siteName) ?> </h6>
+                <h1> <?= $this->text('welcome', i::__('Boas-vindas!')) ?> </h1>
+                <p> <?= sprintf($this->text('greeting', i::__('Entre na sua conta do %s')), $app->siteName) ?> </p>
             </div>
 
             <div class="login__card__content">
@@ -35,8 +35,8 @@ $this->import('
                         <div class="field password">
                             <label for="password"> <?= i::__('Senha') ?> </label>
                             <input type="password" name="password" id="password" v-model="password" autocomplete="off" />
-                            <a id="multiple-login-recover" class="login__recover-link" @click="recoveryRequest = true"> <?= i::__('Esqueci minha senha') ?> </a>
-                            <div class="seePassword" @click="togglePassword('password', $event)"></div>
+                            <button id="multiple-login-recover" type="button" class="login__recover-link" @click="recoveryRequest = true"> <?= i::__('Esqueci minha senha') ?> </button>
+                            <button type="button" class="seePassword" aria-label="<?= i::esc_attr_e('Mostrar ou ocultar senha') ?>" @click="togglePassword('password', $event)"></button>
                         </div> 
                     </div>                     
 
@@ -86,8 +86,8 @@ $this->import('
     <div v-if="recoveryRequest" class="login__recovery--request">
         <div class="login__card" v-if="!recoveryEmailSent">
             <div class="login__card__header">
-                <h3> <?= i::__('Alteração de senha') ?> </h3>
-                <h6> <?= i::__('Se você esqueceu a senha, não se preocupe, todo mundo passa por isso.') ?> <br> <?= i::__('Digite seu e-mail para criar uma nova.') ?> </h6>
+                <h1> <?= i::__('Alteração de senha') ?> </h1>
+                <p> <?= i::__('Se você esqueceu a senha, não se preocupe, todo mundo passa por isso.') ?> <br> <?= i::__('Digite seu e-mail para criar uma nova.') ?> </p>
             </div>
 
             <div class="login__card__content">
@@ -98,7 +98,7 @@ $this->import('
                     </div>
                     <VueRecaptcha v-if="configs['google-recaptcha-sitekey']" :sitekey="configs['google-recaptcha-sitekey']" @verify="verifyCaptcha" @expired="expiredCaptcha" @render="expiredCaptcha" class="g-recaptcha col-12"></VueRecaptcha>
                     <button class="col-12 button button--primary button--large button--md" type="submit"> <?= i::__('Alterar senha') ?> </button>
-                    <a @click="recoveryRequest = false" class="col-12 button button--secondarylight button--large button--md"> <?= i::__('Voltar') ?> </a>
+                    <button type="button" @click="recoveryRequest = false" class="col-12 button button--secondarylight button--large button--md"> <?= i::__('Voltar') ?> </button>
                 </form>
             </div>
         </div>
@@ -113,7 +113,7 @@ $this->import('
                     </div>
 
                     <button class="col-12 button button--primary button--large button--md" type="submit"> <?= i::__('Não recebi o e-mail') ?> </button>
-                    <a @click="recoveryEmailSent = false" class="col-12 button button--secondarylight button--large button--md"> <?= i::__('Voltar') ?> </a>
+                    <button type="button" @click="recoveryEmailSent = false" class="col-12 button button--secondarylight button--large button--md"> <?= i::__('Voltar') ?> </button>
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@ $this->import('
     <div v-if="recoveryMode" class="login__recovery--action">
         <div class="login__card">
             <div class="login__card__header">
-                <h3> <?= i::__('Redefinir senha de acesso') ?> </h3>
+                <h1> <?= i::__('Redefinir senha de acesso') ?> </h1>
             </div>
 
             <div class="login__card__content">
@@ -135,8 +135,8 @@ $this->import('
                     </div>
 
                     <div class="field col-12 password">
-                        <label for="pwd"> <?= i::__('Confirme sua nova senha'); ?> </label>
-                        <input autocomplete="off" id="pwd" type="password" name="confirmPassword" v-model="confirmPassword" />
+                        <label for="pwd-confirm"> <?= i::__('Confirme sua nova senha'); ?> </label>
+                        <input autocomplete="off" id="pwd-confirm" type="password" name="confirmPassword" v-model="confirmPassword" />
                     </div>
 
                     <div class="col-12">
