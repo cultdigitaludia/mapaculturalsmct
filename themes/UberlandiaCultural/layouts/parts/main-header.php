@@ -97,6 +97,10 @@ $redirect_to = $_SERVER['REQUEST_URI'] ?? '/';
                     <?php $this->applyTemplateHook('mc-header-menu-projects', 'end') ?>
                 </li>
                 <?php $this->applyTemplateHook('mc-header-menu-projects', 'after') ?>
+
+                <li class="accessibility-menu-item">
+                    <?php $this->part('accessibility-menu', $render_data ?? []); ?>
+                </li>
                 
                 <?php $this->applyTemplateHook('mc-header-menu', 'end') ?>
             </template>

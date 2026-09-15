@@ -20,6 +20,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $this->bodyClasses[] = 'base-v2';
         $this->enqueueStyle('app-v2', 'main', 'css/theme-BaseV2.css');
         $this->assetManager->publishFolder('fonts');
+        $this->enqueueScript('app-v2', 'accessibility', 'js/accessibility.js');
         $this->enqueueScript('app-v2', 'chatbot', 'js/chatbot-widget.js');
         $this->enqueueScript('app-v2', 'geolocalizacao', 'js/geolocalizacao.js');
         $this->enqueueScript('app-v2', 'vlibras', 'js/vlibras-widget.js');
@@ -141,18 +142,6 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
     }
 }
 </style>';
-            echo "<script>
-                    document.addEventListener('DOMContentLoaded', (e) => {
-                        let opacity = 0.01;
-                        globalThis.opacityInterval = setInterval(() => {
-                            if(opacity >= 1) {
-                                clearInterval(globalThis.opacityInterval);
-                            }
-                            document.body.style.opacity = opacity;
-                            opacity += 0.02;
-                        },5);
-                    });
-                </script>";
         });
         $app->hook('view.render(<<*>>):before', function() use($app) {
             $this->addDocumentMetas();
@@ -193,8 +182,6 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         } else {
             $description = $app->siteDescription;
         }
-        // for responsive
-        $this->documentMeta[] = array("name" => 'viewport', 'content' => 'width=device-width, initial-scale=1, maximum-scale=1.0');
         // for google
         $this->documentMeta[] = array("name" => 'description', 'content' => $description);
         $this->documentMeta[] = array("name" => 'keywords', 'content' => $site_name);

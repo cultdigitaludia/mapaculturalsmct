@@ -22,7 +22,7 @@ $taxonomies = $app->getRegisteredTaxonomies("MapasCulturais\Entities\Agent");
 <div class="create-account"> 
 
     <div v-if="!created" class="create-account__title">
-        <label><?= $this->text('title', i::__('Novo cadastro')) ?> </label>
+        <h1><?= $this->text('title', i::__('Novo cadastro')) ?> </h1>
         <p><?= sprintf($this->text('description', i::__('Siga os passos para criar o seu cadastro no %s.')), $app->siteName) ?> </p>
     </div>
 
@@ -59,7 +59,7 @@ $taxonomies = $app->getRegisteredTaxonomies("MapasCulturais\Entities\Agent");
                             {{ documentType === 'cpf' ? 'CPF' : 'CNPJ' }}
                             <div class="question">
                                 <VMenu class="popover">
-                                    <button tabindex="-1" class="question" type="button"> <?= i::__('Por que pedimos este dado') ?> <mc-icon name="question"></mc-icon> </button>
+                                    <button class="question" type="button"> <?= i::__('Por que pedimos este dado') ?> <mc-icon name="question"></mc-icon> </button>
                                     <template #popper>
                                         <?= i::__('Para previnir fraudes e por questão de segurança, sendo utilizado para verificar a identidade do <br> usuário e garantir a segurança dos processos de identificação na plataforma, <br> evitando golpes e contas falsas.') ?>
                                     </template>
@@ -73,7 +73,7 @@ $taxonomies = $app->getRegisteredTaxonomies("MapasCulturais\Entities\Agent");
                     <div class="field col-12 password" :class="{'field--error': fieldErrors.password.length}">
                         <label for="pwd"> <?= i::__('Senha'); ?> </label>
                         <input autocomplete="off" id="pwd" type="password" name="password" v-model="password" @input="clearFieldError('password')" :aria-invalid="fieldErrors.password.length > 0" aria-describedby="password-error" />
-                        <div class="seePassword" @click="togglePassword('pwd', $event)"></div>
+                        <button type="button" class="seePassword" aria-label="<?= i::esc_attr_e('Mostrar ou ocultar senha') ?>" @click="togglePassword('pwd', $event)"></button>
                         <p v-if="fieldErrors.password.length" id="password-error" class="create-account__field-error" role="alert">{{fieldErrors.password[0]}}</p>
                     </div>
                     <div class="field col-12 password" :class="{'field--error': fieldErrors.confirm_password.length}">
@@ -81,7 +81,7 @@ $taxonomies = $app->getRegisteredTaxonomies("MapasCulturais\Entities\Agent");
                             <?= i::__('Confirme sua senha'); ?>
                         </label>
                         <input autocomplete="off" id="pwd-check" type="password" name="confirm_password" v-model="confirmPassword" @input="clearFieldError('confirm_password')" :aria-invalid="fieldErrors.confirm_password.length > 0" aria-describedby="confirm-password-error" />
-                        <div class="seePassword" @click="togglePassword('pwd-check', $event)"></div>
+                        <button type="button" class="seePassword" aria-label="<?= i::esc_attr_e('Mostrar ou ocultar confirmação de senha') ?>" @click="togglePassword('pwd-check', $event)"></button>
                         <p v-if="fieldErrors.confirm_password.length" id="confirm-password-error" class="create-account__field-error" role="alert">{{fieldErrors.confirm_password[0]}}</p>
                         <p v-if="passwordRulesLoaded && !allPasswordCriteriaMet" class="create-account__password-requirements" aria-live="polite">
                             <strong><?= i::__('A senha deve conter no mínimo:'); ?></strong>

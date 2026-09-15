@@ -36,7 +36,7 @@ $this->import('
     </div>
     <div class="home-header__background">
         <div class="img">
-            <img :src="background" />
+            <img :src="background" alt="" aria-hidden="true" />
         </div>
     </div>
     <!-- <home-search></home-search> -->

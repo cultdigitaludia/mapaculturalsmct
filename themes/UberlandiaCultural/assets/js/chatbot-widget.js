@@ -31,9 +31,9 @@
     #mc-chat-dismiss {
       align-items: center; background: #003F7D; border: 2px solid #fff;
       border-radius: 50%; color: #fff; cursor: pointer; display: flex;
-      font-size: 18px; height: 26px; justify-content: center;
+      font-size: 18px; height: 44px; justify-content: center;
       line-height: 1; padding: 0; position: absolute; right: 6px; top: 10px;
-      width: 26px; z-index: 2;
+      width: 44px; z-index: 2;
     }
     #mc-chat-dismiss:hover, #mc-chat-dismiss:focus-visible { background: #002C42; }
     #mc-chat-panel {
@@ -47,6 +47,7 @@
       transition: opacity 0.25s ease, transform 0.25s ease;
       font-family: 'Segoe UI', sans-serif;
     }
+    #mc-chat-panel[hidden] { display: none !important; }
     #mc-chat-panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
     @media (max-width: 800px) {
       #mc-chat-root.footer-visible #mc-chat-launcher,
@@ -59,7 +60,7 @@
     @media (max-width: 480px) {
       #mc-chat-panel { width: calc(100vw - 20px); right: 10px; bottom: 90px; height: min(70vh, calc(100vh - 110px)); z-index: 99999; }
       #mc-chat-launcher { bottom: 16px; right: 16px; width: clamp(120px, 38vw, 175px); height: clamp(120px, 38vw, 175px); }
-      #mc-chat-dismiss { font-size: 16px; height: 22px; right: 2px; top: 6px; width: 22px; }
+      #mc-chat-dismiss { font-size: 16px; height: 44px; right: -4px; top: 0; width: 44px; }
     }
     .mc-header {
       padding: 14px 16px; background: #161920;
@@ -76,7 +77,7 @@
     .mc-header-info { flex: 1; }
     .mc-header-info strong { display: block; font-size: 14px; color: #eef0f8; }
     .mc-header-info span { font-size: 11px; color: #7a7f9a; }
-    #mc-close-btn { background: transparent; border: none; color: #FFD700; cursor: pointer; font-size: 28px; line-height: 1; padding: 4px; }
+    #mc-close-btn { align-items: center; background: transparent; border: none; color: #FFD700; cursor: pointer; display: flex; font-size: 28px; height: 44px; justify-content: center; line-height: 1; padding: 4px; width: 44px; }
     #mc-close-btn:hover, #mc-close-btn:focus-visible { color: #FFF500; }
     .mc-status { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 5px #4ade80; animation: mc-pulse 2s infinite; flex-shrink: 0; }
     @keyframes mc-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
@@ -111,31 +112,36 @@
     .mc-send { width: 36px; height: 36px; border-radius: 50%; background: #0055A5; border: none; color: #fff; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.15s; flex-shrink: 0; }
     .mc-send:hover { background: #003F7D; transform: scale(1.05); }
     .mc-send:disabled { background: #2a2a3a; cursor: not-allowed; }
-    .mc-footer { text-align: center; font-size: 10px; color: #4a4f66; padding: 4px 0 6px; flex-shrink: 0; }
+    .mc-footer { text-align: center; font-size: 10px; color: #9da3bd; padding: 4px 0 6px; flex-shrink: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      #mc-chat-launcher, #mc-chat-panel, #mc-chat-btn, .mc-ev-card, .mc-input, .mc-send, .mc-qr-btn { transition: none !important; }
+      .mc-status, .mc-msg, .mc-dot { animation: none !important; }
+      .mc-messages { scroll-behavior: auto; }
+    }
   `;
 
   function buildHTML() {
     return `
       <div id="mc-chat-launcher">
         <button id="mc-chat-btn" aria-label="Abrir assistente cultural" title="Assistente Cultural UDI">
-          <img class="icon-chat" src="${AVATAR_URL}" style="width:110%;height:110%;object-fit:contain;border-radius:0;" alt="Assistente" />
+          <img class="icon-chat" src="${AVATAR_URL}" style="width:110%;height:110%;object-fit:contain;border-radius:0;" alt="" />
         </button>
         <button id="mc-chat-dismiss" aria-label="Ocultar assistente cultural" title="Ocultar assistente">&times;</button>
       </div>
-      <div id="mc-chat-panel" role="dialog" aria-label="Assistente Cultural UDI">
+      <div id="mc-chat-panel" role="dialog" aria-modal="true" aria-labelledby="mc-chat-title" hidden>
         <div class="mc-header">
           <div class="mc-avatar" id="mc-avatar-hdr">🎭</div>
           <div class="mc-header-info">
-            <strong>${WIDGET_TITLE}</strong>
+            <strong id="mc-chat-title">${WIDGET_TITLE}</strong>
             <span>${WIDGET_SUBTITLE}</span>
           </div>
           <button id="mc-close-btn" aria-label="Fechar chat" title="Fechar chat">&times;</button>
         </div>
-        <div class="mc-messages" id="mc-messages"></div>
+        <div class="mc-messages" id="mc-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
         <div class="mc-qr" id="mc-qr"></div>
         <div class="mc-input-area">
-          <input class="mc-input" id="mc-input" type="text" placeholder="Digite sua dúvida..." />
-          <button class="mc-send" id="mc-send" onclick="mcSend()">➤</button>
+          <input class="mc-input" id="mc-input" type="text" aria-label="Mensagem para o assistente cultural" placeholder="Digite sua dúvida..." />
+          <button class="mc-send" id="mc-send" aria-label="Enviar mensagem">➤</button>
         </div>
         <div class="mc-footer">Mapa Cultural Uberlândia · SMCT</div>
       </div>
@@ -143,6 +149,25 @@
   }
 
   let mcOpen = false, mcTyping = false, mcFooterObserver, mcGreetingTimer;
+  let mcLastFocus = null;
+
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+  }
+
+  function safeUrl(value) {
+    try {
+      const url = new URL(value, MAPA_BASE);
+      return ['http:', 'https:'].includes(url.protocol) ? url.href : '#';
+    } catch {
+      return '#';
+    }
+  }
 
   function wasDismissed() {
     try { return sessionStorage.getItem(DISMISSED_KEY) === '1'; }
@@ -176,7 +201,7 @@
     const msgs = document.getElementById('mc-messages');
     const div = document.createElement('div');
     div.className = 'mc-msg bot';
-    const ch = (cards||[]).map(c=>`<div class="mc-ev-card" onclick="window.open('${c.url}','_blank')"><div class="mc-ev-title">${c.title}</div><div class="mc-ev-meta">${c.meta}</div>${c.desc?`<div class="mc-ev-desc">${c.desc}</div>`:''}</div>`).join('');
+    const ch = (cards||[]).map(c=>`<a class="mc-ev-card" href="${escapeHtml(safeUrl(c.url))}" target="_blank" rel="noopener noreferrer"><div class="mc-ev-title">${escapeHtml(c.title)}</div><div class="mc-ev-meta">${escapeHtml(c.meta)}</div>${c.desc?`<div class="mc-ev-desc">${escapeHtml(c.desc)}</div>`:''}</a>`).join('');
     div.innerHTML = `<div class="mc-msg-av">${avHtml()}</div><div class="mc-bubble">${html}${ch}</div>`;
     msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
   }
@@ -193,7 +218,7 @@
     const msgs = document.getElementById('mc-messages');
     const div = document.createElement('div');
     div.className = 'mc-msg bot'; div.id = 'mc-typing-row';
-    div.innerHTML = `<div class="mc-msg-av">${avHtml()}</div><div class="mc-typing"><div class="mc-dot"></div><div class="mc-dot"></div><div class="mc-dot"></div></div>`;
+    div.innerHTML = `<div class="mc-msg-av">${avHtml()}</div><div class="mc-typing" role="status" aria-label="O assistente está digitando"><div class="mc-dot"></div><div class="mc-dot"></div><div class="mc-dot"></div></div>`;
     msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
   }
 
@@ -332,22 +357,62 @@
     mcTyping = false; document.getElementById('mc-send').disabled = false; input.focus();
   };
 
-  function mcToggle() {
+  function mcToggle(nextState) {
     const panel = document.getElementById('mc-chat-panel');
     const launcher = document.getElementById('mc-chat-launcher');
-    mcOpen = !mcOpen;
-    panel.classList.toggle('open', mcOpen); launcher.classList.toggle('open', mcOpen);
-    if (mcOpen) setTimeout(() => document.getElementById('mc-input')?.focus(), 300);
+    const openButton = document.getElementById('mc-chat-btn');
+    mcOpen = typeof nextState === 'boolean' ? nextState : !mcOpen;
+    if (mcOpen) {
+      mcLastFocus = document.activeElement;
+      panel.hidden = false;
+      panel.inert = false;
+      panel.classList.add('open');
+      launcher.classList.add('open');
+      openButton.setAttribute('aria-expanded', 'true');
+      setTimeout(() => document.getElementById('mc-input')?.focus(), 50);
+    } else {
+      panel.classList.remove('open');
+      panel.inert = true;
+      launcher.classList.remove('open');
+      openButton.setAttribute('aria-expanded', 'false');
+      window.setTimeout(() => { if (!mcOpen) panel.hidden = true; }, 260);
+      mcLastFocus?.focus();
+    }
   }
 
   function mcInit() {
     if (wasDismissed()) return;
     const style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
     const wrapper = document.createElement('div'); wrapper.id = 'mc-chat-root'; wrapper.innerHTML = buildHTML(); document.body.appendChild(wrapper);
+    const panel = document.getElementById('mc-chat-panel');
+    panel.inert = true;
+    document.getElementById('mc-chat-btn').setAttribute('aria-expanded', 'false');
+    document.getElementById('mc-chat-btn').setAttribute('aria-controls', 'mc-chat-panel');
     document.getElementById('mc-chat-btn').addEventListener('click', mcToggle);
     document.getElementById('mc-chat-dismiss').addEventListener('click', mcDismiss);
     document.getElementById('mc-close-btn').addEventListener('click', mcToggle);
+    document.getElementById('mc-send').addEventListener('click', mcSend);
     document.getElementById('mc-input').addEventListener('keydown', e => { if (e.key === 'Enter') mcSend(); });
+    panel.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        mcToggle(false);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const focusable = [...panel.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+        .filter(element => !element.hidden && element.getClientRects().length);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
     if (AVATAR_URL) { document.getElementById('mc-avatar-hdr').innerHTML = `<img src="${AVATAR_URL}" alt="">`; }
     mcObserveFooter();
     mcGreetingTimer = setTimeout(() => {

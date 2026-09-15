@@ -34,7 +34,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img src="<?= $this->asset('img/boton_1.png', false) ?>" />
+                        <img src="<?= $this->asset('img/boton_1.png', false) ?>" alt="" aria-hidden="true" />
                     </div>
                 </div>
                 <div class="card__right">
@@ -57,7 +57,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img src="<?= $this->asset('img/boton_2.png', false) ?>" />
+                        <img src="<?= $this->asset('img/boton_2.png', false) ?>" alt="" aria-hidden="true" />
                     </div>
                 </div>
                 <div class="card__right">
@@ -80,7 +80,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img src="<?= $this->asset('img/boton_3.png', false) ?>" />
+                        <img src="<?= $this->asset('img/boton_3.png', false) ?>" alt="" aria-hidden="true" />
                     </div>
                 </div>
                 <div class="card__right">
@@ -103,7 +103,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img src="<?= $this->asset('img/boton_4.png', false) ?>" />
+                        <img src="<?= $this->asset('img/boton_4.png', false) ?>" alt="" aria-hidden="true" />
                     </div>
                 </div>
                 <div class="card__right">
@@ -126,7 +126,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img src="<?= $this->asset('img/boton_5.png', false) ?>" />
+                        <img src="<?= $this->asset('img/boton_5.png', false) ?>" alt="" aria-hidden="true" />
                     </div>
                 </div>
                 <div class="card__right">
@@ -149,7 +149,7 @@ $this->import('
                         </div>
                     </div>
                     <div class="card__left--img">
-                        <img src="<?= $this->asset('img/boton_6.png', false) ?>" />
+                        <img src="<?= $this->asset('img/boton_6.png', false) ?>" alt="" aria-hidden="true" />
                     </div>
                 </div>
                 <div class="card__right">
