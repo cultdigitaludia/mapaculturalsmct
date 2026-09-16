@@ -86,13 +86,13 @@ $config = $app->config['social-media'];
                     <a href="<?= $app->createUrl('faq') ?>"><?php i::_e('Dúvidas Frequentes'); ?></a>
                 </li>
                 <li>
-                    <a href="<?= $app->createUrl('page', 'site', ['termos-de-uso']) ?>"><?php i::_e('Termos e Condições de Uso'); ?></a>
+                    <a href="<?= $app->createUrl('lgpd', 'view', ['termsOfUsage']) ?>"><?php i::_e('Termos e Condições de Uso'); ?></a>
                 </li>
                 <li>
-                    <a href="<?= $app->createUrl('page', 'site', ['politica-de-privacidade']) ?>"><?php i::_e('Política de Privacidade'); ?></a>
+                    <a href="<?= $app->createUrl('lgpd', 'view', ['privacyPolicy']) ?>"><?php i::_e('Política de Privacidade'); ?></a>
                 </li>
                 <li>
-                    <a href="<?= $app->createUrl('page', 'site', ['autorizacao-de-uso-de-imagem']) ?>"><?php i::_e('Autorização de Uso de Imagem'); ?></a>
+                    <a href="<?= $app->createUrl('lgpd', 'view', ['imageUsageAuthorization']) ?>"><?php i::_e('Autorização de Uso de Imagem'); ?></a>
                 </li>
             </ul>
 

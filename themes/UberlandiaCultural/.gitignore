@@ -4,3 +4,4 @@ assets/js/**.js
 !assets/js/panel-ordering.js
 !assets/js/space-card-pills.js
 !assets/js/accessibility.js
+!assets/js/terms-navigation.js
