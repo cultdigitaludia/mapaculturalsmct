@@ -22320,6 +22320,9 @@ ol.mc-stepper-vertical > li.active::before {
   list-style-position: inside;
   padding-left: 0;
 }
+.mapas-terms__content .term .legal-document__sections > li > ol {
+  padding-left: 0;
+}
 .mapas-terms__content .term li {
   margin-bottom: 0.625rem;
   padding-left: 0.3125rem;
