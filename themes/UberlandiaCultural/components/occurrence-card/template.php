@@ -40,20 +40,20 @@ $this->import('
         <div v-if="!hideSpace" class="entity-card__content--occurrence-space">
             <div class="link"><mc-icon class="link space__color" name="pin"></mc-icon></div>
             <div class="space-adress">
-                <mc-link :entity="space">
+                <mc-link :entity="space" class="space-adress__link">
                     <span class="space-adress__name space__color">{{space.name}}</span>
+                    <span class="space-adress__adress" v-if="space.endereco">{{space.endereco.replace(/\s*-\s*CEP:.*$/i, '').replace(/\s*-\s*Uberlândia\/MG$/i, '')}}</span>
                 </mc-link>
-                <span class="space-adress__adress" v-if="space.endereco">- {{space.endereco}}</span>
             </div>
         </div>
         <div class="entity-card__content--occurrence-info">
             <div class="ageRating">
-                <span class="ageRating__class uppercase"><?= i::__('Classificação') ?><strong>: </strong></span>
-                <span v-if="event.classificacaoEtaria" class="ageRating__value uppercase">{{event.classificacaoEtaria}}</span>
+                <span class="ageRating__class"><?= i::__('Classificação') ?>: </span>
+                <span v-if="event.classificacaoEtaria" class="ageRating__value">{{event.classificacaoEtaria}}</span>
                 <span v-else class="ageRating__value"><?php i::_e('Não informado') ?></span>
             </div>
             <div v-if="occurrence.price" class="price ageRating">
-                <span class="ageRating__class"><?= i::__('Entrada') ?><strong>: </strong></span>
+                <span class="ageRating__class"><?= i::__('Entrada') ?>: </span>
                 <span class="ageRating__value">{{occurrence.price}}</span>
             </div>
         </div>
@@ -66,7 +66,7 @@ $this->import('
             </div>
             <div v-if="linguagens" class="entity-card__content--terms-linguagem">
                 <label class="linguagem__title">
-                    <?php i::_e('linguagens:') ?> ({{event.terms.linguagem.length}}):
+                    <?php i::_e('Linguagens:') ?> ({{event.terms.linguagem.length}}):
                 </label>
                 <p :class="['terms', 'event__color']">{{linguagens}}</p>
             </div>

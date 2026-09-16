@@ -1,9 +1,7 @@
 @use '../0.settings/mixins' as *;
 
 .user-accepted-terms {
-
     &__privacy {
-
         &--accept {
             max-height: 100%;
             background-color: var(--mc-high-500);
@@ -11,53 +9,153 @@
             padding: size(16) size(16) size(24);
 
             &-title {
+                display: block;
                 font-weight: 700;
                 font-size: size(18);
-                margin-bottom: size(24);
+                line-height: 1.3;
+                margin: 0;
+                padding-bottom: size(16);
 
                 &-box {
-                    margin-top: size(24);
-                    @media (max-width: size(500)){
-                        .boxterm__list-subterm{
-                            label{
-                                font-weight: 600;
-                                font-size: size(14);
-                            }
-                        }
-                    }
+                    margin-top: 0;
+                    padding-top: 0;
+
                     .boxterm {
-                        padding-bottom: size(24);
+                        display: grid;
+                        gap: size(12);
+                        padding: 0;
 
                         &__list {
-                            margin-top: size(12);
+                            margin: 0;
+
+                            > div {
+                                background-color: var(--mc-gray-100);
+                                border: size(1) solid var(--mc-gray-300);
+                                border-radius: var(--mc-border-radius-xs);
+                                padding: size(16);
+                            }
+
+                            &-entry {
+                                align-items: center;
+                                display: grid;
+                                gap: size(16);
+                                grid-template-columns: minmax(0, 1fr) auto;
+                            }
 
                             &-subterm {
-                                display: flex;
-                                flex-direction: column;
-                                gap: size(4);
+                                align-items: start;
+                                display: grid;
+                                gap: size(4) size(12);
+                                grid-template-columns: size(32) minmax(0, 1fr);
+                                margin: 0;
+
+                                &::before {
+                                    align-items: center;
+                                    background-color: var(--mc-success-500);
+                                    border-radius: var(--mc-border-radius-pill);
+                                    color: var(--mc-high-500);
+                                    content: '\2713';
+                                    display: flex;
+                                    font-size: size(17);
+                                    font-weight: 700;
+                                    grid-row: 1 / 3;
+                                    height: size(32);
+                                    justify-content: center;
+                                    line-height: 1;
+                                    width: size(32);
+                                }
 
                                 &-title {
+                                    display: block;
                                     font-weight: 700;
                                     font-size: size(16);
                                     font-style: normal;
+                                    line-height: 1.35;
+                                    margin: 0;
                                 }
 
                                 &-content {
+                                    color: var(--mc-gray-700);
+                                    display: flex;
+                                    flex-wrap: wrap;
                                     font-family: $font-body;
                                     font-style: normal;
-                                    font-weight: 600;
+                                    font-weight: 400;
                                     font-size: size(14);
+                                    gap: size(4);
+                                    line-height: 1.4;
+                                    margin: 0;
+
+                                    > label,
+                                    > span {
+                                        color: inherit;
+                                        font: inherit;
+                                        margin: 0;
+                                    }
+
+                                    > label:first-child::first-letter,
+                                    > span:first-child::first-letter {
+                                        text-transform: uppercase;
+                                    }
+                                }
+                            }
+
+                            &-action {
+                                color: var(--mc-helper-500);
+                                font-size: size(14);
+                                font-weight: 700;
+                                line-height: 1.4;
+                                text-decoration: none;
+                                white-space: nowrap;
+
+                                &:hover,
+                                &:focus-visible {
+                                    color: var(--mc-helper-700);
+                                    text-decoration: underline;
                                 }
                             }
                         }
-
-                        @media (max-width: size(500)) {
-                            .boxterm {
-                                max-width: fit-content;
-                                background-color: var(--mc-danger-500);
-                            }
-                        }
                     }
+                }
+            }
+        }
+    }
+
+    @media (max-width: size(500)) {
+        &__privacy--accept-title-box {
+            .boxterm__list {
+                > div {
+                    padding: size(14);
+                }
+
+                &-entry {
+                    align-items: start;
+                    grid-template-columns: 1fr;
+                    gap: size(12);
+                }
+
+                &-subterm {
+                    gap: size(8) size(10);
+                    grid-template-columns: size(28) minmax(0, 1fr);
+
+                    &::before {
+                        font-size: size(15);
+                        height: size(28);
+                        width: size(28);
+                    }
+
+                    &-title {
+                        font-size: size(15);
+                    }
+
+                    &-content {
+                        flex-direction: column;
+                        gap: 0;
+                    }
+                }
+
+                &-action {
+                    margin-left: size(38);
                 }
             }
         }

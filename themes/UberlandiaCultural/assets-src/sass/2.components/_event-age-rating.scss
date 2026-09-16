@@ -3,7 +3,7 @@
 .age-rating {
     display: flex;
     flex-direction: column;
-    gap: size(12);
+    gap: size(8);
 
     &__title {
         font-weight: var(--mc-font-bold);

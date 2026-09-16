@@ -10,4 +10,111 @@
             }
         }
     }
+
+    &.action-single {
+        @include entity-single-base;
+
+        .long-description {
+            gap: size(8);
+
+            .entity-data__label {
+                font-size: var(--mc-font-size-sm);
+                font-weight: var(--mc-font-bold);
+            }
+        }
+
+        .entity-occurrence-list .occurrence:last-child {
+            margin-bottom: 0;
+        }
+
+        // caixas de classificação, local e descrição com o mesmo visual
+        .age-rating__content,
+        .entity-occurrence-list__empty,
+        .long-description .entity-data__data,
+        .entity-occurrence-list .occurrence__card {
+            background-color: var(--mc-gray-100);
+            border: 0;
+            border-radius: var(--mc-border-radius-xs);
+            padding: size(12) size(16);
+        }
+
+        .long-description .entity-data__value {
+            font-weight: var(--mc-font-regular);
+        }
+
+        .entity-occurrence-list .occurrence__card {
+            @media (max-width: size(500)) {
+                padding-bottom: size(44);
+
+                .header__link {
+                    bottom: size(12);
+                }
+            }
+
+            .header__title .title {
+                font-size: size(16);
+                line-height: size(22);
+
+                @media (max-width: size(500)) {
+                    font-size: size(14);
+                    line-height: size(19);
+                }
+            }
+
+            .content {
+                gap: size(6);
+                margin-top: size(8);
+            }
+        }
+
+        .event-info {
+            gap: size(16);
+
+            &:not(:has(*)) {
+                display: none;
+            }
+
+            &__accessibility {
+                gap: 0;
+                padding-bottom: 0;
+
+                h4 {
+                    margin-bottom: size(8);
+                }
+            }
+
+            // itens em uma caixa contínua, como as demais seções
+            &__item {
+                background-color: var(--mc-gray-100);
+                color: var(--mc-low-700);
+                display: block;
+                line-height: size(22);
+                margin: 0;
+                padding: size(4) size(16);
+
+                // alguns rótulos do core vêm em minúsculas (ex.: "telefone:")
+                &::first-letter {
+                    text-transform: uppercase;
+                }
+
+                > span:first-child {
+                    font-weight: 600;
+                    margin-right: size(4);
+                    text-transform: none;
+                }
+            }
+
+            h4 + .event-info__item {
+                border-top-left-radius: var(--mc-border-radius-xs);
+                border-top-right-radius: var(--mc-border-radius-xs);
+                padding-top: size(12);
+            }
+
+            &__item:last-child {
+                border-bottom-left-radius: var(--mc-border-radius-xs);
+                border-bottom-right-radius: var(--mc-border-radius-xs);
+                padding-bottom: size(12);
+            }
+        }
+    }
 }

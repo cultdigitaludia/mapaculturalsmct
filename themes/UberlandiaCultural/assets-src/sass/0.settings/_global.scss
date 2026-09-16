@@ -107,3 +107,17 @@ small {
     }
 
 }
+
+// Esconde o HTML ainda não processado pelo Vue (tags mc-* e textos soltos)
+// até o app ser montado, quando o Vue adiciona o atributo data-v-app.
+// Se o JavaScript falhar, o conteúdo é exibido após 5 segundos.
+#main-app:not([data-v-app]) {
+    animation: main-app-reveal 0s linear 5s forwards;
+    visibility: hidden;
+}
+
+@keyframes main-app-reveal {
+    to {
+        visibility: visible;
+    }
+}
