@@ -239,7 +239,7 @@
 @import 'pages/registrations';
 @import 'pages/seals';
 @import 'pages/search';
-// @import 'pages/spaces';
+@import 'pages/spaces';
 @import 'pages/support';
 @import 'pages/system-roles-modal';
 @import 'pages/system-roles';
@@ -372,6 +372,129 @@
         cursor: pointer;
         right: size(2);
         width: size(46);
+    }
+}
+
+.legal-document__sections {
+    counter-reset: legal-section;
+    list-style: none;
+
+    > li {
+        counter-increment: legal-section;
+
+        &::before {
+            color: var(--mc-gray-700);
+            content: counter(legal-section) '. ';
+            font-weight: 700;
+        }
+
+        > ol {
+            counter-reset: legal-subsection;
+            list-style: none;
+
+            > li {
+                counter-increment: legal-subsection;
+
+                &::before {
+                    color: var(--mc-gray-700);
+                    content: counter(legal-section) '.' counter(legal-subsection) '. ';
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+
+.create-account__legal-document {
+    background-color: var(--mc-white);
+    border: size(1) solid var(--mc-gray-300);
+    border-radius: size(8);
+    color: var(--mc-gray-700);
+    font-size: size(15);
+    line-height: 1.55;
+    max-height: size(430);
+    overflow-y: auto;
+    padding: size(20) size(24);
+    scrollbar-gutter: stable;
+
+    &:focus-visible {
+        border-color: var(--mc-primary-500);
+        outline: size(2) solid var(--mc-primary-300);
+        outline-offset: size(2);
+    }
+
+    p,
+    ul,
+    ol {
+        margin-block: 0 size(14);
+    }
+
+    ol,
+    ul {
+        padding-left: size(24);
+    }
+
+    li {
+        margin-bottom: size(8);
+        padding-left: size(4);
+    }
+
+    li::marker {
+        color: var(--mc-gray-500);
+        font-weight: 700;
+    }
+
+    h3,
+    > ol > li > strong {
+        color: var(--mc-gray-900);
+        font-size: size(16);
+        line-height: 1.35;
+    }
+
+    h3 {
+        margin: size(24) 0 size(10);
+    }
+
+    a {
+        overflow-wrap: anywhere;
+    }
+
+    .legal-document__notice {
+        background-color: #fff8df;
+        border-left: size(4) solid #e8b400;
+        border-radius: size(4);
+        display: flex;
+        flex-direction: column;
+        gap: size(2);
+        margin-bottom: size(8);
+        padding: size(12) size(14);
+
+        strong {
+            color: var(--mc-gray-900);
+            font-size: size(14);
+        }
+
+        span {
+            font-size: size(13);
+            line-height: 1.4;
+        }
+    }
+
+    .legal-document__updated {
+        color: var(--mc-gray-600);
+        font-size: size(13);
+        margin-bottom: size(20);
+    }
+
+    @media (max-width: size(600)) {
+        font-size: size(14);
+        max-height: size(400);
+        padding: size(16);
+
+        ol,
+        ul {
+            padding-left: size(20);
+        }
     }
 }
 

@@ -165,6 +165,14 @@
                         padding: 0 size(7);
                     }
 
+                    .button.space__color {
+                        color: #3f6f06;
+                    }
+
+                    .button.agent__color {
+                        color: #a83e0c;
+                    }
+
                     @media (max-width:size(800)) {
                         align-items: flex-start;
                         padding: size(24) size(14) size(13);

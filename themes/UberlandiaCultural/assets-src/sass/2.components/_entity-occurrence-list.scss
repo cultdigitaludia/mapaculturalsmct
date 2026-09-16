@@ -5,6 +5,20 @@
     flex-direction: column;
     gap: size(21);
 
+    &:has(> .entity-occurrence-list__title) {
+        gap: size(8);
+    }
+
+    &__title {
+        font-weight: var(--mc-font-bold);
+    }
+
+    &__empty {
+        background-color: var(--mc-gray-100);
+        border-radius: var(--mc-border-radius-xs);
+        padding: size(19) size(13);
+    }
+
     &__editable {
         align-items: flex-start;
         display: flex;

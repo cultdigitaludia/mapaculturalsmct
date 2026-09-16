@@ -27,4 +27,39 @@
 		}
 	}
 
+	// rótulos de classificação e entrada sem caixa alta
+	.entity-card__content--occurrence-info .ageRating__class {
+		text-transform: none;
+	}
+
+	// nome do espaço e endereço em linhas separadas
+	.entity-card__content--occurrence-space {
+		align-items: center;
+
+		.space-adress {
+			flex: 1 1 0%;
+			min-width: 0;
+
+			&__link {
+				display: flex;
+				flex-direction: column;
+				gap: size(2);
+				min-width: 0;
+			}
+
+			&__name {
+				overflow-wrap: anywhere;
+			}
+
+			&__adress {
+				color: var(--mc-low-700);
+				font-size: size(14);
+				font-weight: 400;
+				line-height: size(19);
+				margin-left: 0;
+				overflow-wrap: anywhere;
+			}
+		}
+	}
+
 }

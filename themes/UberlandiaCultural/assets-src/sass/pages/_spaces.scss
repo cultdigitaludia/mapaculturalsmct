@@ -2,9 +2,132 @@
 
 .controller-space {
     &.action-single {
+        @include entity-single-base;
+
         .single-space{
             &__longdescription {
                 white-space: pre-line;
+            }
+        }
+
+        // tipo e espaço integrante no cabeçalho
+        .entity-header .metadata dl:not(.metadata__id) {
+            dt {
+                color: var(--mc-gray-700);
+                font-size: size(14);
+                text-transform: none;
+            }
+
+            dd {
+                font-size: size(14);
+                font-weight: 600;
+                text-transform: none;
+            }
+        }
+
+        // informações do espaço com o mesmo visual das demais seções
+        .space-info {
+            gap: size(16);
+
+            &__hour--content {
+                background-color: var(--mc-gray-100);
+                border-radius: var(--mc-border-radius-xs);
+                color: var(--mc-low-700);
+                font-size: size(16);
+                font-weight: var(--mc-font-regular);
+                height: auto;
+                line-height: size(24);
+                padding: size(12) size(16);
+            }
+
+            .international-address-view,
+            .brasil-address-view {
+                row-gap: size(8);
+
+                &__title label {
+                    font-size: size(18);
+                    font-weight: 700;
+                    line-height: size(25);
+                }
+
+                &__address {
+                    background-color: var(--mc-gray-100);
+                    border-radius: var(--mc-border-radius-xs);
+                    line-height: size(24);
+                    margin: 0 0 size(8);
+                    padding: size(12) size(16);
+                }
+
+                .mc-map {
+                    border-radius: var(--mc-border-radius-xs);
+                    overflow: hidden;
+                }
+            }
+
+            &__infos {
+                gap: 0;
+
+                .space-info--label {
+                    margin-bottom: size(8);
+                }
+
+                &--capacidade,
+                &--telefone,
+                &--email {
+                    background-color: var(--mc-gray-100);
+                    font-weight: 600;
+                    line-height: size(22);
+                    padding: size(4) size(16);
+
+                    span {
+                        font-weight: var(--mc-font-regular);
+                    }
+                }
+
+                .space-info--label + div {
+                    border-top-left-radius: var(--mc-border-radius-xs);
+                    border-top-right-radius: var(--mc-border-radius-xs);
+                    padding-top: size(12);
+                }
+
+                > div:last-child {
+                    border-bottom-left-radius: var(--mc-border-radius-xs);
+                    border-bottom-right-radius: var(--mc-border-radius-xs);
+                    padding-bottom: size(12);
+                }
+            }
+        }
+
+        // descrição detalhada
+        .tabs__info main > .grid-12 > .col-12 {
+            > h2 {
+                font-size: var(--mc-font-size-sm);
+                line-height: size(25);
+                margin-bottom: size(8);
+            }
+
+            > .description {
+                background-color: var(--mc-gray-100);
+                border-radius: var(--mc-border-radius-xs);
+                line-height: size(24);
+                margin: 0;
+                padding: size(12) size(16);
+            }
+        }
+
+        // links
+        .entity-links__links {
+            margin: 0;
+
+            &--item {
+                padding: size(4) 0;
+
+                .link {
+                    color: var(--mc-primary-500);
+                    font-size: size(16);
+                    font-weight: 600;
+                    line-height: size(22);
+                }
             }
         }
     }

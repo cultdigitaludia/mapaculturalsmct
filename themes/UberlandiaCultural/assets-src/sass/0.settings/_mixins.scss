@@ -36,3 +36,169 @@
     white-space: nowrap;
     width: 1px;
 }
+
+// Base visual das páginas de detalhe de entidade (cabeçalho, aba e "Publicado por").
+// Usado em pages/_events.scss e pages/_spaces.scss.
+@mixin entity-single-base {
+    .tabs__info main > .grid-12 {
+        row-gap: size(16);
+    }
+
+    // cabeçalho: título em destaque, descrição e ID discretos
+    .entity-header {
+        .entity-header__single--content {
+            align-items: center;
+            gap: size(24);
+            padding-bottom: size(16);
+
+            .leftSide {
+                margin: 0;
+
+                .avatar {
+                    height: size(112);
+                    margin: 0;
+                    max-width: none;
+                    width: size(112);
+
+                    .mc-avatar {
+                        height: 100%;
+                        min-height: 0;
+                        min-width: 0;
+                        width: 100%;
+                    }
+
+                    .iconify {
+                        font-size: size(48);
+                        height: size(48);
+                        width: size(48);
+                    }
+                }
+            }
+
+            .rightSide {
+                gap: size(8);
+                padding-top: 0;
+
+                .data,
+                .metadata {
+                    display: contents;
+                }
+            }
+
+            .entity-header__title {
+                font-size: size(32);
+                line-height: size(40);
+                margin: 0;
+                order: 1;
+            }
+
+            .metadata dl {
+                margin: 0;
+                order: 2;
+
+                &:not(:has(*)) {
+                    display: none;
+                }
+
+                &.metadata__id {
+                    order: 4;
+                }
+
+                .entity-data {
+                    align-items: baseline;
+                    flex-direction: row;
+                    gap: size(4);
+                }
+
+                .entity-data__data {
+                    background: none;
+                    min-height: 0;
+                    padding: 0;
+                }
+
+                .entity-data__label,
+                .entity-data__value {
+                    color: var(--mc-gray-700);
+                    font-size: size(13);
+                    font-weight: var(--mc-font-regular);
+                }
+
+                // subtítulo
+                &:not(.metadata__id) {
+                    .entity-data__label {
+                        display: none;
+                    }
+
+                    .entity-data__value {
+                        color: var(--mc-low-700);
+                        font-size: size(18);
+                        font-weight: 600;
+                        line-height: size(24);
+                    }
+                }
+            }
+
+            .description {
+                order: 3;
+                padding-bottom: 0;
+                white-space: normal;
+
+                p {
+                    color: var(--mc-gray-700);
+                    font-size: size(16);
+                    line-height: size(24);
+                    white-space: pre-line;
+                }
+            }
+
+            .site {
+                order: 5;
+            }
+
+            @include mobile {
+                flex-direction: column;
+                gap: size(16);
+                padding-bottom: size(16);
+                text-align: center;
+
+                .leftSide .avatar {
+                    height: size(80);
+                    width: size(80);
+
+                    .iconify {
+                        font-size: size(36);
+                        height: size(36);
+                        width: size(36);
+                    }
+                }
+
+                .rightSide {
+                    align-items: center;
+                }
+
+                .entity-header__title {
+                    font-size: size(24);
+                    line-height: size(32);
+                }
+
+                .metadata dl {
+                    justify-content: center;
+
+                    .entity-data {
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .tabs .tabs-component__header {
+        border-bottom-color: var(--mc-gray-300);
+    }
+
+    .entity-owner__owner--name {
+        font-size: size(14);
+        font-weight: 600;
+        line-height: size(19);
+    }
+}
