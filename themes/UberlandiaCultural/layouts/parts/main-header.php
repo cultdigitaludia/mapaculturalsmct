@@ -27,7 +27,10 @@ $redirect_to = $_SERVER['REQUEST_URI'] ?? '/';
 
             <!-- Logo -->
             <template #logo>
-                <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
+                <theme-logo
+                    href="<?= $app->createUrl('site', 'index') ?>"
+                    aria-label="<?= i::__('Página inicial do Mapa Cultural e Turístico de Uberlândia') ?>">
+                </theme-logo>
             </template>
             <!-- Menu principal -->
             <template #default>

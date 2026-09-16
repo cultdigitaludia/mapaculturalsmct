@@ -4,6 +4,17 @@
     overflow: hidden;
 }
 
+// trava a rolagem da página enquanto o menu da conta ou o menu principal estão abertos no celular
+// (os dois só existem no DOM quando abertos)
+html:has(.mc-header-menu-user__mobile--list),
+html:has(.mc-header-menu.mobile) {
+    overflow: hidden;
+
+    body {
+        overflow: hidden;
+    }
+}
+
 .mc-header-menu-user {
 
     .popover {
@@ -95,21 +106,36 @@
         }
 
         &--list {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
             height: 100vh;
+            height: 100dvh;
             left: 0;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
 
-            .panel-nav {
+            // lista principal ocupa o espaço abaixo do cabeçalho e é a única que rola
+            > .panel-nav {
                 background-color: white;
-                overflow-y: scroll;
-                display: block;
-                height: calc(100% - 90px);
+                display: flex;
+                flex: 1 1 auto;
+                flex-direction: column;
+                min-height: 0;
+                overflow-y: auto;
+                overscroll-behavior: contain;
                 padding: size(16) size(16) size(70);
+            }
+
+            // grupo interno com "Meu Perfil" e "Sair" (o core também usa a classe panel-nav)
+            .panel-nav .panel-nav {
                 display: flex;
                 flex-direction: column;
+                height: auto;
+                overflow: visible;
+                padding: 0;
             }
         }
 
@@ -119,6 +145,7 @@
             border-top: none;
             box-shadow: var(--mc-shadow-lv1);
             display: flex;
+            flex-shrink: 0;
             gap: size(30);
             height: size(90);
             justify-content: space-between;
@@ -198,4 +225,83 @@
             border-bottom: 2px solid var(--mc-spaces-500);
         }
     }
+}
+
+// botão da conta no desktop: só o avatar; o nome aparece no tooltip e no topo do menu
+.mc-header-menu-user__desktop .user {
+    appearance: none;
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    display: flex;
+    padding: 0;
+
+    &::before {
+        content: none;
+    }
+
+    &:focus-visible {
+        outline: size(2) solid var(--mc-primary-500);
+        outline-offset: size(2);
+    }
+
+    .user__avatar {
+        border: 0;
+    }
+
+    .user__initials {
+        align-items: center;
+        background-color: var(--mc-primary-500);
+        color: var(--mc-white);
+        display: flex;
+        font-size: size(14);
+        font-weight: 700;
+        height: 100%;
+        justify-content: center;
+        letter-spacing: 0.02em;
+        width: 100%;
+    }
+}
+
+// nome e e-mail da conta no topo do menu
+.panel-nav.user-menu {
+    flex-wrap: wrap;
+
+    .user-menu__account {
+        border-bottom: size(1) solid var(--mc-gray-300);
+        // não influencia a largura do menu: ocupa a linha, mas a caixa segue a largura das colunas
+        contain: inline-size;
+        display: flex;
+        flex: 0 0 100%;
+        flex-direction: column;
+        gap: size(2);
+        margin-bottom: size(16);
+        padding-bottom: size(16);
+    }
+
+    .user-menu__account-name {
+        font-size: size(16);
+        font-weight: 700;
+        line-height: size(22);
+        overflow-wrap: anywhere;
+    }
+
+    .user-menu__account-email {
+        color: var(--mc-gray-700);
+        font-size: size(14);
+        line-height: size(19);
+        overflow-wrap: anywhere;
+    }
+}
+
+// desloca a caixa do menu da conta para a esquerda, sem cobrir o botão do VLibras.
+// O elemento externo é posicionado pelo floating-vue via transform inline, então a sombra
+// passa para o elemento interno, que é o que se move (a seta continua apontando para o avatar).
+.user-menu-popover.v-popper__popper {
+    box-shadow: none;
+}
+
+.user-menu-popover .v-popper__inner {
+    box-shadow: 0 0 size(10) 0 var(--mc-gray-700);
+    transform: translateX(size(-64));
 }

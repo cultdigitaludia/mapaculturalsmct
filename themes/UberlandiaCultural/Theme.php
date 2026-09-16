@@ -21,6 +21,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $this->enqueueStyle('app-v2', 'main', 'css/theme-BaseV2.css');
         $this->assetManager->publishFolder('fonts');
         $this->enqueueScript('app-v2', 'accessibility', 'js/accessibility.js');
+        $this->enqueueScript('app-v2', 'terms-navigation', 'js/terms-navigation.js');
         $this->enqueueScript('app-v2', 'chatbot', 'js/chatbot-widget.js');
         $this->enqueueScript('app-v2', 'geolocalizacao', 'js/geolocalizacao.js');
         $this->enqueueScript('app-v2', 'vlibras', 'js/vlibras-widget.js');
@@ -33,6 +34,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
             $iconset['panel-registrations'] = 'material-symbols:assignment';
             $iconset['panel-evaluations'] = 'material-symbols:rate-review';
             $iconset['panel-validations'] = 'material-symbols:fact-check';
+            $iconset['notification-bell'] = 'material-symbols:notifications-rounded';
         });
 
         $app->hook('panel.nav', function (&$navItems) {
