@@ -32,7 +32,7 @@ $escape = fn($value) => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     <mc-popover openside="down-left" classes="user-menu-popover">
         <template #button="{ toggle }">
         <div class="mc-header-menu-user__desktop">
-            <button type="button" class="user" @click="toggle()" aria-label="<?= $escape($account_label) ?>" title="<?= $escape($profile_name) ?>">
+            <button type="button" class="user" @mousedown.stop @click="toggle()" aria-label="<?= $escape($account_label) ?>" title="<?= $escape($profile_name) ?>">
                 <span class="user__avatar">
                     <user-profile-avatar v-if="global.auth.user?.profile?.files?.avatar"></user-profile-avatar>
                     <span v-else class="user__initials" aria-hidden="true"><span v-pre><?= $escape($initials) ?></span></span>
@@ -75,7 +75,7 @@ $escape = fn($value) => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     <div class="mc-header-menu-user__mobile">
         <?php $this->applyTemplateHook('header-menu-user--mobile', 'begin'); ?>
         <div class="mc-header-menu-user__mobile--button">
-            <a href="#main-app" class="user" @click="toggleMobile()">
+            <a href="#main-app" class="user" @click="toggleMobile()" aria-label="<?= $escape($account_label) ?>">
                 <div class="user__name">
                     <?= i::_e('Minha conta') ?>
                 </div>

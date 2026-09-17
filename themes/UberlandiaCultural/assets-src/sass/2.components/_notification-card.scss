@@ -82,27 +82,23 @@
             }
 
             &__groupButtons {
+                align-items: center;
                 display: flex;
                 gap: size(8);
+                justify-content: flex-end;
+                width: 100%;
 
                 .button {
+                    align-items: center;
+                    display: inline-flex;
                     font-size: size(14);
+                    justify-content: center;
                     min-height: size(34);
                     padding: size(6) size(14);
+                    width: size(92);
                 }
 
-                &--notification {
-                    align-items: center;
-                    justify-content: flex-end;
-                    width: 100%;
-                }
             }
-        }
-
-        &__check {
-            font-size: size(16);
-            font-weight: 700;
-            line-height: 1;
         }
 
         &.divider {

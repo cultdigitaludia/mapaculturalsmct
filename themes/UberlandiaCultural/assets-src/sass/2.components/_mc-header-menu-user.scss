@@ -232,12 +232,25 @@ html:has(.mc-header-menu.mobile) {
     appearance: none;
     background: none;
     border: 0;
-    border-radius: 50%;
+    border-radius: var(--mc-border-radius-pill);
     display: flex;
+    gap: size(7);
     padding: 0;
 
     &::before {
         content: none;
+    }
+
+    &::after {
+        border-bottom: size(2) solid #002C41;
+        border-right: size(2) solid #002C41;
+        content: '';
+        flex: 0 0 auto;
+        height: size(7);
+        margin-right: size(2);
+        margin-top: size(-4);
+        transform: rotate(45deg);
+        width: size(7);
     }
 
     &:focus-visible {
@@ -299,9 +312,13 @@ html:has(.mc-header-menu.mobile) {
 // passa para o elemento interno, que é o que se move (a seta continua apontando para o avatar).
 .user-menu-popover.v-popper__popper {
     box-shadow: none;
+
+    .v-popper__arrow-container {
+        display: none;
+    }
 }
 
 .user-menu-popover .v-popper__inner {
     box-shadow: 0 0 size(10) 0 var(--mc-gray-700);
-    transform: translateX(size(-64));
+    transform: translate(size(-64), size(12));
 }
