@@ -4,6 +4,10 @@
  * @var MapasCulturais\Themes\BaseV2\Theme $this
  */
 use MapasCulturais\i;
+$cityCenter = json_encode([
+    (float) ($app->config['maps.latitude'] ?? -18.9186),
+    (float) ($app->config['maps.longitude'] ?? -48.2772),
+]);
 $this->import('
     mc-map 
     mc-map-card
@@ -19,7 +23,7 @@ $this->import('
     <div class="home-map__content">
         <mc-map
             :entities="entities"
-            @ready="$event.options.wheelPxPerZoomLevel = 180; $event.options.wheelDebounceTime = 80">
+            @ready="$event.setView(<?= $cityCenter ?>, 12); $event.options.wheelPxPerZoomLevel = 180; $event.options.wheelDebounceTime = 80">
             <template #popup="{entity}">
                 <mc-map-card :entity="entity"></mc-map-card>
             </template>

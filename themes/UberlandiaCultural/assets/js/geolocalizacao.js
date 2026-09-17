@@ -1,7 +1,8 @@
 /**
  * Geolocalização Global - Mapa Cultural de Uberlândia
  * - Pede permissão ao carregar o site
- * - Centraliza o mapa inicial e a listagem de espaços na posição do usuário
+ * - Mantém o mapa inicial e a listagem de espaços focados em Uberlândia
+ * - Exibe a posição do usuário sem alterar o centro desses mapas
  * - Mantém os mapas de cadastro centralizados na localização da entidade
  * - Não bloqueia navegação livre pelo mapa
  * - 100% gratuito (navigator.geolocation + OpenStreetMap)
@@ -12,7 +13,6 @@
 
     const GEO_STORAGE_KEY = 'mc_user_location';
     const GEO_CACHE_MINUTOS = 10; // reusa a localização por 10 min sem pedir GPS de novo
-    const GEO_ZOOM = 12;
     const WHEEL_PX_PER_ZOOM_LEVEL = 180;
     const WHEEL_DEBOUNCE_TIME = 80;
 
@@ -82,18 +82,10 @@
     function aplicarLocalizacao(lat, lng) {
         if (!paginaTemMapaDaCidade()) return;
 
-        // 1. Sobrescreve o centro padrão do Mapas Culturais
-        //    antes da montagem do mapa da página inicial ou da listagem.
-        if (window.$MAPAS && window.$MAPAS.config && window.$MAPAS.config.map) {
-            window.$MAPAS.config.map.center = { lat, lng };
-            window.$MAPAS.config.map.defaultZoom = GEO_ZOOM;
-        }
-
-        // 2. Centraliza os mapas da cidade que já estiverem instanciados.
+        // Exibe a posição nos mapas montados sem deslocar a visão da cidade.
         mapasDaCidade().forEach(function (el) {
             if (el._leaflet_map) {
                 const mapa = el._leaflet_map;
-                mapa.setView([lat, lng], GEO_ZOOM);
 
                 // Marcador "Você está aqui"
                 if (window._geoMarcadorUsuario) {
@@ -112,13 +104,12 @@
             }
         });
 
-        // 3. Aguarda os mapas caso o Vue ainda não os tenha montado.
+        // Aguarda os mapas caso o Vue ainda não os tenha montado.
         const observer = new MutationObserver(function () {
             mapasDaCidade().forEach(function (el) {
                 if (el._leaflet_map && !el._geo_aplicado) {
                     el._geo_aplicado = true;
                     const mapa = el._leaflet_map;
-                    mapa.setView([lat, lng], GEO_ZOOM);
 
                     L.circleMarker([lat, lng], {
                         radius: 9,
