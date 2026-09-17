@@ -788,6 +788,8 @@
 
                     &__filter {
                         height: 100vh !important;
+                        height: 100dvh !important;
+                        overscroll-behavior: contain;
                         position: fixed !important;
                         right: 0 !important;
                         top: 0 !important;
@@ -833,6 +835,84 @@
             .panel__row {
                 grid-column-end: span 9;
                 text-align: center;
+            }
+        }
+    }
+}
+
+@media (max-width: size(800)) {
+    .search {
+        &__tabs {
+            .tabs-component__header {
+                align-items: center;
+                height: auto !important;
+                min-height: size(64);
+                padding: size(12) size(16) !important;
+
+                &--left {
+                    bottom: auto;
+                    left: auto;
+                    position: static;
+                }
+
+                &--right {
+                    left: auto;
+                    position: static;
+                    width: auto;
+                }
+            }
+
+            .tabs-component__panels {
+                margin-top: 0 !important;
+            }
+
+            &--list {
+                padding-top: 0;
+            }
+        }
+
+        .search-list__filter {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            margin: 0;
+            padding: size(16) 0;
+            width: 100%;
+        }
+
+        .search-filter {
+            &--map {
+                height: auto;
+            }
+
+            &__actions,
+            &--list &__actions,
+            &--map &__actions {
+                align-items: stretch;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap !important;
+                gap: size(8);
+                justify-content: stretch;
+                margin: 0;
+                position: static;
+                top: auto;
+                width: 100%;
+            }
+
+            &__actions-form {
+                flex: 1 1 auto;
+                flex-wrap: nowrap !important;
+                min-width: 0;
+                width: auto;
+            }
+
+            &__actions-form-btn,
+            &--map &__actions-form-btn {
+                bottom: auto;
+                flex: 0 0 auto;
+                position: static;
+                right: auto;
+                white-space: nowrap;
             }
         }
     }

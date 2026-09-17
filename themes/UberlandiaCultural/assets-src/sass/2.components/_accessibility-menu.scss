@@ -44,12 +44,12 @@
 
         &[aria-expanded='true'] {
             .icon {
-                background-color: #ffd300 !important;
-                color: #002c42 !important;
+                background-color: var(--mc-primary-500) !important;
+                color: var(--mc-white) !important;
             }
 
             .label {
-                color: #6b5200 !important;
+                color: var(--mc-primary-500) !important;
             }
         }
     }
@@ -62,15 +62,15 @@
 
     &__panel {
         background: #fff;
-        border: 2px solid #0057aa;
-        border-radius: 8px;
-        box-shadow: 0 8px 24px rgba(0, 44, 66, 0.24);
+        border: size(1) solid var(--mc-gray-300);
+        border-radius: size(12);
+        box-shadow: 0 size(8) size(24) rgba(0, 44, 66, 0.18);
         color: #1f1f1f;
-        padding: 1rem;
+        padding: size(12) size(14) size(14);
         position: absolute;
         right: 0;
-        top: calc(100% + 0.5rem);
-        width: min(22rem, calc(100vw - 1rem));
+        top: calc(100% + #{size(8)});
+        width: min(size(300), calc(100vw - #{size(16)}));
 
         &[hidden] {
             display: none;
@@ -80,14 +80,15 @@
     &__header {
         align-items: center;
         display: flex;
-        gap: 1rem;
+        gap: size(12);
         justify-content: space-between;
-        margin-bottom: 0.75rem;
+        margin-bottom: size(10);
 
         h2 {
             color: inherit;
-            font-size: 1.125rem;
-            line-height: 1.3;
+            font-size: size(17);
+            font-weight: 600;
+            line-height: size(24);
             margin: 0;
         }
     }
@@ -96,36 +97,50 @@
         align-items: center;
         background: transparent;
         border: 0;
-        border-radius: 4px;
-        color: inherit;
+        border-radius: 50%;
+        color: var(--mc-gray-700);
         cursor: pointer;
         display: flex;
-        flex: 0 0 44px;
-        font-size: 1.75rem;
-        height: 44px;
+        flex: 0 0 size(32);
+        font-size: size(22);
+        height: size(32);
         justify-content: center;
         padding: 0;
+
+        &:hover {
+            background: var(--mc-gray-100);
+        }
     }
 
     &__controls {
         display: grid;
-        gap: 0.5rem;
-        grid-template-columns: 1fr;
+        gap: size(8);
+        grid-template-columns: repeat(5, size(44));
+        justify-content: space-between;
 
         button {
+            align-items: center;
             background: #fff;
-            border: 2px solid #0057aa;
-            border-radius: 4px;
-            color: #003f7d;
+            border: size(2) solid var(--mc-primary-500);
+            border-radius: 50%;
+            color: var(--mc-primary-500);
             cursor: pointer;
+            display: inline-flex;
+            font-size: size(13);
             font-weight: 700;
-            min-height: 44px;
-            padding: 0.625rem 0.75rem;
-            text-align: left;
+            height: size(44);
+            justify-content: center;
+            line-height: 1;
+            padding: 0;
+            width: size(44);
 
             &[aria-pressed='true'] {
-                background: #003f7d;
+                background: var(--mc-primary-500);
                 color: #fff;
+            }
+
+            &:hover:not(:disabled) {
+                background: var(--mc-primary-100);
             }
 
             &:disabled {
@@ -135,12 +150,36 @@
         }
     }
 
-    &__status {
+    &__contrast-icon {
+        border: size(2) solid currentColor;
+        border-radius: 50%;
         display: block;
-        font-size: 0.875rem;
-        font-weight: 600;
-        min-height: 1.25rem;
-        padding-top: 0.75rem;
+        height: size(18);
+        overflow: hidden;
+        position: relative;
+        width: size(18);
+
+        &::before {
+            background: currentColor;
+            content: '';
+            inset: 0 50% 0 0;
+            position: absolute;
+        }
+    }
+
+    &__links-icon {
+        text-decoration: underline size(2);
+        text-underline-offset: size(3);
+    }
+
+    &__status {
+        height: size(1);
+        margin: size(-1);
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: size(1);
+        clip: rect(0 0 0 0);
     }
 }
 

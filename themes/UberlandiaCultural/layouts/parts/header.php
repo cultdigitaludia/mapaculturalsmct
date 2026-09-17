@@ -6,15 +6,23 @@
 $document_language = str_replace('_', '-', $app->currentLCode ?: 'pt-BR');
 $document_title = trim((string) $this->getTitle($entity ?? null));
 $request_path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$request_path = $request_path === '/' ? '/' : '/' . trim($request_path, '/') . '/';
 $route_titles = [
     '/autenticacao/register/' => 'Novo cadastro',
     '/search/turismo/' => 'Turismo',
+    '/search/opportunities/' => 'Oportunidades',
+    '/search/agents/' => 'Agentes',
+    '/search/events/' => 'Eventos',
+    '/search/spaces/' => 'Espaços',
+    '/search/projects/' => 'Projetos',
     '/conta-e-privacidade/' => 'Conta e privacidade',
 ];
 if (isset($route_titles[$request_path])) {
     $document_title = $route_titles[$request_path] . ' — ' . $app->siteName;
 } elseif ($document_title === '') {
     $document_title = $app->siteName;
+} elseif (mb_stripos($document_title, $app->siteName) === false) {
+    $document_title .= ' — ' . $app->siteName;
 }
 ?>
 <!DOCTYPE html>

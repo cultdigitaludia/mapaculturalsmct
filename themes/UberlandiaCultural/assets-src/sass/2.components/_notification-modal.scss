@@ -149,6 +149,10 @@
 		}
 	}
 
+	&__content {
+		overscroll-behavior-y: contain;
+	}
+
 	&__action {
 		.link {
 			text-align: center;

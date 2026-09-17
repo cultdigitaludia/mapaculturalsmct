@@ -25,12 +25,10 @@ $this->import('
             </div>
 
             <div class="content__groupButtons content__groupButtons--notification" v-if="!entity.request">
-                <a v-if="editUrl(entity.message)" :href="editUrl(entity.message)" class="button button--primary-outline button--icon button--icon-left notification-card__edit-action">
-                    <mc-icon name="edit"></mc-icon>
+                <a v-if="editUrl(entity.message)" :href="editUrl(entity.message)" class="button button--primary-outline notification-card__edit-action">
                     <?= i::__('Editar') ?>
                 </a>
-                <button class="button button--primary-outline button--icon button--icon-left notification-card__ok-action" @click="ok(entity)">
-                    <span class="notification-card__check" aria-hidden="true">✓</span>
+                <button class="button button--primary notification-card__ok-action" @click="ok(entity)">
                     <?= i::__('Ok') ?>
                 </button>
             </div>
@@ -40,7 +38,7 @@ $this->import('
                     <button class="button button--primary-outline" @click="cancel(entity); refresh();"><?= i::__('Cancelar') ?></button>
                 </div>
                 <div class="col-2">
-                    <button class="button button--primary-outline button--icon button--icon-left" @click="ok(entity)"><span class="notification-card__check" aria-hidden="true">✓</span><?= i::__('Ok') ?></button>
+                    <button class="button button--primary" @click="ok(entity)"><?= i::__('Ok') ?></button>
                 </div>
             </div>
 

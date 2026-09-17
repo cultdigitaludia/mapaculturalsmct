@@ -1,5 +1,15 @@
 @use '../0.settings/mixins' as *;
 
+@media (max-width: size(900)) {
+    html:has(.search-filter__filter.show) {
+        overflow: hidden;
+
+        body {
+            overflow: hidden;
+        }
+    }
+}
+
 .search-filter {
 
     .foundResults {
@@ -363,13 +373,30 @@
 
                 form {
                     background: #FFFFFF;
-                    border-radius: var(--mc-border-radius-xs);
+                    border-radius: var(--mc-border-radius-xs) var(--mc-border-radius-xs) 0 0;
                     padding: size(16);
+                }
+
+                .clear-filter {
+                    background: var(--mc-white);
+                    border-radius: 0 0 var(--mc-border-radius-xs) var(--mc-border-radius-xs);
+                    color: var(--mc-danger-500);
+                    justify-content: center;
+                    margin-top: 0;
+                    min-height: size(44);
+                    padding: 0 size(16) size(16);
+                    text-align: center;
+                    width: 100%;
+
+                    &.clear-filter:hover,
+                    &.clear-filter:active {
+                        color: var(--mc-danger-700);
+                    }
                 }
             }
 
             &__filter-content {
-                padding: size(130) size(16) size(32);
+                padding: size(105) size(16) size(32);
             }
             
             &__filter-close {

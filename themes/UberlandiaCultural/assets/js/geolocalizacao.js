@@ -1,7 +1,8 @@
 /**
  * Geolocalização Global - Mapa Cultural de Uberlândia
  * - Pede permissão ao carregar o site
- * - Centraliza TODOS os mapas na posição do usuário
+ * - Centraliza o mapa inicial e a listagem de espaços na posição do usuário
+ * - Mantém os mapas de cadastro centralizados na localização da entidade
  * - Não bloqueia navegação livre pelo mapa
  * - 100% gratuito (navigator.geolocation + OpenStreetMap)
  */
@@ -11,6 +12,35 @@
 
     const GEO_STORAGE_KEY = 'mc_user_location';
     const GEO_CACHE_MINUTOS = 10; // reusa a localização por 10 min sem pedir GPS de novo
+    const GEO_ZOOM = 12;
+    const WHEEL_PX_PER_ZOOM_LEVEL = 180;
+    const WHEEL_DEBOUNCE_TIME = 80;
+
+    function configurarInteracaoMapa(mapa) {
+        if (!mapa || mapa._uberlandiaInteracaoConfigurada) return;
+
+        mapa._uberlandiaInteracaoConfigurada = true;
+        mapa.options.wheelPxPerZoomLevel = WHEEL_PX_PER_ZOOM_LEVEL;
+        mapa.options.wheelDebounceTime = WHEEL_DEBOUNCE_TIME;
+
+        const container = mapa.getContainer?.();
+        if (container) {
+            container._leaflet_map = mapa;
+        }
+
+        if (!mapa.zoomControl && window.L?.control?.zoom) {
+            mapa.zoomControl = L.control.zoom({ position: 'topleft' }).addTo(mapa);
+        }
+    }
+
+    function configurarMapasLeaflet() {
+        if (!window.L?.Map || L.Map.prototype._uberlandiaInteracaoHook) return;
+
+        L.Map.prototype._uberlandiaInteracaoHook = true;
+        L.Map.addInitHook(function () {
+            configurarInteracaoMapa(this);
+        });
+    }
 
     // ─── LER CACHE DE LOCALIZAÇÃO ─────────────────────────────────────────────
     function lerCache() {
@@ -34,20 +64,36 @@
         } catch (e) {}
     }
 
-    // ─── APLICAR NOS MAPAS ────────────────────────────────────────────────────
+    function paginaTemMapaDaCidade() {
+        return Boolean(
+            document.querySelector('home-map, .home-map') ||
+            document.body.matches('.controller-search.action-spaces')
+        );
+    }
+
+    function mapasDaCidade() {
+        return document.querySelectorAll([
+            '.home-map .leaflet-container',
+            'body.controller-search.action-spaces .leaflet-container',
+        ].join(','));
+    }
+
+    // ─── APLICAR NOS MAPAS COM VISÃO DA CIDADE ────────────────────────────────
     function aplicarLocalizacao(lat, lng) {
+        if (!paginaTemMapaDaCidade()) return;
+
         // 1. Sobrescreve o centro padrão do Mapas Culturais
-        //    Todos os mc-map usam $MAPAS.config.map.center como default
+        //    antes da montagem do mapa da página inicial ou da listagem.
         if (window.$MAPAS && window.$MAPAS.config && window.$MAPAS.config.map) {
             window.$MAPAS.config.map.center = { lat, lng };
-            window.$MAPAS.config.map.defaultZoom = 14;
+            window.$MAPAS.config.map.defaultZoom = GEO_ZOOM;
         }
 
-        // 2. Centraliza mapas Leaflet já instanciados (se usuário já estava na página)
-        document.querySelectorAll('.leaflet-container').forEach(function (el) {
+        // 2. Centraliza os mapas da cidade que já estiverem instanciados.
+        mapasDaCidade().forEach(function (el) {
             if (el._leaflet_map) {
                 const mapa = el._leaflet_map;
-                mapa.setView([lat, lng], 14);
+                mapa.setView([lat, lng], GEO_ZOOM);
 
                 // Marcador "Você está aqui"
                 if (window._geoMarcadorUsuario) {
@@ -66,13 +112,13 @@
             }
         });
 
-        // 3. Observa novos mapas que apareçam depois (ex: usuário clica aba Mapa)
+        // 3. Aguarda os mapas caso o Vue ainda não os tenha montado.
         const observer = new MutationObserver(function () {
-            document.querySelectorAll('.leaflet-container').forEach(function (el) {
+            mapasDaCidade().forEach(function (el) {
                 if (el._leaflet_map && !el._geo_aplicado) {
                     el._geo_aplicado = true;
                     const mapa = el._leaflet_map;
-                    mapa.setView([lat, lng], 14);
+                    mapa.setView([lat, lng], GEO_ZOOM);
 
                     L.circleMarker([lat, lng], {
                         radius: 9,
@@ -123,6 +169,8 @@
 
     // ─── INIT ─────────────────────────────────────────────────────────────────
     function init() {
+        configurarMapasLeaflet();
+
         if (!navigator.geolocation) return;
         solicitarLocalizacao();
     }

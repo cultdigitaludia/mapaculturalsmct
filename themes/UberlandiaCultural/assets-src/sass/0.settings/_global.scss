@@ -121,3 +121,24 @@ small {
         visibility: visible;
     }
 }
+
+// Mantém o botão compacto do VLibras sem deformar a imagem original (450 × 120).
+[vw-access-button] {
+    bottom: auto !important;
+    height: size(40) !important;
+    left: auto !important;
+    overflow: hidden !important;
+    position: fixed !important;
+    right: size(24) !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: size(40) !important;
+
+    #vlibras-popup {
+        height: size(40) !important;
+        max-width: none !important;
+        position: absolute !important;
+        right: 0 !important;
+        width: size(150) !important;
+    }
+}
