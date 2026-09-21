@@ -811,6 +811,35 @@
     }
 }
 
+.action-spaces .search__tabs--list .search-list {
+    @media (min-width: size(801)) {
+        .entity-card__header.user-details {
+            padding-right: size(72);
+        }
+    }
+
+    .entity-card__content {
+        gap: size(16);
+
+        &--terms {
+            gap: size(14);
+
+            &-area .entity-card__term-pill {
+                background: color-mix(in srgb, var(--mc-spaces-500) 24%, white);
+                border-color: color-mix(in srgb, var(--mc-spaces-500) 55%, white);
+            }
+
+            &-tag .entity-card__term-pill {
+                background: color-mix(in srgb, var(--mc-gray-300) 30%, white);
+            }
+        }
+    }
+
+    .entity-card__footer {
+        margin-top: size(24);
+    }
+}
+
 .action-opportunities,
 .action-projects {
     .search {

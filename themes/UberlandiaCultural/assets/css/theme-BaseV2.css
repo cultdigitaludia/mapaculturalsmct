@@ -21659,6 +21659,28 @@ ol.mc-stepper-vertical > li.active::before {
   }
 }
 
+@media (min-width: 50.0625rem) {
+  .action-spaces .search__tabs--list .search-list .entity-card__header.user-details {
+    padding-right: 4.5rem;
+  }
+}
+.action-spaces .search__tabs--list .search-list .entity-card__content {
+  gap: 1rem;
+}
+.action-spaces .search__tabs--list .search-list .entity-card__content--terms {
+  gap: 0.875rem;
+}
+.action-spaces .search__tabs--list .search-list .entity-card__content--terms-area .entity-card__term-pill {
+  background: color-mix(in srgb, var(--mc-spaces-500) 24%, white);
+  border-color: color-mix(in srgb, var(--mc-spaces-500) 55%, white);
+}
+.action-spaces .search__tabs--list .search-list .entity-card__content--terms-tag .entity-card__term-pill {
+  background: color-mix(in srgb, var(--mc-gray-300) 30%, white);
+}
+.action-spaces .search__tabs--list .search-list .entity-card__footer {
+  margin-top: 1.5rem;
+}
+
 .action-opportunities .search .tabs-component__panels,
 .action-projects .search .tabs-component__panels {
   background: var(--mc-gray-100);
@@ -21873,6 +21895,57 @@ ol.mc-stepper-vertical > li.active::before {
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.1875rem;
+}
+.controller-space.action-single .entity-header .entity-header__single--content {
+  align-items: flex-start;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.controller-space.action-single .entity-header .entity-header__single--content .rightSide {
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  min-width: 0;
+  row-gap: 0.75rem;
+}
+.controller-space.action-single .entity-header .entity-header__single--content .entity-header__title {
+  grid-column: 1;
+  min-width: 0;
+}
+.controller-space.action-single .entity-header .entity-header__single--content .metadata dl:not(.metadata__id),
+.controller-space.action-single .entity-header .entity-header__single--content .description,
+.controller-space.action-single .entity-header .entity-header__single--content .site {
+  grid-column: 1/-1;
+}
+.controller-space.action-single .entity-header .entity-header__single--content .metadata dl.metadata__id {
+  align-self: center;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  white-space: nowrap;
+}
+.controller-space.action-single .entity-header .entity-header__single--content .metadata dl.metadata__id .entity-data__label::after,
+.controller-space.action-single .entity-header .entity-header__single--content .metadata dl.metadata__id dt::after {
+  content: none;
+}
+@media screen and (max-width: 50rem) {
+  .controller-space.action-single .entity-header .entity-header__single--content {
+    align-items: center;
+    padding-top: 1.25rem;
+    padding-bottom: 1rem;
+  }
+  .controller-space.action-single .entity-header .entity-header__single--content .rightSide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .controller-space.action-single .entity-header .entity-header__single--content .metadata dl.metadata__id {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: center;
+  }
+}
+.controller-space.action-single .tabs-component__buttons {
+  margin-top: 1.5rem;
 }
 .controller-space.action-single .single-space__longdescription {
   white-space: pre-line;
