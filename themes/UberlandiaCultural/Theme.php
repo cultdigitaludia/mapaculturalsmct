@@ -22,7 +22,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $this->assetManager->publishFolder('fonts');
         $this->enqueueScript('app-v2', 'accessibility', 'js/accessibility.js');
         $this->enqueueScript('app-v2', 'terms-navigation', 'js/terms-navigation.js');
-        $this->enqueueScript('app-v2', 'chatbot', 'js/chatbot-widget.js');
+        // Culturese Bot temporariamente desativado até a revisão do widget.
         $this->enqueueScript('app-v2', 'geolocalizacao', 'js/geolocalizacao.js');
         $this->enqueueScript('app-v2', 'vlibras', 'js/vlibras-widget.js');
         $this->enqueueScript('app-v2', 'panel-ordering', 'js/panel-ordering.js');
