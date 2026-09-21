@@ -4,6 +4,65 @@
     &.action-single {
         @include entity-single-base;
 
+        .entity-header .entity-header__single--content {
+            align-items: flex-start;
+            padding-top: size(24);
+            padding-bottom: size(24);
+
+            .rightSide {
+                column-gap: size(16);
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) max-content;
+                min-width: 0;
+                row-gap: size(12);
+            }
+
+            .entity-header__title {
+                grid-column: 1;
+                min-width: 0;
+            }
+
+            .metadata dl:not(.metadata__id),
+            .description,
+            .site {
+                grid-column: 1 / -1;
+            }
+
+            .metadata dl.metadata__id {
+                align-self: center;
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: end;
+                white-space: nowrap;
+
+                // O template já fornece "ID:"; não acrescentar outro sinal.
+                .entity-data__label::after,
+                dt::after {
+                    content: none;
+                }
+            }
+
+            @include mobile {
+                align-items: center;
+                padding-top: size(20);
+                padding-bottom: size(16);
+
+                .rightSide {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+
+                .metadata dl.metadata__id {
+                    grid-column: 1;
+                    grid-row: auto;
+                    justify-self: center;
+                }
+            }
+        }
+
+        .tabs-component__buttons {
+            margin-top: size(24);
+        }
+
         .single-space{
             &__longdescription {
                 white-space: pre-line;

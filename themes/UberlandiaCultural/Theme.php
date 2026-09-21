@@ -37,6 +37,61 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
             $iconset['notification-bell'] = 'material-symbols:notifications-rounded';
         });
 
+        // Espaços legados sem país selecionado usam a visualização internacional,
+        // que oculta endereço e mapa de visitantes quando publicLocation é nulo.
+        $app->hook('template(space.single.international-address-view):end', function () {
+            ?>
+            <template v-if="entity.publicLocation == null && !verifiedAdress() && entity.endereco && entity.location">
+                <div class="international-address-view__title col-12">
+                    <label><?= i::__('Endereço') ?></label>
+                </div>
+                <div class="col-12">
+                    <p class="international-address-view__address">{{ entity.endereco }}</p>
+                    <entity-map :entity="entity"></entity-map>
+                </div>
+            </template>
+            <?php
+        });
+
+        $app->hook('entity(Space).validationErrors', function (&$errors) {
+            if ($this->acessibilidade !== 'Sim') {
+                return;
+            }
+
+            $physicalAccessibility = $this->acessibilidade_fisica;
+            $physicalAccessibility = is_array($physicalAccessibility)
+                ? $physicalAccessibility
+                : ($physicalAccessibility ? [$physicalAccessibility] : []);
+
+            $hasResource = false;
+            $hasNoAccessibilityOption = false;
+            foreach ($physicalAccessibility as $resource) {
+                if (!is_string($resource) || trim($resource) === '') {
+                    continue;
+                }
+
+                if ($resource === '@NA') {
+                    $hasNoAccessibilityOption = true;
+                } else {
+                    $hasResource = true;
+                }
+            }
+
+            if (!$hasResource || $hasNoAccessibilityOption) {
+                $message = i::__('Selecione ao menos um recurso de acessibilidade física. A opção "Não possui" não é válida quando a acessibilidade é "Sim".');
+                $errors['acessibilidade'][] = $message;
+                $errors['acessibilidade_fisica'][] = $message;
+            }
+        });
+
+        $app->hook('template(space.edit.mc-card-content-acessibilidade_fisica):begin', function () {
+            ?>
+            <p v-if="entity.acessibilidade === 'Sim'" class="field__description">
+                <?= i::__('Obrigatório: selecione ao menos um recurso de acessibilidade física. "Não possui" não é válido com "Sim".') ?>
+            </p>
+            <?php
+        });
+
         $app->hook('panel.nav', function (&$navItems) {
             $iconsByRoute = [
                 'panel/opportunities' => 'panel-opportunities',
