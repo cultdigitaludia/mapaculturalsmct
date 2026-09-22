@@ -820,23 +820,26 @@
 
     .entity-card__content {
         gap: size(16);
-
-        &--terms {
-            gap: size(14);
-
-            &-area .entity-card__term-pill {
-                background: color-mix(in srgb, var(--mc-spaces-500) 24%, white);
-                border-color: color-mix(in srgb, var(--mc-spaces-500) 55%, white);
-            }
-
-            &-tag .entity-card__term-pill {
-                background: color-mix(in srgb, var(--mc-gray-300) 30%, white);
-            }
-        }
     }
 
     .entity-card__footer {
         margin-top: size(24);
+    }
+}
+
+.action-spaces .search__tabs--list .search-list,
+.action-turismo .search__tabs--list .search-list {
+    .entity-card__content--terms {
+        gap: size(14);
+
+        &-area .entity-card__term-pill {
+            background: color-mix(in srgb, var(--mc-spaces-500) 24%, white);
+            border-color: color-mix(in srgb, var(--mc-spaces-500) 55%, white);
+        }
+
+        &-tag .entity-card__term-pill {
+            background: color-mix(in srgb, var(--mc-gray-300) 30%, white);
+        }
     }
 }
 

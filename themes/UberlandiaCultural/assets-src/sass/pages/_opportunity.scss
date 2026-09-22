@@ -2,6 +2,154 @@
 
 .controller-opportunity {
     &.action-single {
+        @include entity-single-base;
+
+        // Espaçamento do cabeçalho (título, ID, tipo, vinculado com, descrição, site)
+        // igual ao de Espaços/Agentes/Eventos/Projetos; o mixin sozinho deixa esses
+        // itens com gap de 8px, grudados demais.
+        .entity-header .entity-header__single--content {
+            align-items: flex-start;
+            padding-top: size(24);
+            padding-bottom: size(24);
+
+            .rightSide {
+                column-gap: size(16);
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) max-content;
+                min-width: 0;
+                row-gap: size(12);
+            }
+
+            .entity-header__title {
+                grid-column: 1;
+                min-width: 0;
+            }
+
+            .metadata dl:not(.metadata__id),
+            .description,
+            .site {
+                grid-column: 1 / -1;
+            }
+
+            .metadata dl.metadata__id {
+                align-self: center;
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: end;
+                white-space: nowrap;
+            }
+
+            @include mobile {
+                align-items: center;
+                padding-top: size(20);
+                padding-bottom: size(16);
+
+                .rightSide {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+
+                .metadata dl.metadata__id {
+                    grid-column: 1;
+                    grid-row: auto;
+                    justify-self: center;
+                }
+            }
+        }
+
+        // A tela de Oportunidades não usa o wrapper .tabs__info do BaseV2;
+        // aplicamos o mesmo espaçamento vertical entre seções usado nas demais entidades.
+        .opportunity main .grid-12 {
+            row-gap: size(16);
+        }
+
+        // "Apresentação" com a mesma hierarquia de título e caixa de texto usada
+        // na Descrição Detalhada de Espaços/Agentes/Eventos/Projetos.
+        .opportunity main h3 {
+            font-size: var(--mc-font-size-sm);
+            line-height: size(25);
+            margin-bottom: size(8);
+        }
+
+        // Títulos da inscrição no mesmo nível de Apresentação e Links.
+        .opportunity-subscription .title {
+            font-size: var(--mc-font-size-sm);
+            line-height: size(25);
+            margin-bottom: size(8);
+        }
+
+        // Inscrições existentes seguem a mesma escala das seções da página.
+        .opportunity-subscription-list {
+            padding-top: size(24);
+
+            &__header {
+                display: grid;
+                gap: size(8);
+
+                .title {
+                    font-size: var(--mc-font-size-sm);
+                    line-height: size(25);
+                    margin: 0;
+                }
+            }
+
+            .registration-card {
+                border: size(1) solid var(--mc-gray-300);
+                gap: size(20);
+                padding: size(20);
+
+                &__content .right {
+                    gap: size(16);
+                    min-width: 0;
+
+                    .header .title {
+                        font-size: size(14);
+                        line-height: size(20);
+                        text-transform: none;
+
+                        strong {
+                            font-size: size(18);
+                            line-height: size(25);
+                            overflow-wrap: anywhere;
+                        }
+                    }
+
+                    .content .registerData {
+                        .title {
+                            font-size: size(14);
+                            line-height: size(20);
+                            text-transform: none;
+                        }
+
+                        .data {
+                            font-size: size(16);
+                            font-weight: 600;
+                            line-height: size(24);
+                        }
+                    }
+                }
+
+                @include mobile {
+                    padding: size(16);
+                }
+            }
+        }
+
+        .opportunity main > .grid-12 > .col-12 > .description {
+            background-color: var(--mc-gray-100);
+            border-radius: var(--mc-border-radius-xs);
+            line-height: size(24);
+            margin: 0;
+            padding: size(12) size(16);
+        }
+
+        // links com o mesmo destaque visual das demais entidades
+        .entity-links__links--item .link {
+            color: var(--mc-primary-500);
+            font-size: size(16);
+            font-weight: 600;
+            line-height: size(22);
+        }
+
        .entity-header__single--content {
             .rightSide {
                 .metadata {
