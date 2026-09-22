@@ -1,7 +1,98 @@
 @use '../0.settings/mixins' as *;
 
-.single-1 {
-    &__description {
-        padding-bottom: size(16);
+.controller-agent {
+    &.action-single {
+        @include entity-single-base;
+
+        // Espaçamento do cabeçalho (título, ID, tipo, bio, site) igual ao de Espaços;
+        // o mixin sozinho deixa esses itens com gap de 8px, grudados demais.
+        .entity-header .entity-header__single--content {
+            align-items: flex-start;
+            padding-top: size(24);
+            padding-bottom: size(24);
+
+            .rightSide {
+                column-gap: size(16);
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) max-content;
+                min-width: 0;
+                row-gap: size(12);
+            }
+
+            .entity-header__title {
+                grid-column: 1;
+                min-width: 0;
+            }
+
+            .metadata dl:not(.metadata__id),
+            .description,
+            .site {
+                grid-column: 1 / -1;
+            }
+
+            // O cabeçalho padrão de Agentes usa <dt>ID</dt> puro (sem ":" no texto),
+            // por isso, ao contrário de Espaços, o "::after" com ":" deve ser mantido.
+            .metadata dl.metadata__id {
+                align-self: center;
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: end;
+                white-space: nowrap;
+            }
+
+            @include mobile {
+                align-items: center;
+                padding-top: size(20);
+                padding-bottom: size(16);
+
+                .rightSide {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+
+                .metadata dl.metadata__id {
+                    grid-column: 1;
+                    grid-row: auto;
+                    justify-self: center;
+                }
+            }
+        }
+
+        // Agente individual (single-1) não usa o wrapper .tabs__info do BaseV2;
+        // aplicamos o mesmo espaçamento vertical entre seções usado por Espaços e Eventos.
+        .single-1 main > .grid-12 {
+            row-gap: size(16);
+        }
+
+        // "Descrição Detalhada": mesma hierarquia de título usada em Espaços
+        .single-1__description {
+            font-size: var(--mc-font-size-sm);
+            line-height: size(25);
+            margin-bottom: size(8);
+            padding-bottom: size(16);
+        }
+
+        .tabs__info main > .grid-12 > .col-12 > h2 {
+            font-size: var(--mc-font-size-sm);
+            line-height: size(25);
+            margin-bottom: size(8);
+        }
+
+        // descrição detalhada com o mesmo visual das demais seções (caixa cinza)
+        .single-1 main > .grid-12 > .col-12 > .description,
+        .tabs__info main > .grid-12 > .col-12 > .description {
+            background-color: var(--mc-gray-100);
+            border-radius: var(--mc-border-radius-xs);
+            line-height: size(24);
+            margin: 0;
+            padding: size(12) size(16);
+        }
+
+        // links com o mesmo destaque visual de Espaços
+        .entity-links__links--item .link {
+            color: var(--mc-primary-500);
+            font-size: size(16);
+            font-weight: 600;
+            line-height: size(22);
+        }
     }
 }

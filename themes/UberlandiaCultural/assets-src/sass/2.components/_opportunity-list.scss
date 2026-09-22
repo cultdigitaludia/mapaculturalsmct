@@ -21,6 +21,13 @@
         display: flex;
         align-items: flex-start;
         flex-direction: column;
+        gap: size(8);
+
+        // os parágrafos de inscrição vêm com a margem padrão do navegador,
+        // criando um vão grande antes do "Acessar"; o gap acima já cuida do espaçamento.
+        p {
+            margin: 0;
+        }
     }
 
     &__registration {

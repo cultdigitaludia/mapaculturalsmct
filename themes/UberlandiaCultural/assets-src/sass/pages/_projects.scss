@@ -2,10 +2,130 @@
 
 .controller-project {
     &.action-single {
+        @include entity-single-base;
+
+        // Espaçamento do cabeçalho (título, ID, tipo, "Projeto integrante de", descrição, site)
+        // igual ao de Espaços; o mixin sozinho deixa esses itens com gap de 8px, grudados demais.
+        .entity-header .entity-header__single--content {
+            align-items: flex-start;
+            padding-top: size(24);
+            padding-bottom: size(24);
+
+            .rightSide {
+                column-gap: size(16);
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) max-content;
+                min-width: 0;
+                row-gap: size(12);
+            }
+
+            .entity-header__title {
+                grid-column: 1;
+                min-width: 0;
+            }
+
+            .metadata dl:not(.metadata__id),
+            .description,
+            .site {
+                grid-column: 1 / -1;
+            }
+
+            .metadata dl.metadata__id {
+                align-self: center;
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: end;
+                white-space: nowrap;
+
+                // O template já fornece "ID:"; não acrescentar outro sinal.
+                .entity-data__label::after,
+                dt::after {
+                    content: none;
+                }
+            }
+
+            @include mobile {
+                align-items: center;
+                padding-top: size(20);
+                padding-bottom: size(16);
+
+                .rightSide {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+
+                .metadata dl.metadata__id {
+                    grid-column: 1;
+                    grid-row: auto;
+                    justify-self: center;
+                }
+            }
+        }
+
+        // "Descrição Detalhada" usa a mesma classe .additional-info__item do telefone/e-mail,
+        // mas precisa ocupar a coluna inteira e ter o mesmo destaque de título das demais entidades.
+        .tabs__info main > .grid-12 > .col-12 > .additional-info__item.col-12 {
+            align-items: flex-start;
+            flex-direction: column;
+            width: 100%;
+
+            .entity-data__label {
+                font-size: var(--mc-font-size-sm);
+                font-weight: 700;
+                line-height: size(25);
+                margin-bottom: size(8);
+            }
+
+            .entity-data__data {
+                line-height: size(24);
+                padding: size(12) size(16);
+                width: 100%;
+            }
+
+            // o texto da descrição vem em negrito por padrão do componente entity-data;
+            // nas demais entidades a descrição é peso normal.
+            .entity-data__value {
+                font-weight: var(--mc-font-regular);
+            }
+        }
+
+        // links com o mesmo destaque visual de Espaços/Agentes/Eventos
+        .entity-links__links--item .link {
+            color: var(--mc-primary-500);
+            font-size: size(16);
+            font-weight: 600;
+            line-height: size(22);
+        }
+
         .single-project {
             &__subproject {
                 .entity-card {
                     background-color: var(--mc-gray-100);
+                }
+            }
+
+            // a aba "Eventos" lista os cartões sem nenhum destaque (fundo branco
+            // sobre área branca); a mesma borda sutil usada nas abas do site.
+            &__events {
+                .entity-card {
+                    border: size(1) solid var(--mc-gray-300);
+
+                    & + .entity-card {
+                        margin-top: size(16);
+                    }
+
+                    // o ID fica com "top" negativo por padrão, pensado para flutuar
+                    // acima do card quando ele não tem borda; com borda, sobrepõe de
+                    // forma estranha. Reposicionado para dentro da área com padding.
+                    .entity-card__header.user-slot {
+                        top: size(16);
+                    }
+
+                    // o ID é posicionado em absolute e não reserva espaço; quando o
+                    // título quebra em duas linhas, o texto passa por baixo dele.
+                    // Mesma correção já usada na lista de busca de Espaços.
+                    .entity-card__header.user-details {
+                        padding-right: size(72);
+                    }
                 }
             }
 
@@ -15,18 +135,22 @@
             }
         }
 
+        // sem padding-bottom próprio: o espaçamento entre seções já vem do
+        // row-gap de 16px do mixin (entity-single-base), igual às demais entidades.
         .additional-info {
             display: flex;
             flex-direction: column;
-            gap: size(5);
-            padding-bottom: size(32);
+            gap: size(16);
 
             &__title {
+                font-size: var(--mc-font-size-sm);
                 font-weight: 700;
+                line-height: size(25);
+                margin-bottom: size(8);
             }
 
             &__item {
-                align-items: center;
+                align-items: flex-start;
                 display: flex;
                 color: var(--mc-low-700);
                 gap: size(8);
@@ -37,6 +161,12 @@
 
                 &__content {
                     text-transform: uppercase;
+                }
+
+                // o núcleo envia os rótulos em minúsculas ("telefone:", "email:");
+                // corrigido apenas visualmente, sem alterar o texto de origem.
+                .entity-data__label {
+                    text-transform: capitalize;
                 }
             }
         }

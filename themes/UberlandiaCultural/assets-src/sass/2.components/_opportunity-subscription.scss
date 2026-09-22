@@ -70,8 +70,9 @@
             }
 
             &__form {
-                border-bottom: var(--mc-border-hairline);
-                padding-bottom: size(40);
+                // sem linha divisória: nenhuma outra seção do site usa régua entre
+                // blocos, só espaçamento em branco.
+                padding-bottom: size(16);
                 row-gap: size(24);
 
                 .fakeInput {

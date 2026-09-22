@@ -14,6 +14,57 @@
     &.action-single {
         @include entity-single-base;
 
+        // Espaçamento do cabeçalho (título, ID, subtítulo, descrição, site) igual ao de
+        // Espaços/Agentes; o mixin sozinho deixa esses itens com gap de 8px, grudados demais.
+        .entity-header .entity-header__single--content {
+            align-items: flex-start;
+            padding-top: size(24);
+            padding-bottom: size(24);
+
+            .rightSide {
+                column-gap: size(16);
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) max-content;
+                min-width: 0;
+                row-gap: size(12);
+            }
+
+            .entity-header__title {
+                grid-column: 1;
+                min-width: 0;
+            }
+
+            .metadata dl:not(.metadata__id),
+            .description,
+            .site {
+                grid-column: 1 / -1;
+            }
+
+            .metadata dl.metadata__id {
+                align-self: center;
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: end;
+                white-space: nowrap;
+            }
+
+            @include mobile {
+                align-items: center;
+                padding-top: size(20);
+                padding-bottom: size(16);
+
+                .rightSide {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+
+                .metadata dl.metadata__id {
+                    grid-column: 1;
+                    grid-row: auto;
+                    justify-self: center;
+                }
+            }
+        }
+
         .long-description {
             gap: size(8);
 
