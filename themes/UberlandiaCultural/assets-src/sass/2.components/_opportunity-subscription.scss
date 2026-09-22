@@ -39,18 +39,18 @@
 
             &__description {
                 color: var(--mc-black);
-                font-size: size(18);
-                font-weight: 600;
-                line-height: size(25);
+                font-size: size(16);
+                font-weight: 400;
+                line-height: size(24);
                 margin: 0;
-                padding: size(32) size(47);
+                padding: size(12) size(16);
 
                 span {
                     font-weight: 700;
                 }
 
                 @media (max-width:size(400)) {
-                    padding: size(16) size(15);
+                    padding: size(12) size(16);
                     overflow-wrap: break-word;
                 }
             }

@@ -13811,18 +13811,18 @@ ol.mc-stepper-vertical > li.active::before {
 }
 .opportunity-subscription__info .content__description {
   color: var(--mc-black);
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1.5625rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
   margin: 0;
-  padding: 2rem 2.9375rem;
+  padding: 0.75rem 1rem;
 }
 .opportunity-subscription__info .content__description span {
   font-weight: 700;
 }
 @media (max-width: 25rem) {
   .opportunity-subscription__info .content__description {
-    padding: 1rem 0.9375rem;
+    padding: 0.75rem 1rem;
     overflow-wrap: break-word;
   }
 }
@@ -20632,7 +20632,58 @@ ol.mc-stepper-vertical > li.active::before {
   line-height: 1.5625rem;
   margin-bottom: 0.5rem;
 }
-.controller-opportunity.action-single .opportunity main > .grid-12 > .grid-12 > .col-12 > .description {
+.controller-opportunity.action-single .opportunity-subscription .title {
+  font-size: var(--mc-font-size-sm);
+  line-height: 1.5625rem;
+  margin-bottom: 0.5rem;
+}
+.controller-opportunity.action-single .opportunity-subscription-list {
+  padding-top: 1.5rem;
+}
+.controller-opportunity.action-single .opportunity-subscription-list__header {
+  display: grid;
+  gap: 0.5rem;
+}
+.controller-opportunity.action-single .opportunity-subscription-list__header .title {
+  font-size: var(--mc-font-size-sm);
+  line-height: 1.5625rem;
+  margin: 0;
+}
+.controller-opportunity.action-single .opportunity-subscription-list .registration-card {
+  border: 0.0625rem solid var(--mc-gray-300);
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+.controller-opportunity.action-single .opportunity-subscription-list .registration-card__content .right {
+  gap: 1rem;
+  min-width: 0;
+}
+.controller-opportunity.action-single .opportunity-subscription-list .registration-card__content .right .header .title {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-transform: none;
+}
+.controller-opportunity.action-single .opportunity-subscription-list .registration-card__content .right .header .title strong {
+  font-size: 1.125rem;
+  line-height: 1.5625rem;
+  overflow-wrap: anywhere;
+}
+.controller-opportunity.action-single .opportunity-subscription-list .registration-card__content .right .content .registerData .title {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-transform: none;
+}
+.controller-opportunity.action-single .opportunity-subscription-list .registration-card__content .right .content .registerData .data {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+@media screen and (max-width: 50rem) {
+  .controller-opportunity.action-single .opportunity-subscription-list .registration-card {
+    padding: 1rem;
+  }
+}
+.controller-opportunity.action-single .opportunity main > .grid-12 > .col-12 > .description {
   background-color: var(--mc-gray-100);
   border-radius: var(--mc-border-radius-xs);
   line-height: 1.5rem;

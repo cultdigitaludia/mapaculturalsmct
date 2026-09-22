@@ -70,7 +70,71 @@
             margin-bottom: size(8);
         }
 
-        .opportunity main > .grid-12 > .grid-12 > .col-12 > .description {
+        // Títulos da inscrição no mesmo nível de Apresentação e Links.
+        .opportunity-subscription .title {
+            font-size: var(--mc-font-size-sm);
+            line-height: size(25);
+            margin-bottom: size(8);
+        }
+
+        // Inscrições existentes seguem a mesma escala das seções da página.
+        .opportunity-subscription-list {
+            padding-top: size(24);
+
+            &__header {
+                display: grid;
+                gap: size(8);
+
+                .title {
+                    font-size: var(--mc-font-size-sm);
+                    line-height: size(25);
+                    margin: 0;
+                }
+            }
+
+            .registration-card {
+                border: size(1) solid var(--mc-gray-300);
+                gap: size(20);
+                padding: size(20);
+
+                &__content .right {
+                    gap: size(16);
+                    min-width: 0;
+
+                    .header .title {
+                        font-size: size(14);
+                        line-height: size(20);
+                        text-transform: none;
+
+                        strong {
+                            font-size: size(18);
+                            line-height: size(25);
+                            overflow-wrap: anywhere;
+                        }
+                    }
+
+                    .content .registerData {
+                        .title {
+                            font-size: size(14);
+                            line-height: size(20);
+                            text-transform: none;
+                        }
+
+                        .data {
+                            font-size: size(16);
+                            font-weight: 600;
+                            line-height: size(24);
+                        }
+                    }
+                }
+
+                @include mobile {
+                    padding: size(16);
+                }
+            }
+        }
+
+        .opportunity main > .grid-12 > .col-12 > .description {
             background-color: var(--mc-gray-100);
             border-radius: var(--mc-border-radius-xs);
             line-height: size(24);
