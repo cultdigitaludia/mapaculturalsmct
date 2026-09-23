@@ -24251,8 +24251,12 @@ ol.mc-stepper-vertical > li.active::before {
 }
 
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline: 3px solid #005fcc !important;
-  outline-offset: 3px !important;
+  outline: 2px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+
+:where(input, select, textarea, [contenteditable=true], .mc-select, .mc-multiselect__input):focus-visible {
+  outline-offset: 0 !important;
 }
 
 .accessibility-menu {
