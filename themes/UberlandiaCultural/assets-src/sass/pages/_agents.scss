@@ -8,8 +8,18 @@
         // o mixin sozinho deixa esses itens com gap de 8px, grudados demais.
         .entity-header .entity-header__single--content {
             align-items: flex-start;
-            padding-top: size(24);
-            padding-bottom: size(24);
+            padding-top: size(16);
+            padding-bottom: size(16);
+
+            .leftSide .share {
+                gap: size(4);
+                margin: size(8) 0 0;
+                max-width: size(112);
+
+                .button {
+                    padding: size(4);
+                }
+            }
 
             .rightSide {
                 column-gap: size(16);
@@ -55,6 +65,12 @@
                     justify-self: center;
                 }
             }
+        }
+
+        // Evita uma faixa vazia fixa antes da aba. A altura passa a ser definida
+        // somente pelo conteúdo real do cabeçalho (avatar, redes e descrição).
+        .tabs-component__buttons {
+            margin-top: 0;
         }
 
         // Agente individual (single-1) não usa o wrapper .tabs__info do BaseV2;
