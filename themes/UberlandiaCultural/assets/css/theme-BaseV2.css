@@ -19752,8 +19752,16 @@ ol.mc-stepper-vertical > li.active::before {
 }
 .controller-agent.action-single .entity-header .entity-header__single--content {
   align-items: flex-start;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.controller-agent.action-single .entity-header .entity-header__single--content .leftSide .share {
+  gap: 0.25rem;
+  margin: 0.5rem 0 0;
+  max-width: 7rem;
+}
+.controller-agent.action-single .entity-header .entity-header__single--content .leftSide .share .button {
+  padding: 0.25rem;
 }
 .controller-agent.action-single .entity-header .entity-header__single--content .rightSide {
   -moz-column-gap: 1rem;
@@ -19793,6 +19801,9 @@ ol.mc-stepper-vertical > li.active::before {
     grid-row: auto;
     justify-self: center;
   }
+}
+.controller-agent.action-single .tabs-component__buttons {
+  margin-top: 0;
 }
 .controller-agent.action-single .single-1 main > .grid-12 {
   row-gap: 1rem;
