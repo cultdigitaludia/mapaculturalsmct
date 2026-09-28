@@ -587,13 +587,21 @@ ol.mc-stepper-vertical>li.active::before {
 
         .expand-stepper {
             align-items: center;
+            // Acionador é <button>: remove o estilo padrão do navegador.
+            appearance: none;
+            background: none;
+            border: 0;
             color: var(--mc-primary-500);
             display: flex;
+            font: inherit;
             gap: size(4);
             justify-content: flex-end;
+            margin: 0;
             min-width: size(82);
+            padding: 0;
 
-            label {
+            label,
+            &__label {
                 font-weight: 700;
                 font-size: 14px;
                 line-height: 19px;

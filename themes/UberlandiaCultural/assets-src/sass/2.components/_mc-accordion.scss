@@ -31,6 +31,39 @@
         
     }
 
+    // Acionador "Expandir/Diminuir" (with-text) é <button>, com o mesmo visual
+    // do "Expandir" das fases (.expand-stepper): texto em negrito e seta ao lado.
+    &__header:has(> .mc-accordion__toggle) {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    &__toggle {
+        align-items: center;
+        appearance: none;
+        background: none;
+        border: 0;
+        color: var(--mc-primary-500);
+        cursor: pointer;
+        display: flex;
+        font: inherit;
+        gap: size(4);
+        justify-content: flex-end;
+        margin: 0;
+        min-height: size(44);
+        min-width: size(82);
+        padding: 0;
+
+        > .mc-accordion__icon {
+            display: inline-flex;
+        }
+
+        .mc-accordion__label {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 19px;
+        }
+    }
+
     &__close {
         align-items: center;
         display: flex;
