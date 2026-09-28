@@ -1,0 +1,678 @@
+:root {
+  --mc-home-developers: #F5F5F5;
+  --mc-home-entities: #F5F5F5;
+  --mc-home-feature: #3AABDD;
+  --mc-home-map: #FFFFFF;
+  --mc-home-opportunities: #0057AA;
+  --mc-home-register: #002C42;
+  --mc-home-header-gradient: linear-gradient(180deg, rgba(0, 87, 170, 0.65) 0%, rgba(0, 44, 66, 0.65) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  --mc-agents-300: rgb(249.099009901, 206.3168316832, 186.400990099);
+  --mc-agents-500: #EF7B45;
+  --mc-agents-700: rgb(166.202970297, 62.5495049505, 14.297029703);
+  --mc-black: #1E1E1E;
+  --mc-border-hairline: 1px solid;
+  --mc-border-radius-pill: 64px;
+  --mc-border-radius-sm: 8px;
+  --mc-border-radius-xs: 4px;
+  --mc-border-solid: 2px solid;
+  --mc-danger-300: rgb(247, 135.5, 135.5);
+  --mc-danger-500: #EF1010;
+  --mc-danger-700: rgb(119.5, 8, 8);
+  --mc-error: #FF2D2D;
+  --mc-events-300: rgb(210.1738197425, 174.856223176, 229.643776824);
+  --mc-events-500: #9C4EC7;
+  --mc-events-700: rgb(85.9785407725, 35.9313304721, 113.5686695279);
+  --mc-font-body: AvenirNextLTPro, sans-serif;
+  --mc-font-headings: AvenirNextLTPro, sans-serif;
+  --mc-font-bold: 700;
+  --mc-font-regular: 400;
+  --mc-font-semibold: 600;
+  --mc-font-transform-lowercase: lowercase;
+  --mc-font-transform-none: none;
+  --mc-font-transform-uppercase: uppercase;
+  --mc-gray-100: #F5F5F5;
+  --mc-gray-300: #C4C4C4;
+  --mc-gray-500: #898989;
+  --mc-gray-700: #4E4E4E;
+  --mc-helper-300: rgb(65.5, 179.396373057, 255);
+  --mc-helper-500: #0074C1;
+  --mc-helper-700: rgb(0, 39.3678756477, 65.5);
+  --mc-high-300: white;
+  --mc-high-500: #FFFFFF;
+  --mc-high-700: rgb(191.25, 191.25, 191.25);
+  --mc-low-300: rgb(93.75, 93.75, 93.75);
+  --mc-low-500: #1E1E1E;
+  --mc-low-700: black;
+  --mc-opportunities-300: rgb(234.1538461538, 157.3522267206, 140.3461538462);
+  --mc-opportunities-500: #D14526;
+  --mc-opportunities-700: rgb(101.1153846154, 33.3825910931, 18.3846153846);
+  --mc-primary-300: rgb(42.5, 151.25, 255);
+  --mc-primary-500: #0057AA;
+  --mc-primary-700: rgb(0, 21.75, 42.5);
+  --mc-projects-300: rgb(47.4358108108, 216.972972973, 228.0641891892);
+  --mc-projects-500: #117C83;
+  --mc-projects-700: rgb(2.3547297297, 17.1756756757, 18.1452702703);
+  --mc-seals-300: rgb(93.75, 93.75, 93.75);
+  --mc-seals-500: #1E1E1E;
+  --mc-seals-700: black;
+  --mc-secondary-300: rgb(255, 233, 127.5);
+  --mc-secondary-500: #FFD300;
+  --mc-secondary-700: rgb(127.5, 105.5, 0);
+  --mc-shadow-lv1-up: 0px -4px 8px rgba(0, 0, 0, 0.16);
+  --mc-shadow-lv1: 0px 4px 8px rgba(0, 0, 0, 0.16);
+  --mc-shadow-lv2: 0px 8px 16px rgba(0, 0, 0, 0.16);
+  --mc-shadow-lv3: 0px 8px 24px rgba(0, 0, 0, 0.16);
+  --mc-shadow-lv4: 0px 16px 48px rgba(0, 0, 0, 0.16);
+  --mc-spaces-300: rgb(150.7483443709, 239.6688741722, 38.8311258278);
+  --mc-spaces-500: #538D0A;
+  --mc-spaces-700: rgb(12.917218543, 21.9437086093, 1.5562913907);
+  --mc-faq-300: white;
+  --mc-faq-500: #ffcf8f;
+  --mc-faq-700: rgb(255, 152.3571428571, 15.5);
+  --mc-success-300: rgb(144.2884615385, 255, 2.5);
+  --mc-success-500: #498200;
+  --mc-success-700: rgb(1.4038461538, 2.5, 0);
+  --mc-warning-300: rgb(255, 212.9207048458, 155.5);
+  --mc-warning-500: #FF9F1C;
+  --mc-warning-700: rgb(155.5, 89.7378854626, 0);
+  --mc-warning: #F07B07;
+  --mc-white: #FFFFFF;
+  --mc-font-size-xl: 3rem;
+  --mc-font-size-lg: 2rem;
+  --mc-font-size-md: 1.5rem;
+  --mc-font-size-sm: 1.125rem;
+  --mc-font-size-xs: 1rem;
+  --mc-font-size-xxs: 0.875rem;
+  --mc-font-size-xxxs: 0.75rem;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "AvenirNextLTPro";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/fonts/AvenirNextLTPro-Regular.woff") format("woff");
+}
+@font-face {
+  font-display: swap;
+  font-family: "AvenirNextLTPro";
+  font-style: normal;
+  font-weight: 600;
+  src: url("/assets/fonts/AvenirNextLTPro-Demi.woff") format("woff");
+}
+@font-face {
+  font-display: swap;
+  font-family: "AvenirNextLTPro";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/assets/fonts/AvenirNextLTPro-Bold.woff") format("woff");
+}
+@media screen {
+  .controller-embedtools.action-reportmanager {
+    background: transparent;
+    color: var(--mc-low-500);
+  }
+  .controller-embedtools.action-reportmanager :is(p, span, label, small, a, button, select, input, h1, h2, h3, h4, b, strong, header, footer):not(.fa, .fas, .far, .fab) {
+    font-family: var(--mc-font-body);
+  }
+  .controller-embedtools.action-reportmanager #main-section,
+  .controller-embedtools.action-reportmanager .main-content {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+  .controller-embedtools.action-reportmanager .main-content {
+    position: relative;
+  }
+  .controller-embedtools.action-reportmanager .main-content > .print-reports {
+    align-items: center;
+    border-radius: var(--mc-border-radius-sm);
+    box-shadow: none;
+    cursor: pointer;
+    display: inline-flex;
+    float: none;
+    font-family: var(--mc-font-body);
+    font-size: var(--mc-font-size-xxs) !important;
+    font-weight: var(--mc-font-semibold) !important;
+    gap: 0.5rem;
+    height: auto;
+    justify-content: center;
+    line-height: 1.25rem;
+    margin: 0 !important;
+    min-height: 2.75rem;
+    padding: 0.6875rem 1.25rem !important;
+    text-shadow: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .controller-embedtools.action-reportmanager .main-content > .print-reports:focus-visible {
+    outline: 0.125rem solid var(--mc-primary-500);
+    outline-offset: 0.125rem;
+  }
+  .controller-embedtools.action-reportmanager .main-content > .print-reports {
+    background: var(--mc-high-500);
+    border: var(--mc-border-hairline) var(--mc-primary-500) !important;
+    color: var(--mc-primary-500) !important;
+  }
+  .controller-embedtools.action-reportmanager .main-content > .print-reports:hover {
+    background: var(--mc-gray-100);
+    border-color: var(--mc-primary-700) !important;
+    color: var(--mc-primary-700) !important;
+    filter: none;
+  }
+  .controller-embedtools.action-reportmanager .main-content > .print-reports {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .controller-embedtools.action-reportmanager #reports {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .controller-embedtools.action-reportmanager #reports > header {
+    align-items: center;
+    border-bottom: var(--mc-border-hairline) var(--mc-gray-300);
+    box-sizing: border-box;
+    display: flex;
+    min-height: 4rem;
+    padding: 0 10rem 1.25rem 0;
+  }
+  .controller-embedtools.action-reportmanager #reports > header p {
+    color: var(--mc-gray-700);
+    font-size: var(--mc-font-size-xxs);
+    line-height: 1.25rem;
+    margin: 0;
+  }
+  .controller-embedtools.action-reportmanager .charts-static,
+  .controller-embedtools.action-reportmanager .charts-dynamic {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap {
+    background: var(--mc-high-500);
+    border: var(--mc-border-hairline) var(--mc-gray-300);
+    border-radius: var(--mc-border-radius-sm);
+    box-sizing: border-box;
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(12.5rem, 2fr);
+    margin: 0;
+    padding: 1.25rem 1.5rem;
+    row-gap: 1rem;
+    width: 100%;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > header {
+    align-items: center;
+    border-bottom: var(--mc-border-hairline) var(--mc-gray-300);
+    display: flex;
+    gap: 0.75rem;
+    grid-column: 1/-1;
+    justify-content: space-between;
+    margin: 0;
+    padding-bottom: 0.75rem;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > header h3 {
+    color: var(--mc-low-500);
+    display: block;
+    font-size: var(--mc-font-size-sm);
+    font-weight: var(--mc-font-bold);
+    line-height: 1.5625rem;
+    margin: 0;
+    padding: 0;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > header > a.download,
+  .controller-embedtools.action-reportmanager .chart-wrap > header > a {
+    align-items: center;
+    border: var(--mc-border-hairline) var(--mc-gray-300);
+    border-radius: var(--mc-border-radius-sm);
+    box-sizing: border-box;
+    color: var(--mc-primary-500);
+    display: inline-flex;
+    flex: none;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > header > a.download:hover,
+  .controller-embedtools.action-reportmanager .chart-wrap > header > a:hover {
+    background: var(--mc-gray-100);
+    border-color: var(--mc-primary-500);
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > header > a.download:focus-visible,
+  .controller-embedtools.action-reportmanager .chart-wrap > header > a:focus-visible {
+    outline: 0.125rem solid var(--mc-primary-500);
+    outline-offset: 0.125rem;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > header .description {
+    color: var(--mc-gray-700);
+    font-size: var(--mc-font-size-xxs);
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > .chart-container {
+    align-self: center;
+    float: none;
+    margin: 0;
+    max-width: 100%;
+    min-width: 0;
+    width: 100% !important;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > footer {
+    align-self: center;
+    float: none;
+    min-width: 0;
+    width: auto;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap .legends-charts {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap .legends-charts .each {
+    align-items: center;
+    border-bottom: var(--mc-border-hairline) var(--mc-gray-300);
+    gap: 0.625rem;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap .legends-charts .each:last-child {
+    border-bottom: 0;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap .legends-charts .each .dot {
+    border-radius: 50%;
+    height: 0.75rem;
+    margin: 0;
+    min-width: 0.75rem;
+    width: 0.75rem;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap .legends-charts .each p {
+    color: var(--mc-low-500);
+    font-size: var(--mc-font-size-xxs);
+    line-height: 1.25rem;
+    margin: 0;
+    white-space: normal;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap--empty {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap--empty .chart-empty {
+    background: var(--mc-gray-100);
+    border-radius: var(--mc-border-radius-xs);
+    color: var(--mc-gray-700);
+    font-size: var(--mc-font-size-xxs);
+    line-height: 1.25rem;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap.type-line, .controller-embedtools.action-reportmanager .chart-wrap.type-bar, .controller-embedtools.action-reportmanager .chart-wrap.type-table, .controller-embedtools.action-reportmanager .chart-wrap.type-horizontalBar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap.type-line .legends-charts, .controller-embedtools.action-reportmanager .chart-wrap.type-bar .legends-charts, .controller-embedtools.action-reportmanager .chart-wrap.type-table .legends-charts, .controller-embedtools.action-reportmanager .chart-wrap.type-horizontalBar .legends-charts {
+    flex-flow: row wrap;
+    gap: 0.25rem 1.5rem;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap.type-line .legends-charts .each, .controller-embedtools.action-reportmanager .chart-wrap.type-bar .legends-charts .each, .controller-embedtools.action-reportmanager .chart-wrap.type-table .legends-charts .each, .controller-embedtools.action-reportmanager .chart-wrap.type-horizontalBar .legends-charts .each {
+    border-bottom: 0;
+    padding: 0.25rem 0;
+    width: auto;
+  }
+  .controller-embedtools.action-reportmanager .charts-dynamic {
+    border-top: var(--mc-border-hairline) var(--mc-gray-300);
+    padding-top: 1.25rem;
+  }
+  .controller-embedtools.action-reportmanager .charts-dynamic > label {
+    color: var(--mc-low-500);
+    display: flex;
+    flex-direction: column;
+    font-size: var(--mc-font-size-xxs);
+    font-weight: var(--mc-font-semibold);
+    gap: 0.25rem;
+    line-height: 1.25rem;
+    margin: 0;
+  }
+  .controller-embedtools.action-reportmanager .charts-dynamic > label br {
+    display: none;
+  }
+  .controller-embedtools.action-reportmanager .charts-dynamic > label small,
+  .controller-embedtools.action-reportmanager .charts-dynamic > label small i {
+    color: var(--mc-gray-700);
+    font-style: normal;
+    font-weight: var(--mc-font-regular);
+  }
+  .controller-embedtools.action-reportmanager .charts-dynamic > label select {
+    background-color: var(--mc-high-500);
+    border: var(--mc-border-hairline) var(--mc-gray-500);
+    border-radius: var(--mc-border-radius-xs);
+    box-sizing: border-box;
+    color: var(--mc-low-500);
+    font-size: var(--mc-font-size-xxs);
+    margin-top: 0.25rem;
+    max-width: 26.25rem;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    width: 100%;
+  }
+  .controller-embedtools.action-reportmanager .charts-dynamic > label select:disabled {
+    background-color: var(--mc-gray-100);
+    border-color: var(--mc-gray-300) !important;
+    color: var(--mc-gray-700);
+    cursor: not-allowed;
+  }
+  .controller-embedtools.action-reportmanager .charts-dynamic > label select:focus-visible {
+    outline: 0.125rem solid var(--mc-primary-500);
+    outline-offset: 0.0625rem;
+  }
+  .controller-embedtools.action-reportmanager #reports > footer {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    text-align: left;
+  }
+  .controller-embedtools.action-reportmanager #reports > footer .add {
+    align-items: center;
+    border-radius: var(--mc-border-radius-sm);
+    box-shadow: none;
+    cursor: pointer;
+    display: inline-flex;
+    float: none;
+    font-family: var(--mc-font-body);
+    font-size: var(--mc-font-size-xxs) !important;
+    font-weight: var(--mc-font-semibold) !important;
+    gap: 0.5rem;
+    height: auto;
+    justify-content: center;
+    line-height: 1.25rem;
+    margin: 0 !important;
+    min-height: 2.75rem;
+    padding: 0.6875rem 1.25rem !important;
+    text-shadow: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .controller-embedtools.action-reportmanager #reports > footer .add:focus-visible {
+    outline: 0.125rem solid var(--mc-primary-500);
+    outline-offset: 0.125rem;
+  }
+  .controller-embedtools.action-reportmanager #reports > footer .add {
+    background: var(--mc-primary-500);
+    border: var(--mc-border-hairline) var(--mc-primary-500) !important;
+    color: var(--mc-high-500) !important;
+  }
+  .controller-embedtools.action-reportmanager #reports > footer .add:hover {
+    background: var(--mc-primary-700);
+    border-color: var(--mc-primary-700) !important;
+    filter: none;
+  }
+  .controller-embedtools.action-reportmanager #reports > footer .add:disabled {
+    background: var(--mc-gray-300);
+    border-color: var(--mc-gray-300) !important;
+    color: var(--mc-gray-700) !important;
+    cursor: not-allowed;
+  }
+  .controller-embedtools.action-reportmanager .main-content > .alert.info {
+    background: transparent;
+    border: 0.0625rem dashed var(--mc-gray-300);
+    border-radius: var(--mc-border-radius-sm);
+    box-sizing: border-box;
+    color: var(--mc-gray-700);
+    font-size: var(--mc-font-size-xxs);
+    line-height: 1.25rem;
+    margin: 0;
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+  .controller-embedtools.action-reportmanager .main-content > .alert.info::before {
+    display: none;
+  }
+  .controller-embedtools.action-reportmanager .bg-reports-modal {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .controller-embedtools.action-reportmanager .reports-modal {
+    border-radius: var(--mc-border-radius-sm);
+    box-shadow: var(--mc-shadow-lv1);
+    box-sizing: border-box;
+    color: var(--mc-low-500);
+    font-size: var(--mc-font-size-xxs);
+    margin: 1.5rem auto;
+    max-width: 45rem;
+    min-height: 0;
+    padding: 1.5rem;
+    width: calc(100% - 2rem);
+  }
+  .controller-embedtools.action-reportmanager .reports-modal > div {
+    margin-bottom: 1rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal header {
+    align-items: center;
+    border-bottom: var(--mc-border-hairline) var(--mc-gray-300);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal header a {
+    align-items: center;
+    border-radius: var(--mc-border-radius-sm);
+    color: var(--mc-gray-700);
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    line-height: 1;
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+    padding: 0;
+    position: static;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal header a:hover {
+    background: var(--mc-gray-100);
+    color: var(--mc-low-500);
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .report-modal-title {
+    border: 0;
+    color: var(--mc-low-500);
+    font-size: var(--mc-font-size-sm);
+    font-weight: var(--mc-font-bold);
+    line-height: 1.5625rem;
+    margin: 0;
+    padding: 0;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal p {
+    color: var(--mc-gray-700);
+    font-size: var(--mc-font-size-xxs);
+    line-height: 1.25rem;
+    margin: 0 0 0.75rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .line {
+    margin-bottom: 0.5rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .graphic-type .line label {
+    border: var(--mc-border-hairline) var(--mc-gray-300);
+    border-radius: var(--mc-border-radius-sm);
+    color: var(--mc-low-500);
+    gap: 0.75rem;
+    min-height: 3rem;
+    padding: 0.5rem 1rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .graphic-type .line label:hover, .controller-embedtools.action-reportmanager .reports-modal .graphic-type .line label:has(input:checked) {
+    background: var(--mc-gray-100);
+    border-color: var(--mc-primary-500);
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .graphic-type .line label input {
+    accent-color: var(--mc-primary-500);
+    margin: 0;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .graphic-type .line label i {
+    margin: 0;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .graphic-type .line label i::before {
+    color: var(--mc-primary-500);
+    font-size: 1.375rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .graphic-data label {
+    color: var(--mc-low-500);
+    font-size: var(--mc-font-size-xxs);
+    font-weight: var(--mc-font-semibold);
+  }
+  .controller-embedtools.action-reportmanager .reports-modal .line > input,
+  .controller-embedtools.action-reportmanager .reports-modal .line .column > input,
+  .controller-embedtools.action-reportmanager .reports-modal .line > select,
+  .controller-embedtools.action-reportmanager .reports-modal .line .column > select {
+    border: var(--mc-border-hairline) var(--mc-gray-500);
+    border-radius: var(--mc-border-radius-xs);
+    box-sizing: border-box;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer {
+    border-top: var(--mc-border-hairline) var(--mc-gray-300);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    text-align: right;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer button {
+    margin: 0;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .cancel,
+  .controller-embedtools.action-reportmanager .reports-modal footer .back {
+    align-items: center;
+    border-radius: var(--mc-border-radius-sm);
+    box-shadow: none;
+    cursor: pointer;
+    display: inline-flex;
+    float: none;
+    font-family: var(--mc-font-body);
+    font-size: var(--mc-font-size-xxs) !important;
+    font-weight: var(--mc-font-semibold) !important;
+    gap: 0.5rem;
+    height: auto;
+    justify-content: center;
+    line-height: 1.25rem;
+    margin: 0 !important;
+    min-height: 2.75rem;
+    padding: 0.6875rem 1.25rem !important;
+    text-shadow: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .cancel:focus-visible,
+  .controller-embedtools.action-reportmanager .reports-modal footer .back:focus-visible {
+    outline: 0.125rem solid var(--mc-primary-500);
+    outline-offset: 0.125rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .cancel,
+  .controller-embedtools.action-reportmanager .reports-modal footer .back {
+    background: var(--mc-high-500);
+    border: var(--mc-border-hairline) var(--mc-primary-500) !important;
+    color: var(--mc-primary-500) !important;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .cancel:hover,
+  .controller-embedtools.action-reportmanager .reports-modal footer .back:hover {
+    background: var(--mc-gray-100);
+    border-color: var(--mc-primary-700) !important;
+    color: var(--mc-primary-700) !important;
+    filter: none;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .next {
+    align-items: center;
+    border-radius: var(--mc-border-radius-sm);
+    box-shadow: none;
+    cursor: pointer;
+    display: inline-flex;
+    float: none;
+    font-family: var(--mc-font-body);
+    font-size: var(--mc-font-size-xxs) !important;
+    font-weight: var(--mc-font-semibold) !important;
+    gap: 0.5rem;
+    height: auto;
+    justify-content: center;
+    line-height: 1.25rem;
+    margin: 0 !important;
+    min-height: 2.75rem;
+    padding: 0.6875rem 1.25rem !important;
+    text-shadow: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .next:focus-visible {
+    outline: 0.125rem solid var(--mc-primary-500);
+    outline-offset: 0.125rem;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .next {
+    background: var(--mc-primary-500);
+    border: var(--mc-border-hairline) var(--mc-primary-500) !important;
+    color: var(--mc-high-500) !important;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .next:hover {
+    background: var(--mc-primary-700);
+    border-color: var(--mc-primary-700) !important;
+    filter: none;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer .next:disabled {
+    background: var(--mc-gray-300);
+    border-color: var(--mc-gray-300) !important;
+    color: var(--mc-gray-700) !important;
+    cursor: not-allowed;
+  }
+}
+@media screen and (max-width: 37.5rem) {
+  .controller-embedtools.action-reportmanager .chart-wrap {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1rem;
+  }
+  .controller-embedtools.action-reportmanager .chart-wrap > header h3 {
+    font-size: var(--mc-font-size-xs);
+    line-height: 1.375rem;
+  }
+  .controller-embedtools.action-reportmanager .charts-dynamic > label select {
+    max-width: none;
+  }
+  .controller-embedtools.action-reportmanager #reports > footer .add {
+    width: 100%;
+  }
+  .controller-embedtools.action-reportmanager .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .controller-embedtools.action-reportmanager .main-content > .print-reports {
+    order: 1;
+    position: static;
+    width: 100%;
+  }
+  .controller-embedtools.action-reportmanager .main-content > div:not(.alert) {
+    display: contents;
+  }
+  .controller-embedtools.action-reportmanager #reports {
+    display: contents;
+  }
+  .controller-embedtools.action-reportmanager #reports > header {
+    border-bottom: 0;
+    min-height: 0;
+    order: 0;
+    padding: 0;
+  }
+  .controller-embedtools.action-reportmanager #reports > .charts-static {
+    border-top: var(--mc-border-hairline) var(--mc-gray-300);
+    order: 2;
+    padding-top: 1.25rem;
+  }
+  .controller-embedtools.action-reportmanager #reports > .charts-dynamic {
+    order: 3;
+  }
+  .controller-embedtools.action-reportmanager #reports > footer {
+    order: 4;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal {
+    padding: 1rem;
+    width: calc(100% - 1rem);
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer {
+    flex-direction: column-reverse;
+  }
+  .controller-embedtools.action-reportmanager .reports-modal footer button {
+    width: 100%;
+  }
+}

@@ -1,7 +1,7 @@
 <?php
 namespace TemaSMCT;
 
-class Theme extends \BaseV1\Theme {
+class Theme extends \MapasCulturais\Themes\BaseV1\Theme {
 
     static function getThemeFolder() {
         return __DIR__;
