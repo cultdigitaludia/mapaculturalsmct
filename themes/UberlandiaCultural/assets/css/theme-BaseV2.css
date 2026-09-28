@@ -23898,8 +23898,12 @@ ol.mc-stepper-vertical > li.active::before {
   display: none;
 }
 .controller-opportunity.action-registrations > #main-app > .main-app.opportunity-registrations .entity-table__header > .mc-collapse:has(.entity-table__main-filter) {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
   grid-column: 1;
   grid-row: 1;
+  justify-content: center;
 }
 .controller-opportunity.action-registrations > #main-app > .main-app.opportunity-registrations .entity-table__header > .mc-collapse:has(.opportunity-registration-table__actions) {
   align-self: stretch;

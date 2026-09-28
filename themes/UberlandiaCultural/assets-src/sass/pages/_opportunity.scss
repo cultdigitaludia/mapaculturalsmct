@@ -3285,8 +3285,12 @@
 
                 // Pesquisa e filtros à esquerda; ações sobre o resultado à direita.
                 > .mc-collapse:has(.entity-table__main-filter) {
+                    align-self: stretch;
+                    display: flex;
+                    flex-direction: column;
                     grid-column: 1;
                     grid-row: 1;
+                    justify-content: center;
                 }
 
                 > .mc-collapse:has(.opportunity-registration-table__actions) {
