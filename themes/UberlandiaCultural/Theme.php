@@ -27,6 +27,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $this->enqueueScript('app-v2', 'vlibras', 'js/vlibras-widget.js');
         $this->enqueueScript('app-v2', 'panel-ordering', 'js/panel-ordering.js');
         $this->enqueueScript('app-v2', 'space-card-pills', 'js/space-card-pills.js');
+        $this->enqueueScript('app-v2', 'opportunity-edit-tabs', 'js/opportunity-edit-tabs.js');
         $this->assetManager->publishFolder('img');
 
         $app->hook('component(mc-icon).iconset', function (&$iconset) {
