@@ -1,0 +1,145 @@
+<?php
+
+/**
+ * @var MapasCulturais\App $app
+ * @var MapasCulturais\Themes\BaseV2\Theme $this
+ *
+ * Sobrescrita do tema UberlandiaCultural baseada no componente oficial do
+ * MapasCulturais v7.8.14. Diferença: no regulamento da oportunidade
+ * (groupName "rules"), "Enviar/Atualizar" e a lixeira eram <a> sem href que
+ * abrem modais; nesse grupo eles passam a ser <button type="button"> com
+ * aria-haspopup e nome acessível. O link de download continua <a href>. Os
+ * demais grupos (anexos de inscrição, arquivos de agentes etc.) mantêm a
+ * marcação oficial. Ao atualizar o MapasCulturais, compare este arquivo com a
+ * nova versão oficial.
+ */
+
+use MapasCulturais\i;
+
+$this->import('
+    mc-confirm-button
+    mc-modal
+    mc-icon
+    mc-loading
+');
+?>
+
+<div v-if="file || editable || showEmpty" :class="['entity-file', {'entity-file--disabled' : disabled}, classes]" :data-field="groupName?.replace('rfc_', 'file_')">
+
+    <div v-if="!file && !editable && showEmpty" class="entity-file__empty">
+        <label v-if="title" class="entity-file__title">
+            {{title}}
+            <span v-if="required" class="required">*<?php i::_e('obrigatório') ?></span>
+        </label>
+        <small v-if="description" class="field__description">{{description}}</small>
+        <p class="entity-file__no-file"><?php i::_e('Nenhum arquivo anexado') ?></p>
+    </div>
+
+    <template v-else>
+
+    <label v-if="title" class="entity-file__title">
+        {{title}}
+        <span v-if="required" class="required">*<?php i::_e('obrigatório') ?></span>
+    </label>
+
+    <div v-if="file && hasSlot('label') && !downloadOnly" class="entity-file__label semibold">
+        <slot name="label"></slot>
+    </div>
+
+    <small v-if="description" class="field__description">{{description}}</small>
+
+    <div v-if="file" class="entity-file__file">
+
+        <slot name="view">
+            <a v-if="!downloadOnly" class="entity-file__link primary__color bold" :download="file.name" :href="file.url">
+                <mc-icon name="download" :class="entity.__objectType+'__color'"></mc-icon>
+                <span v-if="file.name">{{file.name}}</span>
+                <span v-else> <? i::_e('Sem descrição') ?> </span>
+            </a>
+
+            <a v-if="downloadOnly" class="entity-file__link entity-file__link--download bold" :download="file.name" :href="file.url">
+                <span v-if="file.name">{{file.name}}</span>
+                <span v-else> <? i::_e('Sem descrição') ?> </span>
+                <mc-icon name="download"></mc-icon>
+            </a>
+        </slot>
+
+        <mc-confirm-button v-if="editable && !required" @confirm="deleteFile(file)">
+            <template #button="modal">
+                <button v-if="groupName === 'rules'" type="button" class="entity-file__remove" @click="modal.open()" aria-haspopup="dialog">
+                    <mc-icon name="trash" aria-hidden="true"></mc-icon>
+                    <span class="sr-only"><?= i::__('Remover arquivo') ?> {{file.name}}</span>
+                </button>
+                <a v-else @click="modal.open()"> <mc-icon name="trash"></mc-icon> </a>
+            </template>
+
+            <template #message="message">
+                <?php i::_e('Deseja remover este arquivo?') ?>
+            </template>
+        </mc-confirm-button>
+    </div>
+
+    <mc-modal v-if="editable" :title="titleModal" classes="entity-file__modal">
+        <mc-loading :condition="loading"></mc-loading>
+
+        <template v-if="!loading" #default>
+            <form @submit.prevent="submit(modal)" class="entity-file__newFile">
+                <div class="grid-12">
+                    <slot name="form" :enableDescription="enableDescription" :disableName="disableName" :formData="formData" :setFile="setFile" :file="newFile">
+                        <div class="col-12 field">
+                            <label><?php i::_e('Anexe um arquivo') ?></label>
+                            <div class="field__upload">
+                                <label for="newFile" class="field__buttonUpload button button--icon button--primary-outline">
+                                    <mc-icon name="upload"></mc-icon> <?= i::__('Anexar') ?>
+                                    <input id="newFile" type="file" @change="setFile($event)" ref="file" :accept="acceptAttribute">
+                                    <small><?= i::__('Tamanho máximo do arquivo:') ?> <strong>{{maxFileSize}}</strong></small>
+                                    <small v-if="allowedFileTypesLabel"><?= i::__('Tipos permitidos:') ?> <strong>{{allowedFileTypesLabel}}</strong></small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div v-if="!disableName" class="col-12 field">
+                            <label><?php i::_e('Título do arquivo') ?></label>
+                            <input v-model="newFile.name" type="text" :disabled="groupName == 'rules'"/>
+                        </div>
+
+                        <div v-if="enableDescription" class="col-12 field">
+                            <label><?php i::_e('Descreva abaixo os motivos do recurso') ?></label>
+                            <textarea v-model="formData.description"></textarea>
+                        </div>
+                    </slot>
+                </div>
+            </form>
+        </template>
+
+        <template v-if="!loading" #button="modal">
+            <slot name="button" :open="modal.open" :close="modal.close" :toggle="modal.toggle" :file="file">
+                <a v-if="defaultFile" class="entity-file__link entity-file__link--download bold" :download="defaultFile.name" :href="defaultFile.url">
+                    <mc-icon name="download"></mc-icon> <?php i::_e("Baixar modelo") ?>
+                </a>
+                <template v-if="groupName === 'rules'">
+                    <button v-if="!file" type="button" @click="modal.open()" class="button button--primary button--icon button--primary-outline button-up" aria-haspopup="dialog">
+                        <mc-icon name="upload" aria-hidden="true"></mc-icon> {{ buttonTextValue }}
+                    </button>
+                    <button v-if="file" type="button" @click="modal.open()" class="button button--primary button--icon button--primary-outline button-up" aria-haspopup="dialog">
+                        <mc-icon name="upload" aria-hidden="true"></mc-icon> <?php i::_e("Atualizar") ?>
+                    </button>
+                </template>
+                <template v-else>
+                    <a v-if="!file" @click="modal.open()" class="button button--primary button--icon button--primary-outline button-up">
+                        <mc-icon name="upload"></mc-icon> {{ buttonTextValue }}
+                    </a>
+                    <a v-if="file" @click="modal.open()" class="button button--primary button--icon button--primary-outline button-up">
+                        <mc-icon name="upload"></mc-icon> <?php i::_e("Atualizar") ?>
+                    </a>
+                </template>
+            </slot>
+        </template>
+
+        <template v-if="!loading" #actions="modal">
+            <button class="col-6 button button--text" type="reset" @click="modal.close()"> <?php i::_e("Cancelar") ?> </button>
+            <button class="col-6 button button--primary" type="submit" @click.prevent="submit(modal)"> <?php i::_e("Enviar") ?> </button>
+        </template>
+    </mc-modal>
+    </template>
+</div>

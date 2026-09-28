@@ -1,0 +1,121 @@
+<?php
+/**
+ * @var MapasCulturais\Themes\BaseV2\Theme $this
+ * @var MapasCulturais\App $app
+ *
+ * Sobrescrita do tema UberlandiaCultural baseada no componente oficial do
+ * MapasCulturais v7.8.14. Diferença: o acionador "Expandir/Diminuir" das fases
+ * era um par de <a> sem href; agora é um único <button type="button"> com
+ * aria-expanded e aria-controls (panel-id vem do mc-stepper-vertical do tema).
+ * Ao atualizar o MapasCulturais, compare este arquivo com a nova versão oficial.
+ */
+
+use MapasCulturais\i;
+
+$this->import('
+    mc-link
+    mc-modal
+    mc-stepper-vertical
+    opportunity-appeal-phase-config
+    opportunity-phase-status
+    opportunity-phase-list-evaluation
+    v1-embed-tool
+');
+?>
+<mc-stepper-vertical :items="phases" allow-multiple>
+    <template #header-title="{index, item}">
+        <div class="stepper-header__content">
+            <div class="info">
+                <h3 v-if="item.isFirstPhase" class="info__title"><?= i::__('Período de inscrição') ?></h3>
+                <h3 v-if="!item.isFirstPhase && !item.isLastPhase" class="info__title"><?= sprintf(i::__('Inscritos em %s'), '{{item.name}}') ?></h3>
+                <h3 v-if="item.isLastPhase" class="info__title">{{item.name}}</h3>
+                <div v-if="!item.isLastPhase" class="info__type">
+                    <span class="title"> <?= i::__('Tipo') ?>: </span>
+                    <template v-if="item.__objectType == 'opportunity'">
+                        <span v-if="item.isReportingPhase" class="type"><?= i::__('Prestação de informações') ?></span>
+                        <span v-else class="type"><?= i::__('Coleta de dados') ?></span>
+                    </template>
+                    <span v-if="item.__objectType == 'evaluationmethodconfiguration'" class="type">{{item.type.name}}</span>
+                </div>
+
+            </div>
+            <div class="dates">
+                <div v-if="!item.isLastPhase" class="date">
+                    <div class="date__title"> <?= i::__('Data de início') ?> </div>
+                    <div v-if="item.registrationFrom" class="date__content">{{item.registrationFrom.date('2-digit year')}} {{item.registrationFrom.time('numeric')}}</div>
+                    <div v-if="item.evaluationFrom" class="date__content">{{item.evaluationFrom.date('2-digit year')}} {{item.evaluationFrom.time('numeric')}}</div>
+                </div>
+                <div v-if="!item.isLastPhase && (!phases[0].isContinuousFlow || (phases[0].isContinuousFlow && phases[0].hasEndDate))" class="date">
+                    <div class="date__title"> <?= i::__('Data final') ?> </div>
+                    <div v-if="item.registrationTo" class="date__content">{{item.registrationTo.date('2-digit year')}} {{item.registrationTo.time('numeric')}}</div>
+                    <div v-if="item.evaluationTo" class="date__content">{{item.evaluationTo.date('2-digit year')}} {{item.evaluationTo.time('numeric')}}</div>
+                </div>
+                <div v-if="showPublishTimestamp(item)" class="date">
+                    <div class="date__title"> <?= i::__('Data de publicação') ?> </div>
+                    <div class="date__content">{{publishTimestamp(item)?.date('2-digit year')}} {{publishTimestamp(item)?.time('numeric')}}</div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template #header-actions="{step, item, panelId}">
+        <div class="stepper-header__actions">
+            <mc-modal title="<?= i::esc_attr__('Configurações de suporte')?>" classes="modalEmbedTools" v-if="item.__objectType == 'opportunity' && !item.isLastPhase">
+                <template #default="modal">
+                    <!-- <v1-embed-tool route="supportbuilder" :id="item.id"></v1-embed-tool> -->
+                </template>
+                <template #button="modal">
+                    <mc-link class="button button--icon" route="suporte/configuracao" :params="[item.id]" icon="external" right-icon> <?= i::__('Suporte') ?> </mc-link>
+                </template>
+            </mc-modal>
+            <button type="button" class="expand-stepper" :aria-expanded="step.active ? 'true' : 'false'" :aria-controls="step.active ? panelId : null" @click="step.toggle()">
+                <span v-if="step.active" class="expand-stepper__label"><?= i::__('Diminuir') ?></span>
+                <span v-else class="expand-stepper__label"><?= i::__('Expandir') ?></span>
+                <span v-if="item.name" class="sr-only">: {{item.name}}</span>
+                <mc-icon :name="step.active ? 'arrowPoint-up' : 'arrowPoint-down'" aria-hidden="true"></mc-icon>
+            </button>
+        </div>
+    </template>
+    <template #default="{index, item}">
+
+        <template v-if="item.__objectType == 'evaluationmethodconfiguration'">
+            <opportunity-phase-list-evaluation :entity="item" :phases="phases" :tab="tab"></opportunity-phase-list-evaluation>
+        </template>
+
+        <template v-if="item.__objectType == 'opportunity'">
+            <opportunity-phase-status :entity="item"  :phases="phases" :tab="tab"></opportunity-phase-status>
+        </template>
+    </template>
+    <template #after-li="{index, item, step}">
+        <div v-if="!step?.active && item.__objectType === 'evaluationmethodconfiguration' && item?.opportunity?.appealPhase" class="appeal-phase-info">
+           <div class="data-collection">
+                <div>
+                    <small><strong><?= i::__("Recurso") ?></strong></small>
+                </div>
+                <div class="data-collection-dates">
+                    <small>
+                        {{item?.opportunity?.appealPhase?.registrationFrom?.date('2-digit year')}} {{item?.opportunity?.appealPhase?.registrationFrom?.time('numeric')}}
+                    </small>
+                    <small><strong><?= i::__("à") ?></strong></small>
+                    <small>
+                        {{item?.opportunity?.appealPhase?.registrationTo?.date('2-digit year')}} {{item?.opportunity?.appealPhase?.registrationTo?.time('numeric')}}
+                    </small>
+                </div>
+           </div>
+
+           <div class="evaluation">
+                <div>
+                    <small><strong><?= i::__("Avaliação do recurso") ?></strong></small>
+                </div>
+                <div class="evaluation-dates">
+                    <small>
+                        {{item?.opportunity?.appealPhase?.evaluationMethodConfiguration?.evaluationFrom?.date('2-digit year')}} {{item?.opportunity?.appealPhase?.evaluationMethodConfiguration?.evaluationFrom?.time('numeric')}}
+                    </small>
+                    <small><strong><?= i::__("à") ?></strong></small>
+                    <small>
+                        {{item?.opportunity?.appealPhase?.evaluationMethodConfiguration?.evaluationTo?.date('2-digit year')}} {{item?.opportunity?.appealPhase?.evaluationMethodConfiguration?.evaluationTo?.time('numeric')}}
+                    </small>
+                </div>
+           </div>
+        </div>
+    </template>
+</mc-stepper-vertical>

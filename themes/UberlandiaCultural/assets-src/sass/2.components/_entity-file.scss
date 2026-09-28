@@ -11,6 +11,32 @@
         align-items: center;
         gap: size(18);
     }
+
+    // Lixeira do regulamento é <button>: mantém o ícone como antes e amplia a
+    // área de toque para 44px sem mudar o layout.
+    &__remove {
+        align-items: center;
+        appearance: none;
+        background: none;
+        border: 0;
+        color: var(--mc-primary-500);
+        cursor: pointer;
+        display: inline-flex;
+        font: inherit;
+        margin: 0;
+        padding: 0;
+        position: relative;
+
+        &::before {
+            content: '';
+            height: size(44);
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: size(44);
+        }
+    }
     &__label {
         font-size: var(--mc-font-size-xxs);        
     }

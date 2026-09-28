@@ -4468,6 +4468,30 @@ input:checked + .slider:before {
   align-items: center;
   gap: 1.125rem;
 }
+.entity-file__remove {
+  align-items: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 0;
+  color: var(--mc-primary-500);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.entity-file__remove::before {
+  content: "";
+  height: 2.75rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.75rem;
+}
 .entity-file__label {
   font-size: var(--mc-font-size-xxs);
 }
@@ -8812,6 +8836,35 @@ body.galleryOpen {
   max-width: 54.375rem;
   padding: 1rem;
 }
+.mc-accordion__header:has(> .mc-accordion__toggle) {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.mc-accordion__toggle {
+  align-items: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 0;
+  color: var(--mc-primary-500);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  gap: 0.25rem;
+  justify-content: flex-end;
+  margin: 0;
+  min-height: 2.75rem;
+  min-width: 5.125rem;
+  padding: 0;
+}
+.mc-accordion__toggle > .mc-accordion__icon {
+  display: inline-flex;
+}
+.mc-accordion__toggle .mc-accordion__label {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19px;
+}
 .mc-accordion__close {
   align-items: center;
   display: flex;
@@ -11188,13 +11241,21 @@ ol.mc-stepper-vertical > li.active::before {
 }
 .mc-stepper-vertical .stepper-header .expand-stepper {
   align-items: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 0;
   color: var(--mc-primary-500);
   display: flex;
+  font: inherit;
   gap: 0.25rem;
   justify-content: flex-end;
+  margin: 0;
   min-width: 5.125rem;
+  padding: 0;
 }
-.mc-stepper-vertical .stepper-header .expand-stepper label {
+.mc-stepper-vertical .stepper-header .expand-stepper label, .mc-stepper-vertical .stepper-header .expand-stepper__label {
   font-weight: 700;
   font-size: 14px;
   line-height: 19px;
@@ -12213,10 +12274,18 @@ ol.mc-stepper-vertical > li.active::before {
   }
 }
 .opportunity-evaluation-committee__card-toggle {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0;
+  font: inherit;
+  margin: 0;
+  padding: 0;
   cursor: pointer;
   background-color: var(--mc-opportunities-500);
   display: flex;
   max-height: 100%;
+  min-height: 2.75rem;
   min-width: 3rem;
   max-width: 100%;
   color: var(--mc-white);
@@ -16266,12 +16335,30 @@ ol.mc-stepper-vertical > li.active::before {
   gap: 0.8125rem;
 }
 .registration-evaluation-info__toggle {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 0.875rem;
+  margin: 0;
+  padding: 0;
+  position: relative;
   cursor: pointer;
   align-items: center;
   color: var(--mc-primary-500);
   display: flex;
   gap: 0.25rem;
   justify-content: flex-end;
+}
+.registration-evaluation-info__toggle::before {
+  content: "";
+  inset: 50% 0 auto;
+  min-height: 2.75rem;
+  position: absolute;
+  transform: translateY(-50%);
+  width: 100%;
 }
 
 .registration-evaluation-tab__text {
@@ -17250,7 +17337,43 @@ ol.mc-stepper-vertical > li.active::before {
   right: -0.5rem;
   width: 1rem;
 }
+.seals-certifier__proponent--seal .seal-icon .icon .seals-certifier__remove, .seals-certifier__category--seal .seal-icon .icon .seals-certifier__remove {
+  align-items: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+.seals-certifier__proponent--seal .seal-icon .icon .seals-certifier__remove::before, .seals-certifier__category--seal .seal-icon .icon .seals-certifier__remove::before {
+  content: "";
+  height: 2.75rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.75rem;
+}
 .seals-certifier__proponent--addSeal, .seals-certifier__category--addSeal {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 0;
   align-items: center;
   border: 0.0625rem solid;
   border-radius: var(--mc-border-radius-xs);

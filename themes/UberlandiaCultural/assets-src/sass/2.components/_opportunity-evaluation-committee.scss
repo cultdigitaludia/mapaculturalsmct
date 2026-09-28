@@ -78,10 +78,17 @@
     }
 
     &__card-toggle {
+        // Acionador é <button>: remove o estilo padrão do navegador.
+        appearance: none;
+        border: 0;
+        font: inherit;
+        margin: 0;
+        padding: 0;
         cursor: pointer;
         background-color: var(--mc-opportunities-500);
         display: flex;
         max-height: 100%;
+        min-height: size(44);
         min-width: size(48);
         max-width: 100%;
         color: var(--mc-white);
