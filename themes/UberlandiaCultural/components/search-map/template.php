@@ -24,7 +24,7 @@ $this->import('
 
     <mc-map
         :entities="entities"
-        @ready="$event.options.wheelPxPerZoomLevel = 180; $event.options.wheelDebounceTime = 80; type === 'space' && $event.setView(<?= $cityCenter ?>, 12); $emit('ready', $event)"
+        @ready="type === 'space' && $event.setView(<?= $cityCenter ?>, 12); $emit('ready', $event)"
         @close-popup="$emit('closePopup', $event)"
         @open-popup="openPopUp($event)">
         <template #popup="{entity}">
