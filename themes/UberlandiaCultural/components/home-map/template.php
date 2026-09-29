@@ -23,7 +23,7 @@ $this->import('
     <div class="home-map__content">
         <mc-map
             :entities="entities"
-            @ready="$event.setView(<?= $cityCenter ?>, 12); $event.options.wheelPxPerZoomLevel = 180; $event.options.wheelDebounceTime = 80">
+            @ready="$event.setView(<?= $cityCenter ?>, 12)">
             <template #popup="{entity}">
                 <mc-map-card :entity="entity"></mc-map-card>
             </template>

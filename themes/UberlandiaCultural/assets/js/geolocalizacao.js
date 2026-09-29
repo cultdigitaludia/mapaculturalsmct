@@ -13,34 +13,8 @@
 
     const GEO_STORAGE_KEY = 'mc_user_location';
     const GEO_CACHE_MINUTOS = 10; // reusa a localização por 10 min sem pedir GPS de novo
-    const WHEEL_PX_PER_ZOOM_LEVEL = 180;
-    const WHEEL_DEBOUNCE_TIME = 80;
-
-    function configurarInteracaoMapa(mapa) {
-        if (!mapa || mapa._uberlandiaInteracaoConfigurada) return;
-
-        mapa._uberlandiaInteracaoConfigurada = true;
-        mapa.options.wheelPxPerZoomLevel = WHEEL_PX_PER_ZOOM_LEVEL;
-        mapa.options.wheelDebounceTime = WHEEL_DEBOUNCE_TIME;
-
-        const container = mapa.getContainer?.();
-        if (container) {
-            container._leaflet_map = mapa;
-        }
-
-        if (!mapa.zoomControl && window.L?.control?.zoom) {
-            mapa.zoomControl = L.control.zoom({ position: 'topleft' }).addTo(mapa);
-        }
-    }
-
-    function configurarMapasLeaflet() {
-        if (!window.L?.Map || L.Map.prototype._uberlandiaInteracaoHook) return;
-
-        L.Map.prototype._uberlandiaInteracaoHook = true;
-        L.Map.addInitHook(function () {
-            configurarInteracaoMapa(this);
-        });
-    }
+    // A sensibilidade do zoom e a referência el._leaflet_map dos mapas vêm do
+    // leaflet-config.js, carregado nas páginas com mapa.
 
     // ─── LER CACHE DE LOCALIZAÇÃO ─────────────────────────────────────────────
     function lerCache() {
@@ -160,8 +134,6 @@
 
     // ─── INIT ─────────────────────────────────────────────────────────────────
     function init() {
-        configurarMapasLeaflet();
-
         if (!navigator.geolocation) return;
         solicitarLocalizacao();
     }

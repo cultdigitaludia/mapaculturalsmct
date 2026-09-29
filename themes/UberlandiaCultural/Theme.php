@@ -30,6 +30,17 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $this->enqueueScript('app-v2', 'opportunity-edit-tabs', 'js/opportunity-edit-tabs.js');
         $this->assetManager->publishFolder('img');
 
+        // Configuração compartilhada dos mapas Leaflet (sensibilidade do zoom e
+        // ícones padrão publicados pelo tema), carregada só em páginas com mapa.
+        $app->hook('component(<<mc-map|subsite-config-map>>):before', function () {
+            $this->enqueueScript('components', 'uberlandia-leaflet-config', 'js/leaflet-config.js', ['components-init']);
+            $this->jsObject['config']['leafletIcons'] = [
+                'iconUrl' => $this->asset('img/leaflet/marker-icon.png', false),
+                'iconRetinaUrl' => $this->asset('img/leaflet/marker-icon-2x.png', false),
+                'shadowUrl' => $this->asset('img/leaflet/marker-shadow.png', false),
+            ];
+        });
+
         $app->hook('component(mc-icon).iconset', function (&$iconset) {
             $iconset['panel-opportunities'] = 'material-symbols:campaign';
             $iconset['panel-registrations'] = 'material-symbols:assignment';
@@ -40,6 +51,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 
         // Espaços legados sem país selecionado usam a visualização internacional,
         // que oculta endereço e mapa de visitantes quando publicLocation é nulo.
+        // O mapa só aparece com coordenadas definidas: (0,0) é "sem localização"
+        // e mostraria um ponto no oceano.
         $app->hook('template(space.single.international-address-view):end', function () {
             ?>
             <template v-if="entity.publicLocation == null && !verifiedAdress() && entity.endereco && entity.location">
@@ -48,7 +61,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                 </div>
                 <div class="col-12">
                     <p class="international-address-view__address">{{ entity.endereco }}</p>
-                    <entity-map :entity="entity"></entity-map>
+                    <entity-map v-if="Number(entity.location.lat ?? entity.location.latitude) || Number(entity.location.lng ?? entity.location.longitude)" :entity="entity"></entity-map>
                 </div>
             </template>
             <?php
