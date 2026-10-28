@@ -28,19 +28,24 @@
 
         // A arte (1280 × 456) é exibida no tamanho original, sem ampliação: em
         // telas largas ela perdia nitidez e cortava o mapa em cima e embaixo.
-        // O fim do mapa (x = 1160 na arte) fica alinhado à borda direita do
-        // conteúdo (max-width 1170 com respiro de 16), como os cards da página.
-        // As laterais usam a cor de fundo da arte, e a borda direita do brilho
-        // é suavizada para não marcar a emenda.
+        // O fim do mapa (x = 1160 na arte, 120px antes da borda da imagem) fica
+        // alinhado à borda direita do conteúdo (max-width 1170 com respiro de
+        // 16), como os cards da página. As laterais usam a cor de fundo da arte,
+        // e a borda direita do brilho é suavizada para não marcar a emenda.
+        // Os cálculos usam só subtração: o minificador de produção remove os
+        // espaços em volta do "+", o que invalida calc()/min().
         background-color: #2F478E;
 
         &--img {
-            height: 100%;
-            width: 100%;
-            object-fit: none;
-            object-position: min(calc(50% + #{size(585)} - 520px), calc(100% - #{size(16)} + 120px)) center;
-            -webkit-mask-image: linear-gradient(to right, #000 min(calc(50% + #{size(585)} + 20px), calc(100% - #{size(16)} + 20px)), transparent min(calc(50% + #{size(585)} + 120px), calc(100% - #{size(16)} + 120px)));
-            mask-image: linear-gradient(to right, #000 min(calc(50% + #{size(585)} + 20px), calc(100% - #{size(16)} + 20px)), transparent min(calc(50% + #{size(585)} + 120px), calc(100% - #{size(16)} + 120px)));
+            height: auto;
+            max-width: none;
+            position: absolute;
+            right: calc(max(#{size(16)}, (100% - #{size(1170)}) / 2) - 120px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            -webkit-mask-image: linear-gradient(to right, #000 92%, transparent);
+            mask-image: linear-gradient(to right, #000 92%, transparent);
         }
 
         &--mask {

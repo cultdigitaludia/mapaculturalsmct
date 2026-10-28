@@ -8529,14 +8529,15 @@ body.galleryOpen {
   background-color: #2F478E;
 }
 .home-register__background--img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: none;
-     object-fit: none;
-  -o-object-position: min(50% + 36.5625rem - 520px, 100% - 1rem + 120px) center;
-     object-position: min(50% + 36.5625rem - 520px, 100% - 1rem + 120px) center;
-  -webkit-mask-image: linear-gradient(to right, #000 min(50% + 36.5625rem + 20px, 100% - 1rem + 20px), transparent min(50% + 36.5625rem + 120px, 100% - 1rem + 120px));
-  mask-image: linear-gradient(to right, #000 min(50% + 36.5625rem + 20px, 100% - 1rem + 20px), transparent min(50% + 36.5625rem + 120px, 100% - 1rem + 120px));
+  height: auto;
+  max-width: none;
+  position: absolute;
+  right: calc(max(1rem, (100% - 73.125rem) / 2) - 120px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  -webkit-mask-image: linear-gradient(to right, #000 92%, transparent);
+  mask-image: linear-gradient(to right, #000 92%, transparent);
 }
 .home-register__background--mask {
   width: 100%;
