@@ -26,10 +26,21 @@
             display: none;
         }
 
+        // A arte (1280 × 456) é exibida no tamanho original, sem ampliação: em
+        // telas largas ela perdia nitidez e cortava o mapa em cima e embaixo.
+        // O fim do mapa (x = 1160 na arte) fica alinhado à borda direita do
+        // conteúdo (max-width 1170 com respiro de 16), como os cards da página.
+        // As laterais usam a cor de fundo da arte, e a borda direita do brilho
+        // é suavizada para não marcar a emenda.
+        background-color: #2F478E;
+
         &--img {
+            height: 100%;
             width: 100%;
-            object-fit: cover;
-            -o-object-fit: cover;
+            object-fit: none;
+            object-position: min(calc(50% + #{size(585)} - 520px), calc(100% - #{size(16)} + 120px)) center;
+            -webkit-mask-image: linear-gradient(to right, #000 min(calc(50% + #{size(585)} + 20px), calc(100% - #{size(16)} + 20px)), transparent min(calc(50% + #{size(585)} + 120px), calc(100% - #{size(16)} + 120px)));
+            mask-image: linear-gradient(to right, #000 min(calc(50% + #{size(585)} + 20px), calc(100% - #{size(16)} + 20px)), transparent min(calc(50% + #{size(585)} + 120px), calc(100% - #{size(16)} + 120px)));
         }
 
         &--mask {
@@ -89,7 +100,7 @@
             transition: background-color 0.2s, color 0.2s;
 
             &:hover {
-                background-color: #FFD300;
+                background-color: #FFF0A8;
                 color: #002C42;
             }
 

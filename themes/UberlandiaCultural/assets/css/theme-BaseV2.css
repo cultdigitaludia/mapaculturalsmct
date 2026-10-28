@@ -8525,10 +8525,18 @@ body.galleryOpen {
     display: none;
   }
 }
+.home-register__background {
+  background-color: #2F478E;
+}
 .home-register__background--img {
+  height: 100%;
   width: 100%;
-  object-fit: cover;
-  -o-object-fit: cover;
+  -o-object-fit: none;
+     object-fit: none;
+  -o-object-position: min(50% + 36.5625rem - 520px, 100% - 1rem + 120px) center;
+     object-position: min(50% + 36.5625rem - 520px, 100% - 1rem + 120px) center;
+  -webkit-mask-image: linear-gradient(to right, #000 min(50% + 36.5625rem + 20px, 100% - 1rem + 20px), transparent min(50% + 36.5625rem + 120px, 100% - 1rem + 120px));
+  mask-image: linear-gradient(to right, #000 min(50% + 36.5625rem + 20px, 100% - 1rem + 20px), transparent min(50% + 36.5625rem + 120px, 100% - 1rem + 120px));
 }
 .home-register__background--mask {
   width: 100%;
@@ -8586,7 +8594,7 @@ body.galleryOpen {
   transition: background-color 0.2s, color 0.2s;
 }
 .home-register__content--button:hover {
-  background-color: #FFD300;
+  background-color: #FFF0A8;
   color: #002C42;
 }
 .home-register__content--button .iconify {
