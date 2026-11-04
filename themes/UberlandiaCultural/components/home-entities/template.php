@@ -9,6 +9,8 @@ use MapasCulturais\i;
 $this->import('
     mc-link
 ');
+
+$descriptions = $this->getSectionDescriptions();
 ?>
 <div class="home-entities">
     <div class="home-entities__content">
@@ -38,7 +40,7 @@ $this->import('
                     </div>
                 </div>
                 <div class="card__right">
-                    <p><?= $this->text('turismo', i::__('Explore os pontos turísticos, espaços culturais, gastronomia, meios de hospedagem e muito mais de Uberlândia. <br> Conheça e divulgue o turismo da nossa cidade.')) ?></p>
+                    <p><?= $this->text('turismo', $descriptions['turismo']['text']) ?></p>
                         <a href="/search/turismo" class="button button--icon button--sm space__color">
                             <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>
@@ -61,7 +63,7 @@ $this->import('
                     </div>
                 </div>
                 <div class="card__right">
-                    <p><?= $this->text('opportunities', i::__('Faça a sua inscrição ou acesse o resultado de diversas convocatórias como editais, oficinas, prêmios e concursos. <br> Você também pode criar o seu próprio formulário e divulgar uma oportunidade para outros agentes culturais.')) ?></p>
+                    <p><?= $this->text('opportunities', $descriptions['opportunity']['text']) ?></p>
                     <mc-link route="search/opportunities" class="button button--icon button--sm opportunity__color">
                         <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>
@@ -84,7 +86,7 @@ $this->import('
                     </div>
                 </div>
                 <div class="card__right">
-                    <p><?= $this->text('events', i::__('Você pode pesquisar eventos culturais nos campos de busca combinada. <br> Como usuário cadastrado, você pode incluir seus eventos na plataforma e divulgá-los gratuitamente.')) ?></p>
+                    <p><?= $this->text('events', $descriptions['event']['text']) ?></p>
                     <mc-link route="search/events" class="button button--icon button--sm event__color">
                         <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>
@@ -107,7 +109,7 @@ $this->import('
                     </div>
                 </div>
                 <div class="card__right">
-                    <p><?= $this->text('spaces', i::__('Procure por espaços culturais incluídos na plataforma, acessando os campos de busca combinada que ajudam na precisão de sua pesquisa. <br> Cadastre também os espaços onde desenvolve suas atividades artísticas e culturais.')) ?></p>
+                    <p><?= $this->text('spaces', $descriptions['space']['text']) ?></p>
                     <mc-link route="search/spaces" class="button button--icon button--sm space__color">
                         <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>
@@ -130,7 +132,7 @@ $this->import('
                     </div>
                 </div>
                 <div class="card__right">
-                    <p><?= $this->text('agents', i::__('Neste espaço, estão registrados artistas, gestores e produtores; uma rede de atores envolvidos na cena cultural da região. <br> Você pode cadastrar um ou mais agentes (grupos, coletivos, bandas, instituições, empresas, etc.).')) ?></p>
+                    <p><?= $this->text('agents', $descriptions['agent']['text']) ?></p>
                     <mc-link route="search/agents" class="button button--icon button--sm agent__color">
                         <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>
@@ -153,7 +155,7 @@ $this->import('
                     </div>
                 </div>
                 <div class="card__right">
-                    <p><?= $this->text('projects', i::__('Aqui você encontra leis de fomento, mostras, convocatórias e editais criados, além de diversas iniciativas cadastradas pelos usuários da plataforma.')) ?></p>
+                    <p><?= $this->text('projects', $descriptions['project']['text']) ?></p>
                     <mc-link route="search/projects" class="button button--icon button--sm project__color">
                         <?= i::__('Ver todos')?>
                         <mc-icon name="access"></mc-icon>

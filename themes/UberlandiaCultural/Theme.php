@@ -237,6 +237,44 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         );
     }
 
+    /**
+     * Texto de apresentação de cada seção, usado no topo das listagens
+     * (componente search) e nos cards da página inicial (home-entities).
+     * "tip" e "link" apontam a seção vizinha, para quem procurava outra coisa.
+     */
+    function getSectionDescriptions(): array {
+        $app = App::i();
+
+        return [
+            'turismo' => [
+                'text' => i::__('Descubra o que visitar em Uberlândia: atrativos naturais, gastronomia, hospedagem, compras, estruturas esportivas, templos e outros pontos de interesse para moradores e visitantes.'),
+                'tip' => i::__('Procurando teatros, museus e bibliotecas?'),
+                'link' => ['label' => i::__('Veja a seção Espaços'), 'url' => $app->createUrl('search', 'spaces')],
+            ],
+            'opportunity' => [
+                'text' => i::__('Encontre editais, chamamentos, prêmios, oficinas e outras oportunidades da cultura e do turismo. Confira os prazos e as regras de cada uma e faça sua inscrição pela própria plataforma.'),
+            ],
+            'agent' => [
+                'text' => i::__('Conheça artistas, grupos, coletivos, produtores e instituições que fazem a cultura de Uberlândia. Cada perfil é criado e mantido pelo próprio agente, que escolhe quais informações deseja tornar públicas.'),
+            ],
+            'event' => [
+                'text' => i::__('Confira a agenda cultural da cidade: shows, espetáculos, exposições, oficinas e outras atividades com data, horário e local definidos.'),
+                'tip' => i::__('Quer conhecer festivais, programas e editais completos?'),
+                'link' => ['label' => i::__('Veja a seção Projetos'), 'url' => $app->createUrl('search', 'projects')],
+            ],
+            'space' => [
+                'text' => i::__('Conheça os locais onde a cultura acontece em Uberlândia: teatros, museus, bibliotecas, centros culturais, salas de cinema e outros espaços dedicados às atividades artísticas e culturais.'),
+                'tip' => i::__('Procurando onde comer, se hospedar ou passear?'),
+                'link' => ['label' => i::__('Veja a seção Turismo'), 'url' => $app->createUrl('search', 'turismo')],
+            ],
+            'project' => [
+                'text' => i::__('Conheça as iniciativas culturais de médio e longo prazo, como festivais, mostras, programas, leis de incentivo e editais. Um projeto pode reunir vários eventos ao longo do tempo. Por exemplo, o Festival Municipal de Cultura é um projeto, e cada apresentação dentro dele é um evento.'),
+                'tip' => i::__('Quer saber o que acontece em uma data específica?'),
+                'link' => ['label' => i::__('Veja a seção Eventos'), 'url' => $app->createUrl('search', 'events')],
+            ],
+        ];
+    }
+
     function addDocumentMetas() {
         $app = App::i();
         $entity = $this->controller->requestedEntity;
