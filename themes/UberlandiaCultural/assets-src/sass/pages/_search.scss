@@ -100,6 +100,41 @@
         }
     }
 
+    // Texto de apresentação da seção, abaixo do título da listagem.
+    &__description {
+        margin: size(16) auto 0;
+        max-width: size(1170);
+        padding: 0 size(16);
+
+        p {
+            max-width: size(800);
+        }
+
+        &--text {
+            color: var(--mc-low-700);
+            font-size: size(18);
+            line-height: size(26);
+
+            @media (max-width: size(500)) {
+                font-size: size(16);
+                line-height: size(22);
+            }
+        }
+
+        &--tip {
+            color: var(--mc-low-500);
+            font-size: size(14);
+            line-height: size(20);
+            margin-top: size(8);
+
+            a {
+                color: var(--mc-primary-500);
+                font-weight: 700;
+                text-decoration: underline;
+            }
+        }
+    }
+
     &__tabs {
         // label - before - tabs
         &--before {
