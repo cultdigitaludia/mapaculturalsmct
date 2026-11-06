@@ -7,6 +7,28 @@ use MapasCulturais\App;
  */
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 {
+    /**
+     * Tipos de espaço da seção Turismo ("onde ir e o que usar como visitante").
+     * A seção Espaços ("onde a cultura acontece") lista todos os demais tipos,
+     * de modo que cada espaço aparece em uma única seção.
+     */
+    const TURISMO_SPACE_TYPES = [
+        // Pontos turísticos e atrativos naturais
+        1000, 1010,
+        // Templos e espaços religiosos
+        80, 81, 82, 83, 84, 85, 1003, 1004, 1005,
+        // Patrimônio histórico (bens culturais de natureza material)
+        200, 201, 202, 203, 204, 205, 206, 207,
+        // Gastronomia, hospedagem e agências
+        1001, 1018, 1019,
+        // Compras
+        1006, 1007, 1008,
+        // Esporte e lazer
+        1002, 1011, 1012,
+        // Segurança pública
+        1017,
+    ];
+
     function getVersion() {
         return 2;
     }
@@ -39,6 +61,29 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                 'iconRetinaUrl' => $this->asset('img/leaflet/marker-icon-2x.png', false),
                 'shadowUrl' => $this->asset('img/leaflet/marker-shadow.png', false),
             ];
+        });
+
+        // Seções Turismo × Espaços: as listagens enviam "@secao" na consulta e a
+        // API restringe os tipos. Se o usuário filtrou tipos, vale o filtro dele
+        // (o filtro de cada seção só oferece os tipos da própria seção).
+        $this->jsObject['config']['sectionSpaceTypes'] = ['turismo' => self::TURISMO_SPACE_TYPES];
+
+        $app->hook('API.<<*>>(space).params', function (&$params) {
+            if (!isset($params['@secao'])) {
+                return;
+            }
+            $secao = $params['@secao'];
+            unset($params['@secao']);
+
+            if (!empty($params['type']) || !in_array($secao, ['turismo', 'espacos'], true)) {
+                return;
+            }
+            $types = implode(',', self::TURISMO_SPACE_TYPES);
+            $params['type'] = $secao === 'turismo' ? "IN({$types})" : "!IN({$types})";
+        });
+
+        $app->hook('search-spaces-initial-pseudo-query', function (&$initial_pseudo_query) {
+            $initial_pseudo_query['@secao'] = 'espacos';
         });
 
         $app->hook('component(mc-icon).iconset', function (&$iconset) {
@@ -128,9 +173,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 
         // Adiciona a rota de turismo ao controller de search
         $app->hook('GET(search.turismo)', function() use ($app) {
-            $initial_pseudo_query = [
-                'type' => [1000,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019]
-            ];
+            $initial_pseudo_query = ['@secao' => 'turismo'];
             $this->render('turismo', ['initial_pseudo_query' => $initial_pseudo_query]);
         });
 
@@ -247,7 +290,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 
         return [
             'turismo' => [
-                'text' => i::__('Descubra o que visitar em Uberlândia: atrativos naturais, gastronomia, hospedagem, compras, estruturas esportivas, templos e outros pontos de interesse para moradores e visitantes.'),
+                'text' => i::__('Descubra o que visitar em Uberlândia: atrativos naturais, patrimônio histórico, gastronomia, hospedagem, compras, estruturas esportivas, templos e outros pontos de interesse para moradores e visitantes.'),
                 'tip' => i::__('Procurando teatros, museus e bibliotecas?'),
                 'link' => ['label' => i::__('Veja a seção Espaços'), 'url' => $app->createUrl('search', 'spaces')],
             ],

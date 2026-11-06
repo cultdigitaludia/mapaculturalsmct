@@ -18,7 +18,7 @@ $this->breadcrumb = [
     ['label' => i::__('Turismo'),  'url' => $app->createUrl('search', 'turismo')],
 ];
 ?>
-<search page-title="<?= htmlspecialchars($this->text('title', i::__('Turismo'))) ?>" entity-type="space" :initial-pseudo-query="{'@verified': undefined, 'status_turismo': [], type:[1000,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019]}">
+<search page-title="<?= htmlspecialchars($this->text('title', i::__('Turismo'))) ?>" entity-type="space" :initial-pseudo-query="{'@verified': undefined, 'status_turismo': [], type: []}">
     <template #default="{pseudoQuery, changeTab}">
         <mc-tabs @changed="changeTab($event)" class="search__tabs" sync-hash>
             <template #before-tablist>

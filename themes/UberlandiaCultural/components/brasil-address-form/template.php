@@ -1,0 +1,125 @@
+<?php
+/**
+ * @var MapasCulturais\App $app
+ * @var MapasCulturais\Themes\BaseV2\Theme $this
+ *
+ * Sobrescrita do tema UberlandiaCultural baseada no componente oficial do
+ * MapasCulturais v7.8.14. Diferença: o texto da opção "Localização pública"
+ * informa explicitamente que, ao marcar, o endereço e a localização no mapa
+ * ficam visíveis para qualquer visitante (consentimento informado, conforme os
+ * Termos de Uso e a Política de Privacidade). Ao atualizar o MapasCulturais,
+ * compare este arquivo com a nova versão oficial.
+ */
+
+use MapasCulturais\i;
+
+$this->import('
+    entity-field
+    entity-map
+');
+?>
+
+<div class="brasil-address-form">
+    <?php $this->applyTemplateHook('brasil-address-form','before'); ?>
+    <div class="grid-12">
+        <?php $this->applyTemplateHook('brasil-address-form','begin'); ?>
+
+        <div class="field col-12">
+            <label class="field__title" v-if="verifiedAdress()">
+                <?= i::__('Endereço')?>
+                <?php if($this->isEditable()): ?>
+                    <?php $this->info('cadastro -> configuracoes-entidades -> endereco') ?>
+                <?php endif; ?>
+            </label>
+        </div>
+
+        <div class="col-12">
+            <div class="grid-12">
+                <entity-field @change="address(); pesquisacep(entity.En_CEP);" classes="col-4 sm:col-12" :entity="entity" prop="En_CEP"></entity-field>
+                <entity-field @change="address()" classes="col-8 sm:col-12" :entity="entity" prop="En_Nome_Logradouro"></entity-field>
+                <entity-field @change="address()" classes="col-2 sm:col-4" :entity="entity" prop="En_Num"></entity-field>
+                <entity-field @change="address()" classes="col-10 sm:col-8" :entity="entity" prop="En_Bairro"></entity-field>
+                <entity-field @change="address()" classes="col-12" :entity="entity" prop="En_Complemento" label="<?php i::_e('Complemento ou ponto de referência')?>"></entity-field>
+                <entity-field v-if="statesAndCitiesCountryCode != 'BR'" @change="address()" classes="col-12" :entity="entity" prop="En_Pais" label="<?php i::_e('País') ?>"></entity-field>
+            </div>
+        </div>
+
+        <div class="col-12" v-if="!statesAndCitiesEnable">
+            <div class="grid-12" v-if="!entity.En_Pais || entity.En_Pais == statesAndCitiesCountryCode">
+                <entity-field @change="address()" classes="col-6 sm:col-12" :entity="entity" prop="En_Estado" label="<?php i::_e('Estado')?>"></entity-field>
+                <entity-field @change="address()" classes="col-6 sm:col-12" :entity="entity" prop="En_Municipio" label="<?php i::_e('Município')?>"></entity-field>
+            </div>            
+        </div>
+
+        <div class="col-12" v-if="statesAndCitiesEnable">
+            <div class="grid-12" v-if="!entity.En_Pais || entity.En_Pais == statesAndCitiesCountryCode">
+                <div class="field col-6">
+                    <label class="field__title">
+                        <?php i::_e('Estado')?>
+                        <span v-if="isRequired('En_Estado')" class="required">*<?php i::_e('obrigatório') ?></span>
+                    </label>
+                    <select @change="citiesList(); address()" v-model="entity.En_Estado">
+                        <option v-for="state in states" :value="state.value">{{state.label}}</option>
+                    </select>
+                </div>
+
+                <div class="field col-6">
+                    <label class="field__title">
+                        <?php i::_e('Município')?>
+                        <span v-if="isRequired('En_Municipio')" class="required">*<?php i::_e('obrigatório') ?></span>
+                    </label>
+                    <select @change="address()" v-model="entity.En_Municipio">
+                        <option v-for="city in cities" :value="city">{{city}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="entity.En_Pais && entity.En_Pais != statesAndCitiesCountryCode" class="col-12">
+            <div class="grid-12">
+                <div class="field col-6">
+                        <label class="field__title">
+                        <?php i::_e('Estado')?>
+                        <span v-if="isRequired('En_Estado')" class="required">*<?php i::_e('obrigatório') ?></span>
+                    </label>
+                    <input :id="propId('En_Estado')" v-model="entity.En_Estado" type="text" @change="address()" autocomplete="off">
+                </div>
+
+                <div class="field col-6">
+                    <label class="field__title">
+                        <?php i::_e('Município')?>
+                        <span v-if="isRequired('En_Municipio')" class="required">*<?php i::_e('obrigatório') ?></span>
+                    </label>
+                    <input v-model="entity.En_Municipio" :id="propId('En_Municipio')"  type="text" @change="address()" autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12" v-if="hasPublicLocation">
+            <div class="col-6 sm:col-12 field public-location">
+                <entity-field  @change="address()" type="checkbox" classes="public-location__field col-6" :entity="entity" prop="publicLocation" label="<?= $this->text('brasil-address', i::__('Localização pública')) ?>">
+                    <?php if($this->isEditable()): ?>
+                        <template #info>
+                            <?php $this->info('cadastro -> configuracoes-entidades -> localizacao-publica') ?>
+                        </template>
+                    <?php endif; ?>
+                </entity-field>
+
+                <small class="field__description">
+                    <?php i::_e('Ao marcar esta opção, o endereço e a localização no mapa ficam visíveis para qualquer visitante da plataforma, inclusive nos mapas públicos e nas consultas públicas. Deixe desmarcado para manter o endereço privado. A escolha pode ser alterada a qualquer momento.')?>
+                </small>
+            </div>
+        </div>
+
+        <div v-if="verifiedAdress()" class="col-12">
+            <p class="brasil-address-form__address">
+                <span v-if="showAddress()">{{showAddress()}}</span>
+                <span v-else><?= i::_e("Sem Endereço"); ?></span>
+            </p>
+            <entity-map :entity="entity" editable></entity-map>
+        </div>
+
+        <?php $this->applyTemplateHook('brasil-address-form','end'); ?>
+    </div>
+    <?php $this->applyTemplateHook('brasil-address-form','after'); ?>
+</div>
