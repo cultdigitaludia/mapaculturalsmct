@@ -3391,8 +3391,9 @@ vue3-easy-data-table__body {
   border-radius: 0.5rem;
 }
 .entity-card__footer--action {
-  align-items: flex-end;
+  align-items: stretch;
   display: flex;
+  gap: 0.5rem;
   justify-content: flex-end;
   width: 100%;
 }
@@ -3403,6 +3404,17 @@ vue3-easy-data-table__body {
 }
 .entity-card__footer--action .button .iconify {
   float: right;
+}
+.entity-card__footer--action .entity-card__edit {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 0.5rem;
+  justify-content: center;
+  white-space: nowrap;
+}
+.entity-card__footer--action .entity-card__edit .iconify {
+  float: none;
 }
 .entity-card.portrait .entity-card__header.user-details {
   flex-direction: column;
