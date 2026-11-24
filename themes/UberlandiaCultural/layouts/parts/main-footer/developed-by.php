@@ -9,7 +9,7 @@ use MapasCulturais\i;
 $this->import('mc-icon');
 ?>
 <p>
-    <?php i::_e("plataforma criada pela comunidade") ?> 
+    <?php i::_e("Plataforma criada pela comunidade") ?> 
     <span class="mapas"> <mc-icon name="map"></mc-icon><?php i::_e("mapas culturais"); ?> </span> 
     <?php i::_e("e desenvolvida por "); ?><strong>hacklab/</strong>
 </p>

@@ -383,6 +383,11 @@ html.a11y-highlight-links a:not(.button):not(.skip-link) {
     text-underline-offset: 0.2em;
 }
 
+// Alto contraste: fundo preto, texto branco e ações (links, botões) em
+// amarelo em todas as páginas. As regras são genéricas para cobrir também os
+// componentes do núcleo (listagens, filtros, cards, formulários e painel),
+// sem depender de uma lista de seletores de cada página. Ficam de fora os
+// elementos gráficos (imagens, ícones SVG, mapa) e o widget do VLibras.
 html.a11y-high-contrast {
     --mc-primary-300: #00ffff;
     --mc-primary-500: #ffff00;
@@ -390,45 +395,63 @@ html.a11y-high-contrast {
     --mc-gray-300: #fff;
     --mc-gray-500: #fff;
     --mc-gray-700: #fff;
+    --mc-low-300: #fff;
+    --mc-low-500: #fff;
+    --mc-low-700: #fff;
     --mc-white: #000;
 
+    color-scheme: dark;
+
     body,
-    #main-app,
-    .site-main,
-    .main-header,
-    .main-footer,
-    .main-footer__content,
-    .mc-header-menu.mobile,
-    .home-entities,
-    .home-entities .card__right,
-    .home-register,
-    .mc-card,
-    .tabs-component__panels,
-    .accessibility-menu__panel,
-    .accessibility-menu__controls button,
-    .leaflet-control-attribution,
-    .home-register .button {
-        background: #000 !important;
+    body :not(svg, svg *, img, video, iframe, canvas, .leaflet-pane, .leaflet-pane *, [vw], [vw] *) {
+        background-color: #000 !important;
+        border-color: #fff !important;
+        box-shadow: none !important;
         color: #fff !important;
+        text-shadow: none !important;
     }
 
-    a,
-    .link,
-    .label,
-    button:not(:disabled) {
+    // Ações: links e botões em amarelo, com borda amarela nos botões para que
+    // continuem reconhecíveis sem a cor de fundo original.
+    body :is(a, .link, button, .button, [role="button"], summary, .label),
+    body :is(a, .link, button, .button, [role="button"], summary) :not(svg, svg *, img) {
         color: #ffff00 !important;
     }
 
-    .home-entities a.space__color,
-    .home-entities a.agent__color,
-    .accessibility-menu__trigger[aria-expanded="true"] .accessibility-menu__trigger-label,
-    .home-register .button {
-        color: #ffff00 !important;
+    body :is(button, .button, [role="button"]):not(:disabled):not(.disabled) {
+        border: 2px solid #ffff00 !important;
     }
 
-    .accessibility-menu__controls button,
-    .home-register .button {
-        border-color: #ffff00 !important;
+    body :is(button, .button):is(:disabled, .disabled),
+    body :is(button, .button):is(:disabled, .disabled) * {
+        border-color: #bdbdbd !important;
+        color: #bdbdbd !important;
+        opacity: 1 !important;
+    }
+
+    body :is(input, select, textarea) {
+        border: 1px solid #fff !important;
+    }
+
+    ::placeholder {
+        color: #d0d0d0 !important;
+        opacity: 1;
+    }
+
+    // Itens selecionados de abas, filtros e paginação ganham sublinhado para
+    // não depender apenas de cor.
+    body :is(.active, [aria-selected="true"], [aria-current="page"]) {
+        text-decoration: underline 2px !important;
+        text-underline-offset: 0.25em;
+    }
+
+    // A arte dos logos do rodapé tem texto escuro (Secretaria): no alto
+    // contraste ela fica sobre um fundo branco para continuar legível.
+    .main-footer__content--logo-img a {
+        background-color: #fff !important;
+        border-radius: 8px;
+        display: inline-block;
+        padding: 12px 16px;
     }
 
     .home-register__content--title,
