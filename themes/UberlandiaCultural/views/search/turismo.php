@@ -14,7 +14,7 @@ $this->import('
     search-map
 ');
 $this->breadcrumb = [
-    ['label' => i::__('Inicio'), 'url' => $app->createUrl('site', 'index')],
+    ['label' => i::__('Início'), 'url' => $app->createUrl('site', 'index')],
     ['label' => i::__('Turismo'),  'url' => $app->createUrl('search', 'turismo')],
 ];
 ?>

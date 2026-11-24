@@ -48,7 +48,10 @@
 				}
 			}
 
+			// Reserva o canto direito para o "ID", posicionado sobre o
+			// cabeçalho, para que ele não sobreponha o nome.
 			.user-info {
+				padding-right: size(56);
 				align-items: flex-start;
 				display: flex;
 				flex-direction: column;

@@ -3123,6 +3123,7 @@ vue3-easy-data-table__body {
   color: var(--mc-gray-700);
 }
 .entity-card__header.user-details .user-info {
+  padding-right: 3.5rem;
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -25941,6 +25942,7 @@ ol.mc-stepper-vertical > li.active::before {
   color: var(--mc-primary-500);
   font-weight: 700;
   text-decoration: underline;
+  white-space: nowrap;
 }
 .search__tabs--before {
   line-height: 1.375rem;
@@ -28724,42 +28726,54 @@ html.a11y-high-contrast {
   --mc-gray-300: #fff;
   --mc-gray-500: #fff;
   --mc-gray-700: #fff;
+  --mc-low-300: #fff;
+  --mc-low-500: #fff;
+  --mc-low-700: #fff;
   --mc-white: #000;
+  color-scheme: dark;
 }
 html.a11y-high-contrast body,
-html.a11y-high-contrast #main-app,
-html.a11y-high-contrast .site-main,
-html.a11y-high-contrast .main-header,
-html.a11y-high-contrast .main-footer,
-html.a11y-high-contrast .main-footer__content,
-html.a11y-high-contrast .mc-header-menu.mobile,
-html.a11y-high-contrast .home-entities,
-html.a11y-high-contrast .home-entities .card__right,
-html.a11y-high-contrast .home-register,
-html.a11y-high-contrast .mc-card,
-html.a11y-high-contrast .tabs-component__panels,
-html.a11y-high-contrast .accessibility-menu__panel,
-html.a11y-high-contrast .accessibility-menu__controls button,
-html.a11y-high-contrast .leaflet-control-attribution,
-html.a11y-high-contrast .home-register .button {
-  background: #000 !important;
+html.a11y-high-contrast body :not(svg, svg *, img, video, iframe, canvas, .leaflet-pane, .leaflet-pane *, [vw], [vw] *) {
+  background-color: #000 !important;
+  border-color: #fff !important;
+  box-shadow: none !important;
   color: #fff !important;
+  text-shadow: none !important;
 }
-html.a11y-high-contrast a,
-html.a11y-high-contrast .link,
-html.a11y-high-contrast .label,
-html.a11y-high-contrast button:not(:disabled) {
+html.a11y-high-contrast body :is(a, .link, button, .button, [role=button], summary, .label),
+html.a11y-high-contrast body :is(a, .link, button, .button, [role=button], summary) :not(svg, svg *, img) {
   color: #ffff00 !important;
 }
-html.a11y-high-contrast .home-entities a.space__color,
-html.a11y-high-contrast .home-entities a.agent__color,
-html.a11y-high-contrast .accessibility-menu__trigger[aria-expanded=true] .accessibility-menu__trigger-label,
-html.a11y-high-contrast .home-register .button {
-  color: #ffff00 !important;
+html.a11y-high-contrast body :is(button, .button, [role=button]):not(:disabled):not(.disabled) {
+  border: 2px solid #ffff00 !important;
 }
-html.a11y-high-contrast .accessibility-menu__controls button,
-html.a11y-high-contrast .home-register .button {
-  border-color: #ffff00 !important;
+html.a11y-high-contrast body :is(button, .button):is(:disabled, .disabled),
+html.a11y-high-contrast body :is(button, .button):is(:disabled, .disabled) * {
+  border-color: #bdbdbd !important;
+  color: #bdbdbd !important;
+  opacity: 1 !important;
+}
+html.a11y-high-contrast body :is(input, select, textarea) {
+  border: 1px solid #fff !important;
+}
+html.a11y-high-contrast ::-moz-placeholder {
+  color: #d0d0d0 !important;
+  opacity: 1;
+}
+html.a11y-high-contrast ::placeholder {
+  color: #d0d0d0 !important;
+  opacity: 1;
+}
+html.a11y-high-contrast body :is(.active, [aria-selected=true], [aria-current=page]) {
+  -webkit-text-decoration: underline 2px !important;
+          text-decoration: underline 2px !important;
+  text-underline-offset: 0.25em;
+}
+html.a11y-high-contrast .main-footer__content--logo-img a {
+  background-color: #fff !important;
+  border-radius: 8px;
+  display: inline-block;
+  padding: 12px 16px;
 }
 html.a11y-high-contrast .home-register__content--title,
 html.a11y-high-contrast .home-register__content--description {

@@ -131,6 +131,9 @@
                 color: var(--mc-primary-500);
                 font-weight: 700;
                 text-decoration: underline;
+                // O link não quebra no meio: se não couber, desce inteiro
+                // para a linha seguinte.
+                white-space: nowrap;
             }
         }
     }
